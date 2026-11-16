@@ -1,4 +1,4 @@
-# Mapa de la reforma de EsSalud
+# Estudios sobre EsSalud-Perú
 
 **Página:** https://diegosimemirror.github.io/libro_blanco/
 

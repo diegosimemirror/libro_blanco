@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mapa de la reforma de EsSalud</title>
+<title>Estudios sobre EsSalud-Perú</title>
 <meta name="description" content="EsSalud como asegurador y como prestador: lo que dicen el Libro Blanco (EsSalud y Banco Mundial, 2019) y la valuación actuarial de la OIT (2022), con cada afirmación enlazada a su página.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='5' width='14' height='6' fill='%23E3120B'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -170,13 +170,22 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}
 .btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .btn:focus-visible{outline:3px solid var(--focus)}
 .cap{font-size:.95rem;color:var(--ink2);min-height:1.5em;max-width:92ch}
-.mapscroll{overflow-x:auto}
-.map{position:relative;min-width:980px}
+/* Paneles congelados, como en una hoja de cálculo: debajo de la barra fija quedan el subtítulo de la sección
+   y los títulos de columna; el nombre de cada carril queda fijo mientras se recorre su fila. Al salir de la
+   matriz, todo se descongela. --barh y --mhh los calcula el script. */
+:root{--barh:48px;--mhh:72px;--thh:70px;--safe:env(safe-area-inset-top, 0px)}
+.map{position:relative}
 .map svg.edges{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:visible}
-.grid{position:relative;z-index:1;display:grid;grid-template-columns:118px repeat(4,minmax(0,1fr));column-gap:40px}
+.mhead{position:sticky;top:calc(var(--safe) + var(--barh));z-index:20;background:var(--bg);padding-top:8px}
+.mtitle{font:700 .78rem/1.2 var(--f-cond);text-transform:uppercase;letter-spacing:.06em;color:var(--ink);padding-bottom:6px}
+.mtitle b{color:var(--red);margin-right:6px}
+.mtitle span{color:var(--muted);font-weight:500;text-transform:none;letter-spacing:0;font-family:var(--f-body);margin-left:6px}
+.mcols,.grid{display:grid;grid-template-columns:118px repeat(4,minmax(0,1fr));column-gap:40px}
+.grid{position:relative;z-index:1}
 .gh{font:700 .78rem var(--f-cond);text-transform:uppercase;letter-spacing:.06em;padding:0 0 8px;border-bottom:1px solid var(--ink)}
 .gh small{display:block;font:400 .78rem var(--f-body);text-transform:none;letter-spacing:0;color:var(--muted);margin-top:2px}
-.lane{padding:14px 0;border-bottom:1px solid var(--rule);font:700 1rem/1.2 var(--f-head)}
+.lane{padding:14px 0;border-bottom:1px solid var(--rule)}
+.lane-in{position:sticky;top:calc(var(--safe) + var(--barh) + var(--mhh) + 6px);background:var(--bg);font:700 1rem/1.2 var(--f-head);padding-bottom:4px}
 .lane small{display:block;font:500 .72rem/1.3 var(--f-cond);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:4px}
 .cell{padding:14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:7px;min-width:0}
 .node{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:7px 9px 8px;background:var(--bg);border:1px solid var(--rule);border-left:3px solid var(--rule2);min-width:0}
@@ -232,7 +241,15 @@ body.on-LB.on-OIT .node.hit[data-hit="LB OIT"]{border-left-color:var(--lb);backg
 .l-mid{fill:var(--red);font:700 34px var(--f-head)}
 .l-sub{fill:var(--muted);font:500 10.5px var(--f-cond);text-transform:uppercase;letter-spacing:.04em}
 
-/* 6. quién propone qué */
+/* 6. quién propone qué: encabezado y grupos congelados */
+.tbl.cmpwrap{overflow:visible}
+#cmpTable{border-collapse:separate;border-spacing:0}
+#cmpTable thead{position:sticky;top:calc(var(--safe) + var(--barh));z-index:15}
+#cmpTable thead th{background:var(--bg)}
+#cmpTable thead tr.tt th{color:var(--ink);border-bottom:1px solid var(--rule);padding-top:10px}
+#cmpTable thead tr.tt b{color:var(--red);margin-right:6px}
+#cmpTable thead tr.tt span{color:var(--muted);font-weight:500;text-transform:none;letter-spacing:0;font-family:var(--f-body);margin-left:6px}
+#cmpTable tr.grp td{position:sticky;top:calc(var(--safe) + var(--barh) + var(--thh));z-index:14;background:var(--bg)}
 td.c-LB,td.c-OIT{min-width:220px}
 td.none{color:var(--muted);font-style:italic}
 tr.grp td{font:700 .78rem var(--f-cond);text-transform:uppercase;letter-spacing:.06em;color:var(--ink);border-bottom:1px solid var(--ink);padding-top:18px;background:transparent}
@@ -255,7 +272,22 @@ footer{border-top:1px solid var(--ink);margin-top:36px;padding-block:18px 34px;f
   .ess,.charts,.frames,.src,.loops{grid-template-columns:minmax(0,1fr)}
   .ess{gap:24px}
 }
+@media (max-width:900px){
+  .mcols{display:none}
+  .grid{grid-template-columns:minmax(0,1fr)}
+  .map svg.edges{display:none}
+  .lane{padding:16px 0 6px;border-bottom:1px solid var(--ink)}
+  .lane-in{top:calc(var(--safe) + var(--barh) + var(--mhh))}
+  .cell{border-bottom:0;padding:8px 0}
+  .cell::before{content:attr(data-col);font:700 .74rem var(--f-cond);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .cell:not(:has(.node:not([hidden])))::before{display:none}
+}
+@media (max-width:760px){
+  .tbl.cmpwrap{overflow-x:auto}
+  #cmpTable thead,#cmpTable tr.grp td{position:static}
+}
 @media (max-width:640px){
+  .bar-in{flex-wrap:wrap}
   .blocks{grid-template-columns:minmax(0,1fr)}
   .drawer{top:auto;height:84vh;width:100%;border-left:0;border-top:1px solid var(--ink)}
   .switches .lbl{display:none}
@@ -267,7 +299,7 @@ footer{border-top:1px solid var(--ink);margin-top:36px;padding-block:18px 34px;f
 <header class="mast"><div class="wrap">
   <div>
     <p class="kicker">Seguridad social en salud · Perú</p>
-    <h1>Un seguro que también es hospital</h1>
+    <h1>Estudios sobre EsSalud-Perú</h1>
     <p class="dek">EsSalud cumple dos oficios: asegura a 11,6 millones de personas y las atiende en sus propios establecimientos. Dos estudios encuentran problemas en ambos: el Libro Blanco (EsSalud y Banco Mundial, 2019) y la valuación actuarial de la OIT (2022). Esta página los ordena por rol y lleva cada afirmación a su página.</p>
   </div>
   <div class="stats" id="stats"></div>
@@ -341,10 +373,14 @@ footer{border-top:1px solid var(--ink);margin-top:36px;padding-block:18px 34px;f
     <button type="button" class="sw neutral" role="switch" aria-checked="true" id="swKey"><span class="knob"></span>Solo lo esencial</button>
   </div>
   <p class="cap" id="cap" aria-live="polite"></p>
-  <div class="mapscroll"><div class="map" id="map">
+  <div class="map" id="map">
+    <div class="mhead" id="mhead">
+      <p class="mtitle"><b>4</b>El mapa<span>De la causa a la respuesta, rol por rol</span></p>
+      <div class="mcols" id="mcols"></div>
+    </div>
     <svg class="edges" id="edges" aria-hidden="true"></svg>
     <div class="grid" id="grid"></div>
-  </div></div>
+  </div>
   <p class="mapnote">Las flechas aparecen al elegir una tarjeta, un recorrido o un bloque. Las relaciones marcadas con ◇ en el detalle son inferencias nuestras. Los recorridos tienen enlace propio para compartir, por ejemplo <code>#recorrido-dinero</code>.</p>
 </section>
 
@@ -363,8 +399,11 @@ footer{border-top:1px solid var(--ink);margin-top:36px;padding-block:18px 34px;f
     <h2>En qué coinciden el Libro Blanco y la OIT</h2>
     <p>La OIT se concentra en el financiamiento del asegurador; el Libro Blanco, en la organización y la compra. Donde los dos miran lo mismo, casi siempre coinciden.</p>
   </div>
-  <div class="tbl"><table>
-    <thead><tr><th style="width:24%">Tema</th><th>Libro Blanco 2019</th><th>Estudio actuarial OIT 2022</th><th style="width:96px"></th></tr></thead>
+  <div class="tbl cmpwrap"><table id="cmpTable">
+    <thead id="cmpHead">
+      <tr class="tt"><th colspan="4"><b>6</b>Quién propone qué<span>En qué coinciden el Libro Blanco y la OIT</span></th></tr>
+      <tr><th style="width:24%">Tema</th><th>Libro Blanco 2019</th><th>Estudio actuarial OIT 2022</th><th style="width:96px"></th></tr>
+    </thead>
     <tbody id="cmp"></tbody>
   </table></div>
 </section>
@@ -514,9 +553,10 @@ const COLS=["R","P","E","A"];
 function card(n){const ext=n.grp==="ext";
   return '<button type="button" class="node mk'+(ext?' ext':'')+(n.key?' key':'')+'" data-id="'+n.id+'" data-src="'+n.src.join(" ")+'" aria-label="'+code(n)+': '+esc(n.title)+'">'+
    '<span class="row"><span class="code">'+code(n)+(ext?' · entorno':'')+'</span>'+badges(n.src)+'</span><span class="ttl">'+n.title+'</span><span class="fig">'+n.fig+'</span></button>';}
-$("#grid").innerHTML='<div class="gh"></div>'+[["Causas","de fondo"],["Problemas","en la operación"],["Efectos","sobre asegurados y fondo"],["Respuestas","Libro Blanco y OIT"]].map(h=>'<div class="gh">'+h[0]+'<small>'+h[1]+'</small></div>').join("")+
- LANES.map(l=>'<div class="lane">'+D.lanes[l].name+'<small>'+(l==="GOB"?"":D.lanes[l].abbr+" · ")+D.lanes[l].q+'</small></div>'+
-   COLS.map(c=>'<div class="cell">'+D.nodes.filter(n=>n.lane===l&&n.col===c).map(card).join("")+'</div>').join("")).join("");
+const HEADS=[["Causas","de fondo"],["Problemas","en la operación"],["Efectos","sobre asegurados y fondo"],["Respuestas","Libro Blanco y OIT"]];
+$("#mcols").innerHTML='<div class="gh"></div>'+HEADS.map(h=>'<div class="gh">'+h[0]+'<small>'+h[1]+'</small></div>').join("");
+$("#grid").innerHTML=LANES.map(l=>'<div class="lane"><div class="lane-in">'+D.lanes[l].name+'<small>'+(l==="GOB"?"":D.lanes[l].abbr+" · ")+D.lanes[l].q+'</small></div></div>'+
+   COLS.map((c,i)=>'<div class="cell" data-col="'+HEADS[i][0]+'">'+D.nodes.filter(n=>n.lane===l&&n.col===c).map(card).join("")+'</div>').join("")).join("");
 const mapEl=$("#map"),svg=$("#edges"),el=id=>mapEl.querySelector('.node[data-id="'+id+'"]');
 function walk(start,dir){const seen=new Set(),st=[start];while(st.length){const x=st.pop();(dir==="up"?inn[x].map(e=>e.from):out[x].map(e=>e.to)).forEach(y=>{if(!seen.has(y)){seen.add(y);st.push(y);}});}return seen;}
 let focus=null,keyOnly=true;
@@ -623,12 +663,18 @@ if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>{es.f
   $$("section.sec").forEach(s=>io.observe(s));}
 
 /* --- enlaces a recorridos y redibujo --- */
-function fromHash(){const m=location.hash.match(/^#recorrido-([a-z]+)$/),t=m&&D.tours.find(x=>x.id===m[1]);if(!t)return;
-  setFocus({kind:"set",ids:t.ids,cap:t.cap,tour:t.id});document.getElementById("mapa").scrollIntoView();}
+function fromHash(){const m=location.hash.match(/^#recorrido-([a-z]+)$/),t=m&&D.tours.find(x=>x.id===m[1]);
+  if(t){setFocus({kind:"set",ids:t.ids,cap:t.cap,tour:t.id});document.getElementById("mapa").scrollIntoView();return;}
+  const target=/^#[a-z]+$/.test(location.hash)&&document.getElementById(location.hash.slice(1));
+  if(target)target.scrollIntoView({behavior:"auto"});}
 addEventListener("hashchange",fromHash);
-let raf=0;const redraw=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(draw);};
-addEventListener("resize",redraw);if("ResizeObserver" in window)new ResizeObserver(redraw).observe(mapEl);
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(redraw);
+/* alturas de los paneles congelados: barra fija, encabezado del mapa y encabezado de la tabla */
+const rootS=document.documentElement.style;
+function heights(){rootS.setProperty("--barh",$(".bar").offsetHeight+"px");rootS.setProperty("--mhh",$("#mhead").offsetHeight+"px");rootS.setProperty("--thh",$("#cmpHead").offsetHeight+"px");}
+let raf=0;const redraw=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{heights();draw();});};
+addEventListener("resize",redraw);if("ResizeObserver" in window){const ro=new ResizeObserver(redraw);ro.observe(mapEl);ro.observe($(".bar"));ro.observe($("#mhead"));}
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{redraw();if(location.hash)requestAnimationFrame(fromHash);});
+heights();
 applySources();paint();fromHash();
 })();
 </script>
