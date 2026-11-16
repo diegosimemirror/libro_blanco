@@ -1,0 +1,5 @@
+# Los PDF del Libro Blanco tienen derechos reservados: no se suben.
+*.pdf
+# Textos extraídos de los PDF
+*.txt
+__pycache__/

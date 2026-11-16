@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mapa del Libro Blanco</title>
+<meta name="description" content="El Libro Blanco de EsSalud (2019) trazado de la causa a la respuesta: causas raíz, problemas, efectos y las 9 políticas, con cada afirmación enlazada a su página en el PDF oficial.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%2311735a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Concepto: un expediente de trazabilidad. Cuatro columnas que leen de izquierda a derecha (causa → problema → efecto → respuesta),
+   con cada afirmación anclada a su página en el PDF. Colores = tipo de elemento, nunca decoración. */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --surface-2:#e9edf2; --ink:#16202b; --muted:#566273; --line:#d3dae3;
+  --root:#a23d1a; --root-soft:#f7e3da;
+  --prob:#9a6206; --prob-soft:#f6ead2;
+  --eff:#285787; --eff-soft:#dde8f4;
+  --resp:#11735a; --resp-soft:#d8eee5;
+  --ext:#62528f; --ext-soft:#e8e3f4;
+  --accent:#1c3d63; --focus:#2b6cb0; --quote:#2f3b4c; --shadow:0 10px 30px rgba(20,30,45,.16);
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"Public Sans","Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1319; --surface:#161d26; --surface-2:#1d2631; --ink:#e6ebf1; --muted:#9ba8b8; --line:#2a3542;
+    --root:#f08b61; --root-soft:#3a241b; --prob:#e1ae4c; --prob-soft:#372c16; --eff:#88b5e6; --eff-soft:#1b2a3b;
+    --resp:#54c79d; --resp-soft:#15302a; --ext:#b8a8ea; --ext-soft:#28223c; --accent:#a8c7ee; --focus:#8cc0f0; --quote:#cdd6e2;
+    --shadow:0 10px 30px rgba(0,0,0,.5); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1319; --surface:#161d26; --surface-2:#1d2631; --ink:#e6ebf1; --muted:#9ba8b8; --line:#2a3542;
+  --root:#f08b61; --root-soft:#3a241b; --prob:#e1ae4c; --prob-soft:#372c16; --eff:#88b5e6; --eff-soft:#1b2a3b;
+  --resp:#54c79d; --resp-soft:#15302a; --ext:#b8a8ea; --ext-soft:#28223c; --accent:#a8c7ee; --focus:#8cc0f0; --quote:#cdd6e2;
+  --shadow:0 10px 30px rgba(0,0,0,.5); color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.wrap{max-width:1280px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+h2{font-size:1.65rem;font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.08rem;font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.eyebrow{font:600 .74rem/1.3 var(--f-body);text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.muted{color:var(--muted)}
+.inf{color:var(--ext);font-weight:700}
+
+/* cabecera */
+header.top{padding-block:36px 24px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;align-items:end}
+header.top h1{font-size:clamp(1.9rem,3.6vw,2.9rem);font-weight:800;letter-spacing:-.02em;margin-top:8px}
+header.top .lede{margin-top:14px;max-width:66ch;font-size:1.04rem;color:var(--quote)}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stat{background:var(--surface);padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.stat b{font:800 1.35rem/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.stat span{font-size:.82rem;color:var(--muted)}
+.howto{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;font-size:.88rem}
+.howto .k{display:inline-flex;align-items:center;gap:7px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sw.R{background:var(--root)}.sw.P{background:var(--prob)}.sw.E{background:var(--eff)}.sw.A{background:var(--resp)}.sw.X{background:var(--ext)}
+
+/* navegación */
+nav.sec{position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);margin-top:22px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:21;background:var(--bg)}
+nav.sec .in{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:thin}
+nav.sec a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:.88rem;padding:6px 10px;border-radius:6px}
+nav.sec a:hover{color:var(--ink);background:var(--surface-2)}
+
+section.blk{padding-block:44px 8px;display:flex;flex-direction:column;gap:18px}
+.sec-head{display:flex;flex-direction:column;gap:8px;max-width:78ch}
+.sec-head p{color:var(--quote)}
+
+/* citas */
+a.cite{font:500 .76rem/1 var(--f-mono);text-decoration:none;color:var(--accent);background:var(--surface-2);border:1px solid var(--line);padding:2px 5px;border-radius:4px;white-space:nowrap;vertical-align:1px}
+a.cite:hover{border-color:var(--accent)}
+blockquote{margin:0;padding:8px 0 8px 14px;border-left:3px solid var(--line);color:var(--quote);font-style:italic}
+blockquote .cite{font-style:normal;margin-left:4px}
+
+/* tesis */
+.thesis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:th}
+.th{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.th h3{font-size:1rem}
+.th p{font-size:.9rem;color:var(--quote)}
+
+/* sistema */
+figure{margin:0}
+.sys{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:22px}
+.sys .svgbox{overflow-x:auto}
+.sys svg{width:100%;min-width:640px;height:auto;display:block}
+.sys figcaption{font-size:.9rem;color:var(--quote);margin-top:10px}
+.sys ol{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:.86rem;min-width:0}
+.sys li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px}
+.sys li .n{width:22px;height:22px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);font:700 .75rem/20px var(--f-display);text-align:center}
+.s-box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.s-out{fill:var(--surface-2);stroke:var(--line);stroke-width:1.2}
+.s-ess{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:6 4}
+.s-fin{fill:var(--eff-soft);stroke:var(--eff);stroke-width:1.5}
+.s-pre{fill:var(--root-soft);stroke:var(--root);stroke-width:1.5}
+.s-t{fill:var(--ink);font:700 13px var(--f-body)}
+.s-s{fill:var(--muted);font:400 11.5px var(--f-body)}
+.s-l{fill:var(--muted);font:600 11px var(--f-body)}
+.s-k{fill:var(--accent);font:700 11px var(--f-body);letter-spacing:.06em}
+.s-line{stroke:var(--muted);stroke-width:1.5;fill:none}
+.s-hot{stroke:var(--root);stroke-width:2.2;fill:none}
+.s-badge{fill:var(--surface);stroke:var(--ink);stroke-width:1.2}
+.s-bt{fill:var(--ink);font:700 11px var(--f-display)}
+.s-arrow{fill:var(--muted)}.s-arrow-hot{fill:var(--root)}
+
+/* mapa */
+.tours{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{font:600 .86rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 12px;border-radius:999px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.tour-cap{font-size:.92rem;color:var(--quote);min-height:1.5em;max-width:90ch}
+.mapbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;overflow:hidden}
+.map{position:relative}
+.map svg.edges{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:visible}
+.cols{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:58px;align-items:start}
+.col{display:flex;flex-direction:column;gap:8px;min-width:0}
+.col-h{padding-bottom:8px;border-bottom:2px solid var(--line);margin-bottom:4px}
+.col-h h3{font-size:1rem;display:flex;align-items:center;gap:8px}
+.col-h p{font-size:.78rem;color:var(--muted);margin-top:3px}
+.sub{font:600 .7rem/1.2 var(--f-body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:8px}
+.node{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:8px 10px 9px;border-radius:8px;background:var(--surface);
+  border:1px solid var(--line);border-left:4px solid var(--c);transition:opacity .18s, box-shadow .18s, transform .18s;min-width:0}
+.node:hover{box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.node:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.node .row{display:flex;gap:7px;align-items:baseline;min-width:0}
+.node .code{font:700 .72rem/1 var(--f-mono);color:var(--c)}
+.node .ttl{font:700 .88rem/1.25 var(--f-display);color:var(--ink)}
+.node .fig{font-size:.76rem;line-height:1.35;color:var(--muted)}
+.node .lvl{font:600 .64rem/1 var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--c);margin-left:auto;white-space:nowrap}
+.node.ext{border-style:dashed;border-left-style:solid}
+.t-R{--c:var(--root);--cs:var(--root-soft)}.t-P{--c:var(--prob);--cs:var(--prob-soft)}.t-E{--c:var(--eff);--cs:var(--eff-soft)}.t-A{--c:var(--resp);--cs:var(--resp-soft)}.t-X{--c:var(--ext);--cs:var(--ext-soft)}
+.map.focus .node{opacity:.28}
+.map.focus .node.on{opacity:1}
+.map.focus .node.sel{opacity:1;background:var(--cs);box-shadow:0 0 0 2px var(--c)}
+.map-note{font-size:.82rem;color:var(--muted)}
+
+/* panel */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);z-index:50;background:var(--surface);border-left:1px solid var(--line);box-shadow:var(--shadow);
+  overflow-y:auto;padding:calc(18px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) 22px;display:flex;flex-direction:column;gap:16px}
+.drawer .dh{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.drawer .x{all:unset;cursor:pointer;font:700 1.3rem/1 var(--f-display);padding:4px 10px;border-radius:6px;color:var(--muted)}
+.drawer .x:hover{background:var(--surface-2);color:var(--ink)}
+.drawer .x:focus-visible{outline:3px solid var(--focus)}
+.drawer h2{font-size:1.35rem}
+.tag{display:inline-flex;align-items:center;gap:6px;font:600 .72rem/1 var(--f-body);text-transform:uppercase;letter-spacing:.07em;color:var(--c)}
+.dfig{background:var(--cs);border-radius:8px;padding:10px 12px;font-weight:600;font-size:.95rem}
+.dsec{display:flex;flex-direction:column;gap:8px}
+.dsec h4{margin:0;font:700 .78rem/1.2 var(--f-body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.links{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.links li{font-size:.88rem;display:flex;flex-direction:column;gap:3px;padding:8px 10px;border:1px solid var(--line);border-radius:8px}
+.chip{all:unset;cursor:pointer;display:inline-flex;gap:6px;align-items:baseline;font:600 .84rem/1.25 var(--f-body);color:var(--ink)}
+.chip .code{font:700 .72rem var(--f-mono);color:var(--c)}
+.chip:hover .t{text-decoration:underline}
+.chip:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px 14px}
+
+/* bucles */
+.loops{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.loop{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.loop svg{width:100%;max-width:340px;height:auto;align-self:center;display:block}
+.loop .kind{font:700 .72rem var(--f-mono);padding:3px 7px;border-radius:4px}
+.loop .kind.R{background:var(--root-soft);color:var(--root)}
+.loop .kind.B{background:var(--eff-soft);color:var(--eff)}
+.loop p{font-size:.9rem;color:var(--quote)}
+.loop .lev{font-size:.86rem;border-top:1px solid var(--line);padding-top:8px}
+.l-ring{fill:none;stroke:var(--line);stroke-width:2}
+.l-box{stroke-width:1.5}
+.l-txt{fill:var(--ink);font:600 11.5px var(--f-body)}
+.l-mid{font:800 34px var(--f-display)}
+.l-sub{fill:var(--muted);font:600 10.5px var(--f-body)}
+
+/* políticas */
+.dims{display:flex;flex-direction:column;gap:26px}
+.dim h3.dn{font-size:1.15rem;display:flex;gap:10px;align-items:baseline}
+.dim h3.dn span{font:600 .74rem var(--f-body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.pols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:10px}
+.pol{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--resp);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.pol h4{margin:0;font:800 1.08rem/1.2 var(--f-display)}
+.pol .pn{font:600 .72rem var(--f-mono);color:var(--resp)}
+.pol ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.86rem}
+.pol .lbl{font:700 .72rem/1.2 var(--f-body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.pol details summary{cursor:pointer;font-weight:600;font-size:.88rem;color:var(--accent)}
+.pol details[open] summary{margin-bottom:8px}
+
+/* decisiones y brechas */
+.decs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.dec{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.dec p{font-size:.9rem;color:var(--quote)}
+.tblbox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:640px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font:700 .74rem var(--f-body);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+.no{color:var(--root);font-weight:700}.part{color:var(--prob);font-weight:700}
+
+.src{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+.src ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:.9rem}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+footer{padding-block:34px 40px;color:var(--muted);font-size:.84rem}
+
+@media (max-width:1100px){
+  .thesis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .loops,.pols,.decs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{column-gap:40px}
+}
+@media (max-width:980px){
+  header.top{grid-template-columns:minmax(0,1fr)}
+  .sys,.src{grid-template-columns:minmax(0,1fr)}
+  .cols{grid-template-columns:minmax(0,1fr);row-gap:22px}
+  .map svg.edges{display:none}
+}
+@media (max-width:640px){
+  .thesis,.loops,.pols,.decs{grid-template-columns:minmax(0,1fr)}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .drawer{top:auto;height:82vh;width:100%;border-left:0;border-top:1px solid var(--line);border-radius:14px 14px 0 0;padding-left:max(18px, env(safe-area-inset-left, 0px))}
+  h2{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div>
+    <p class="eyebrow">Hacia la modernización de la seguridad social en el Perú · Libro Blanco para el diálogo · EsSalud–Banco Mundial, 2019</p>
+    <h1>El Libro Blanco de EsSalud, trazado de la causa a la respuesta</h1>
+    <p class="lede">Dos tomos y unas 590 páginas reducidos a un mapa: qué causas de fondo identifica el estudio, qué problemas producen, a quién afectan y qué propone para cada uno. Cada afirmación lleva su página; al pulsarla se abre el PDF oficial de EsSalud en esa página.</p>
+  </div>
+  <div class="stats" id="stats"></div>
+</header>
+
+<div class="howto" role="note">
+  <span class="k"><i class="sw X"></i>Presión del entorno</span>
+  <span class="k"><i class="sw R"></i>Causa raíz</span>
+  <span class="k"><i class="sw P"></i>Problema</span>
+  <span class="k"><i class="sw E"></i>Efecto o impacto</span>
+  <span class="k"><i class="sw A"></i>Respuesta (política)</span>
+  <span class="k"><a class="cite" href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf#page=19" target="_blank" rel="noopener">T1·p.17</a> abre el tomo y la página</span>
+  <span class="k"><i>«Cursiva»</i> = cita literal · texto normal = síntesis · <b class="inf">◇</b> = inferencia nuestra</span>
+</div>
+
+<nav class="sec" aria-label="Secciones"><div class="in">
+  <a href="#tesis">La tesis</a><a href="#sistema">EsSalud en el sistema</a><a href="#mapa">Mapa de trazabilidad</a>
+  <a href="#bucles">Bucles</a><a href="#politicas">Las 9 políticas</a><a href="#abierto">Lo que queda abierto</a><a href="#fuentes">Fuentes y método</a>
+</div></nav>
+
+<section class="blk" id="tesis">
+  <div class="sec-head">
+    <p class="eyebrow">En dos minutos</p>
+    <h2>La tesis del Libro Blanco en cinco frases</h2>
+  </div>
+  <div class="thesis" id="thesis"></div>
+</section>
+
+<section class="blk" id="sistema">
+  <div class="sec-head">
+    <p class="eyebrow">Enfoque de sistema complejo</p>
+    <h2>EsSalud es un subsistema: buena parte de sus causas está fuera de él</h2>
+    <p>La Ley 29344 reparte el sistema de salud en cuatro funciones: rectoría (Minsa), supervisión (Susalud), financiamiento (Iafas) y provisión (Ipress). <span class="q">«La estructura de EsSalud incluye ambas funciones.»</span> <a class="cite" href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_2.pdf#page=240" target="_blank" rel="noopener">T2·p.238</a> El diagrama ubica a EsSalud entre los actores que fijan sus ingresos, sus reglas y su competencia.</p>
+  </div>
+  <figure class="sys">
+    <div>
+      <div class="svgbox">
+      <svg viewBox="0 0 1000 610" role="img" aria-label="EsSalud junta el fondo y la red de prestadores; sus ingresos y reglas dependen de actores externos y los asegurados pagan de su bolsillo lo que no resuelve.">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="s-arrow"/></marker>
+          <marker id="arh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="s-arrow-hot"/></marker>
+        </defs>
+        <!-- fila superior -->
+        <rect class="s-out" x="20" y="20" width="250" height="64" rx="8"/>
+        <text class="s-t" x="145" y="47" text-anchor="middle">Congreso y Poder Ejecutivo</text>
+        <text class="s-s" x="145" y="66" text-anchor="middle">leyes sobre aportes y regímenes</text>
+        <rect class="s-out" x="375" y="20" width="250" height="64" rx="8"/>
+        <text class="s-t" x="500" y="47" text-anchor="middle">MTPE · Fonafe</text>
+        <text class="s-s" x="500" y="66" text-anchor="middle">adscripción y gestión empresarial</text>
+        <rect class="s-out" x="730" y="20" width="250" height="64" rx="8"/>
+        <text class="s-t" x="855" y="47" text-anchor="middle">Minsa (rector) · Susalud</text>
+        <text class="s-s" x="855" y="66" text-anchor="middle">normas sanitarias y supervisión</text>
+        <!-- EsSalud -->
+        <rect class="s-ess" x="300" y="170" width="400" height="270" rx="14"/>
+        <text class="s-k" x="318" y="193">ESSALUD · SUBSISTEMA CONTRIBUTIVO</text>
+        <rect class="s-box" x="320" y="204" width="360" height="40" rx="6"/>
+        <text class="s-t" x="500" y="229" text-anchor="middle">Consejo Directivo · Presidencia Ejecutiva · GG</text>
+        <rect class="s-fin" x="320" y="262" width="165" height="110" rx="8"/>
+        <text class="s-t" x="402" y="289" text-anchor="middle">Función aseguradora</text>
+        <text class="s-s" x="402" y="309" text-anchor="middle">afilia, recauda y</text>
+        <text class="s-s" x="402" y="325" text-anchor="middle">administra el fondo</text>
+        <text class="s-l" x="402" y="350" text-anchor="middle">(rol de Iafas)</text>
+        <rect class="s-pre" x="515" y="262" width="165" height="110" rx="8"/>
+        <text class="s-t" x="597" y="289" text-anchor="middle">Función prestadora</text>
+        <text class="s-s" x="597" y="309" text-anchor="middle">29 redes · 389 Ipress</text>
+        <text class="s-s" x="597" y="325" text-anchor="middle">52 000 colaboradores</text>
+        <text class="s-l" x="597" y="350" text-anchor="middle">(rol de Ipress)</text>
+        <path class="s-hot" d="M402,372 Q500,420 597,374" marker-end="url(#arh)"/>
+        <circle class="s-badge" cx="500" cy="397" r="10"/><text class="s-bt" x="500" y="401" text-anchor="middle">6</text>
+        <text class="s-l" x="500" y="428" text-anchor="middle">asigna por presupuesto histórico</text>
+        <!-- izquierda -->
+        <rect class="s-out" x="20" y="186" width="210" height="60" rx="8"/>
+        <text class="s-t" x="125" y="211" text-anchor="middle">Empleadores y trabajadores</text>
+        <text class="s-s" x="125" y="230" text-anchor="middle">aporte de 9 % del salario</text>
+        <rect class="s-out" x="20" y="296" width="210" height="56" rx="8"/>
+        <text class="s-t" x="125" y="320" text-anchor="middle">Sunat</text>
+        <text class="s-s" x="125" y="338" text-anchor="middle">recauda los aportes</text>
+        <!-- derecha -->
+        <rect class="s-out" x="770" y="268" width="210" height="76" rx="8"/>
+        <text class="s-t" x="875" y="293" text-anchor="middle">SIS · FF. AA. · EPS</text>
+        <text class="s-s" x="875" y="312" text-anchor="middle">otros fondos y seguros</text>
+        <text class="s-l" x="875" y="331" text-anchor="middle">(sistema fragmentado)</text>
+        <!-- fila inferior -->
+        <rect class="s-out" x="20" y="520" width="250" height="72" rx="8"/>
+        <text class="s-t" x="145" y="549" text-anchor="middle">Ipress externas y APP</text>
+        <text class="s-s" x="145" y="569" text-anchor="middle">Barton, UBAP, clínicas</text>
+        <rect class="s-box" x="375" y="520" width="250" height="72" rx="8"/>
+        <text class="s-t" x="500" y="549" text-anchor="middle">Asegurados: 11,6 millones</text>
+        <text class="s-s" x="500" y="569" text-anchor="middle">36 % de la población</text>
+        <rect class="s-out" x="730" y="520" width="250" height="72" rx="8"/>
+        <text class="s-t" x="855" y="549" text-anchor="middle">Farmacias y consultas privadas</text>
+        <text class="s-s" x="855" y="569" text-anchor="middle">pagadas de bolsillo</text>
+        <!-- flechas -->
+        <line class="s-hot" x1="145" y1="84" x2="336" y2="168" marker-end="url(#arh)"/>
+        <circle class="s-badge" cx="232" cy="122" r="10"/><text class="s-bt" x="232" y="126" text-anchor="middle">1</text>
+        <text class="s-l" x="246" y="152">topes y exoneraciones</text>
+        <line class="s-line" x1="500" y1="84" x2="500" y2="168" marker-end="url(#ar)"/>
+        <circle class="s-badge" cx="500" cy="124" r="10"/><text class="s-bt" x="500" y="128" text-anchor="middle">2</text>
+        <text class="s-l" x="516" y="128">adscripción</text>
+        <line class="s-line" x1="855" y1="84" x2="664" y2="168" marker-end="url(#ar)"/>
+        <circle class="s-badge" cx="768" cy="122" r="10"/><text class="s-bt" x="768" y="126" text-anchor="middle">3</text>
+        <text class="s-l" x="770" y="152">normas, categorías, plazos</text>
+        <line class="s-line" x1="125" y1="246" x2="125" y2="294" marker-end="url(#ar)"/>
+        <circle class="s-badge" cx="125" cy="270" r="10"/><text class="s-bt" x="125" y="274" text-anchor="middle">4</text>
+        <text class="s-l" x="142" y="274">aportan</text>
+        <line class="s-line" x1="230" y1="324" x2="318" y2="318" marker-end="url(#ar)"/>
+        <circle class="s-badge" cx="268" cy="321" r="10"/><text class="s-bt" x="268" y="325" text-anchor="middle">5</text>
+        <text class="s-l" x="268" y="306" text-anchor="middle">transfiere</text>
+        <line class="s-line" x1="360" y1="440" x2="206" y2="518" marker-end="url(#ar)"/>
+        <circle class="s-badge" cx="284" cy="479" r="10"/><text class="s-bt" x="284" y="483" text-anchor="middle">7</text>
+        <text class="s-l" x="292" y="506">compra S/ 282 M</text>
+        <line class="s-line" x1="600" y1="440" x2="545" y2="518" marker-end="url(#ar)"/>
+        <circle class="s-badge" cx="572" cy="479" r="10"/><text class="s-bt" x="572" y="483" text-anchor="middle">8</text>
+        <text class="s-l" x="588" y="483">atiende con esperas</text>
+        <line class="s-line" x1="270" y1="556" x2="373" y2="556" marker-end="url(#ar)"/>
+        <circle class="s-badge" cx="321" cy="556" r="10"/><text class="s-bt" x="321" y="560" text-anchor="middle">9</text>
+        <line class="s-hot" x1="625" y1="556" x2="728" y2="556" marker-end="url(#arh)"/>
+        <circle class="s-badge" cx="676" cy="556" r="10"/><text class="s-bt" x="676" y="560" text-anchor="middle">10</text>
+        <text class="s-l" x="676" y="584" text-anchor="middle">bolsillo</text>
+        <line class="s-line" x1="702" y1="306" x2="768" y2="306" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <circle class="s-badge" cx="735" cy="306" r="10"/><text class="s-bt" x="735" y="310" text-anchor="middle">11</text>
+        <text class="s-l" x="735" y="290" text-anchor="middle">compiten</text>
+        <line class="s-line" x1="460" y1="518" x2="460" y2="442" marker-end="url(#ar)"/>
+        <circle class="s-badge" cx="460" cy="480" r="10"/><text class="s-bt" x="460" y="484" text-anchor="middle">12</text>
+        <text class="s-l" x="446" y="484" text-anchor="end">desconfían (49 %)</text>
+      </svg>
+      </div>
+      <figcaption>EsSalud reúne en una sola organización el fondo y la red de prestadores (6). Lo que fija sus ingresos y sus reglas se decide en buena parte fuera de él (1 a 5), y lo que no resuelve dentro lo pagan los asegurados fuera (10). Las flechas en rojo son los dos mecanismos que el libro considera decisivos.</figcaption>
+    </div>
+    <ol id="syslist" aria-label="Relaciones numeradas del diagrama"></ol>
+  </figure>
+</section>
+
+<section class="blk" id="mapa">
+  <div class="sec-head">
+    <p class="eyebrow">Trazabilidad</p>
+    <h2>Mapa de causas, problemas, efectos y respuestas</h2>
+    <p>Pulse cualquier tarjeta: se ilumina la cadena completa (de qué viene, a qué lleva y qué política del libro la atiende) y se abre el detalle con las citas. Los recorridos de abajo siguen cuatro hilos que sirven para explicar el libro en una reunión.</p>
+  </div>
+  <div class="tours" id="tours" role="group" aria-label="Recorridos guiados"></div>
+  <p class="tour-cap" id="tourcap" aria-live="polite"></p>
+  <div class="mapbox">
+    <div class="map" id="map">
+      <svg class="edges" id="edges" aria-hidden="true"></svg>
+      <div class="cols" id="cols"></div>
+    </div>
+  </div>
+  <p class="map-note">Las líneas continuas son relaciones causales que el libro afirma; las marcadas con ◇ en el detalle son inferencias nuestras a partir de sus datos. Las respuestas se conectan (en línea discontinua) al seleccionar una tarjeta. En pantallas angostas el mapa se apila y las conexiones se ven en el detalle.</p>
+</section>
+
+<section class="blk" id="bucles">
+  <div class="sec-head">
+    <p class="eyebrow">Por qué el problema persiste</p>
+    <h2>Seis bucles que mantienen el sistema donde está</h2>
+    <p>En un sistema complejo los problemas no se suman, se realimentan. Estos bucles son una lectura nuestra <b class="inf">◇</b>: el libro no los dibuja, pero cada eslabón está sostenido por una cita. Un bucle <b>R</b> se refuerza a sí mismo; un bucle <b>B</b> frena o devuelve el sistema a su estado anterior.</p>
+  </div>
+  <div class="loops" id="loops"></div>
+</section>
+
+<section class="blk" id="politicas">
+  <div class="sec-head">
+    <p class="eyebrow">La respuesta del tomo 1</p>
+    <h2>Nueve políticas en cuatro dimensiones, con su hoja de ruta 2019-2022</h2>
+    <p>El tomo 1 ordena la respuesta en cuatro dimensiones inspiradas en los principios de la OMS para el financiamiento de la salud y asigna a cada estrategia hitos, años, responsables y la norma que debe aprobarse <a class="cite" href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf#page=81" target="_blank" rel="noopener">T1·p.79</a>. Aquí se resume cada política con lo que el tomo 2 le agrega.</p>
+  </div>
+  <div class="dims" id="dims"></div>
+</section>
+
+<section class="blk" id="abierto">
+  <div class="sec-head">
+    <p class="eyebrow">Para decidir</p>
+    <h2>Lo que el libro deja abierto</h2>
+    <p>Seis decisiones que el propio texto plantea sin cerrar, y cinco recomendaciones del tomo 2 que no pasaron a la hoja de ruta del tomo 1.</p>
+  </div>
+  <div class="decs" id="decs"></div>
+  <h3 style="margin-top:12px">Del diagnóstico a la hoja de ruta: lo que se quedó en el camino <b class="inf">◇</b></h3>
+  <div class="tblbox">
+    <table>
+      <thead><tr><th style="width:30%">Recomendación del tomo 2</th><th style="width:18%">¿En el tomo 1?</th><th>Detalle</th></tr></thead>
+      <tbody id="gaps"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="blk" id="fuentes">
+  <div class="sec-head">
+    <p class="eyebrow">Fuentes y método</p>
+    <h2>De dónde sale cada afirmación</h2>
+  </div>
+  <div class="src">
+    <div class="box">
+      <h3>Los dos tomos</h3>
+      <ul>
+        <li><b>Tomo 1.</b> Políticas y hoja de ruta para el fortalecimiento del Seguro Social de Salud, EsSalud 2019-2022 (setiembre de 2019). Leído completo.</li>
+        <li><b>Tomo 2.</b> Compendio de estudios encargados por EsSalud al Banco Mundial (2018-2019). Se leyeron completos los resúmenes, diagnósticos, conclusiones y recomendaciones de cada estudio; el detalle técnico (cálculo de brechas por red, análisis de cada grupo HRG, manual de procesos) se consultó por búsqueda.</li>
+      </ul>
+      <h3>Estudios del tomo 2</h3>
+      <ul id="studies"></ul>
+    </div>
+    <div class="box">
+      <h3>Cómo se verificó</h3>
+      <ul>
+        <li>Cada una de las 116 citas literales se comprobó por programa contra el texto del PDF en la página indicada, con el script <a href="https://github.com/diegosimemirror/libro_blanco/blob/main/scripts/verificar_citas.py" target="_blank" rel="noopener">verificar_citas.py</a>. El número es la página impresa; el enlace abre la página equivalente del archivo, que va dos posiciones más adelante.</li>
+        <li>Las causas, problemas y efectos siguen la teoría del cambio del propio libro (políticas → objetivos intermedios → objetivos finales) <a class="cite" href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf#page=19" target="_blank" rel="noopener">T1·p.17</a>. La clasificación de cada elemento como causa, problema o efecto es nuestra.</li>
+        <li>El libro no concilia algunas cifras: los ingresos que dejan los regímenes especiales (S/ 2 280 M según EsSalud, S/ 1 000 M según el estudio) <a class="cite" href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_2.pdf#page=50" target="_blank" rel="noopener">T2·p.48</a>, y las Ipress privadas a contratar en Lima (26 en el texto, 24 en la hoja de ruta) <a class="cite" href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf#page=68" target="_blank" rel="noopener">T1·p.66</a> <a class="cite" href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf#page=90" target="_blank" rel="noopener">T1·p.88</a>.</li>
+        <li>El propio libro advierte que sus resultados <span class="q">«no reflejan necesariamente el punto de vista del Banco Mundial»</span> <a class="cite" href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf#page=4" target="_blank" rel="noopener">T1·p.2</a>, y que los datos corresponden a los años en que se hicieron los estudios (2014-2018).</li>
+        <li>El Libro Blanco tiene derechos reservados de EsSalud. Esta página cita fragmentos breves con fines de análisis, siempre con su fuente, y no reproduce los PDF: los enlaces llevan a los archivos que publica EsSalud en su <a href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf" target="_blank" rel="noopener">portal de transparencia</a> y en su <a href="https://repositorio.essalud.gob.pe/handle/20.500.12959/830" target="_blank" rel="noopener">repositorio institucional</a>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>Versión 1 · noviembre de 2026 · Análisis de Diego Sime, elaborado con Claude Code a partir de EsSalud (2019), <i>Hacia la modernización de la seguridad social en el Perú. Libro blanco para el diálogo</i>, tomos <a href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf" target="_blank" rel="noopener">1</a> y <a href="https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_2.pdf" target="_blank" rel="noopener">2</a>. Código y verificación: <a href="https://github.com/diegosimemirror/libro_blanco" target="_blank" rel="noopener">github.com/diegosimemirror/libro_blanco</a>.</footer>
+</div>
+
+<aside class="drawer" id="drawer" hidden aria-label="Detalle del elemento seleccionado" tabindex="-1"></aside>
+
+<script type="application/json" id="lb-data">
+{
+"stats":[
+ {"v":"11,6 M","l":"asegurados en 2018","c":{"t":1,"p":33},"q":"ha aumentado de 6,8 a 11,6 millones de personas"},
+ {"v":"36 %","l":"de la población peruana","c":{"t":1,"p":10},"q":"que representan el 36% de la población peruana"},
+ {"v":"S/ 11 000 M","l":"de ingresos al año","c":{"t":2,"p":167},"q":"S/ 11 000 millones por ingresos anuales"},
+ {"v":"389 Ipress","l":"propias, en 29 redes asistenciales","c":{"t":2,"p":137},"q":"Actualmente, EsSalud cuenta con 389 Ipress propias, que se organizan en 29 redes asistenciales"}
+],
+"thesis":[
+ {"h":"Paga y presta a la vez","b":"Al ser asegurador y prestador, EsSalud no puede comprar con exigencia ni contener sus propios costos.","q":{"t":2,"p":107,"q":"lo difícil que es que alguien se compre, y se module a sí mismo en sus propias prestaciones"}},
+ {"h":"Sus ingresos se deciden fuera","b":"Topes a los salarios cotizables y la exoneración de las gratificaciones explican buena parte del deterioro financiero.","q":{"t":1,"p":52,"q":"gran parte del deterioro financiero se explica por las medidas de índole legal aprobadas en la pasada década"}},
+ {"h":"Gasta más de lo que recibe","b":"Los gastos crecen más rápido que los ingresos; sin cambios, el déficit llegaría a casi un tercio de los ingresos.","q":{"t":1,"p":51,"q":"el déficit operacional muestra una tendencia creciente, al representar el 31% de los ingresos en 2028"}},
+ {"h":"Atiende tarde y lejos","b":"El modelo gira en torno al hospital; los asegurados esperan, pagan de su bolsillo y desconfían.","q":{"t":1,"p":66,"q":"el 49% de los asegurados desconfiaba del seguro social"}},
+ {"h":"La separación es un medio","b":"El libro propone 9 políticas en 4 dimensiones; separar Iafas y Ugipress es la estrategia que habilita a las demás.","q":{"t":1,"p":9,"q":"No se trata de un resultado en sí mismo o solo de un proceso de adecuación por mandato normativo"}}
+],
+"sys":[
+ {"n":1,"txt":"Congreso y Ejecutivo fijan topes a los salarios cotizables (del 30 % en CAS al 65 % en Minedu y Minsa, 14,5 % de los ingresos) y exoneraron las gratificaciones (−16,7 % de aportes).","c":[{"t":1,"p":51},{"t":1,"p":52}]},
+ {"n":2,"txt":"EsSalud es un organismo adscrito al MTPE; por estar en el ámbito de Fonafe se le exige gestión empresarial y una reserva técnica.","c":[{"t":2,"p":89},{"t":2,"p":366}]},
+ {"n":3,"txt":"El Minsa rige y Susalud supervisa. Los DS 010-2016-SA y 003-2018-SA fijaron el plazo para separar funciones; las categorías de establecimientos de Minsa y EsSalud no coinciden.","c":[{"t":1,"p":13},{"t":2,"p":340}]},
+ {"n":4,"txt":"Los empleadores aportan el 9 % del salario y, con ello, subsidian a los regímenes que aportan sobre bases reducidas.","c":[{"t":2,"p":48}]},
+ {"n":5,"txt":"La Sunat recauda; el tomo 1 propone un nuevo acuerdo de metas y retribución.","c":[{"t":1,"p":57}]},
+ {"n":6,"txt":"Dentro de EsSalud el fondo se reparte por presupuesto histórico: 50 % a Ipress de nivel I y II y 50 % a nivel III.","c":[{"t":2,"p":167}]},
+ {"n":7,"txt":"Compra a terceros por unos S/ 282 M frente a S/ 11 399 M ejecutados en la red propia (2018).","c":[{"t":2,"p":248}]},
+ {"n":8,"txt":"La red propia atiende con esperas: el 45,8 % de usuarios espera hasta 50 minutos.","c":[{"t":2,"p":38}]},
+ {"n":9,"txt":"La APP Barton supera a redes propias de igual tamaño en satisfacción, medicamentos y atención primaria.","c":[{"t":2,"p":342}]},
+ {"n":10,"txt":"Lo no resuelto se paga fuera: 52 % gasta de bolsillo en consulta y S/ 464 a 516 al año en medicamentos.","c":[{"t":1,"p":52}]},
+ {"n":11,"txt":"Compite con EPS y otros seguros públicos; el libro ve a largo plazo un fondo público único.","c":[{"t":2,"p":83},{"t":2,"p":53}]},
+ {"n":12,"txt":"El 49 % de los asegurados desconfía del seguro social.","c":[{"t":1,"p":66}]}
+],
+"nodes":[
+ {"id":"X1","col":"R","grp":"ext","title":"Envejecimiento y enfermedades crónicas","fig":"87,9 AVISA por 1000 asegurados; 62,8 por crónicas",
+  "sum":"La carga de enfermedad está dominada por las crónicas, que se concentran desde los 45 años, y EsSalud atrae a la población mayor. [[1:40]] [[1:52]]",
+  "quotes":[{"t":1,"p":40,"q":"por las enfermedades crónico-degenerativas se pierden 3,7 veces más años de vida saludables que por las enfermedades transmisibles, maternas y perinatales"},
+   {"t":1,"p":10,"q":"Hoy la población adulta mayor de 60 años representa el 15% de los asegurados, y en el Perú el 75% de los mayores de 80 años está afiliado a EsSalud."},
+   {"t":1,"p":52,"q":"EsSalud tiene un sesgo particular a atraer este segmento poblacional como beneficiarios del seguro"}]},
+ {"id":"X2","col":"R","grp":"ext","title":"Más asegurados que capacidad","fig":"De 6,8 a 11,6 millones de asegurados (2000-2018)",
+  "sum":"El número de asegurados casi se duplicó, pero la oferta creció poco. [[1:33]] [[2:493]]",
+  "quotes":[{"t":1,"p":33,"q":"Este incremento no ha venido acompañado del mismo ritmo de expansión de la capacidad de atención de la institución"},
+   {"t":2,"p":493,"q":"Existen cada vez más asegurados con mayores demandas, pero la oferta se mantiene casi constante"}]},
+ {"id":"R1","col":"R","title":"Asegurador y prestador en una sola organización","fig":"Compra pasiva: EsSalud se compra a sí mismo",
+  "sum":"La misma organización financia y produce los servicios. Así no hay quien exija resultados ni contenga costos, y las deficiencias quedan ocultas dentro. [[2:25]] [[2:360]]",
+  "quotes":[{"t":2,"p":25,"q":"La introducción de la compra estratégica se dificulta aún más cuando es la misma organización la que paga y entrega los servicios de salud, como ocurre en el caso de EsSalud"},
+   {"t":2,"p":107,"q":"dadas las evidencias de lo difícil que es que alguien se compre, y se module a sí mismo en sus propias prestaciones, y se someta a las reglas de la eficiencia per se"},
+   {"t":2,"p":360,"q":"Puesto que EsSalud produce sus propias prestaciones, se concluye que esta institución tiene una dificultad para contener sus propios costos de atención médica."},
+   {"t":2,"p":89,"q":"no habrá posibilidad de encubrir las deficiencias al interno de una sola organización"}]},
+ {"id":"R2","col":"R","title":"Presupuesto histórico sin incentivos","fig":"50 % para nivel I y II, 50 % para nivel III",
+  "sum":"El dinero se asigna según lo gastado antes, no según resultados. Los acuerdos de gestión con las redes se abandonaron en 2016. [[2:167]] [[2:248]]",
+  "quotes":[{"t":2,"p":82,"q":"los proveedores capturan recursos del fondo intangible sobre la base de un proceso de transferencias históricas de los recursos financieros"},
+   {"t":2,"p":248,"q":"La asignación de recursos con base histórica no consideraba los resultados obtenidos por las redes, por lo que cual no existían incentivos para mejorar la producción."},
+   {"t":2,"p":33,"q":"su financiamiento e incentivos se orientan a la producción y no a los resultados sanitarios, y sus mecanismos de pago son heterogéneos y se orientan al prestador y no al asegurado"},
+   {"t":2,"p":248,"q":"Hasta 2016 se firmaron acuerdos de gestión con las redes asistenciales de EsSalud asociados a actividad, que luego no se continuaron"}]},
+ {"id":"R3","col":"R","title":"Leyes que recortan los aportes","fig":"S/ 2 280 M dejados de percibir en 2017 (22 %), según EsSalud",
+  "sum":"Topes a la base de cotización de CAS, salud y educación, gratificaciones exoneradas y regímenes con tasas menores. EsSalud no controla estas decisiones. El estudio estima la pérdida en S/ 1 000 M. [[1:51]] [[2:48]]",
+  "quotes":[{"t":1,"p":51,"q":"Topes a los salarios cotizables de ciertos grupos laborales que van desde un 30% para los trabajadores de contratación administrativa de servicios (CAS) hasta un 65% para los trabajadores del Ministerio de Educación (Minedu) y el Minsa"},
+   {"t":1,"p":52,"q":"La vigencia de dicha norma ha reducido los ingresos por contribuciones de EsSalud en 16,7%."},
+   {"t":1,"p":57,"q":"la práctica de aprobar legislación con mandatos no financiados"},
+   {"t":2,"p":365,"q":"si el Gobierno incorpora nuevos regímenes especiales, que no se encuentra bajo el entero control de EsSalud, aumentarán los gastos de EsSalud y muy por encima de sus ingresos como viene ocurriendo"}]},
+ {"id":"R4","col":"R","title":"Gobernanza débil y decisiones centralizadas","fig":"Funciones dispersas; Ipress sin autonomía",
+  "sum":"Buen gobierno corporativo limitado, sin autonomía presupuestal, expuesto a interferencia política y con una cadena de mando larga. Las Ipress no deciden sobre sus recursos. [[2:53]] [[2:144]]",
+  "quotes":[{"t":2,"p":53,"q":"limitada aplicación de los principios de buen gobierno corporativo y falta de autonomía para la asignación presupuestal"},
+   {"t":2,"p":29,"q":"una ley que impidiese la interferencia política, especialmente en sus planes de beneficios, tasas y acceso de beneficiarios, tal como ocurre hoy con EsSalud"},
+   {"t":2,"p":144,"q":"a nivel de la sede central estos procesos están bajo responsabilidad de varias gerencias y oficinas que necesitan ser articuladas, sin que este rol pueda ser claramente identificado"},
+   {"t":1,"p":73,"q":"acabar con la dispersión de funciones que existe en la actual organización, y superar el bajo nivel de coordinación del seguro con otros entes públicos"}]},
+ {"id":"R5","col":"R","title":"Modelo hospitalocéntrico y recuperativo","fig":"Solo 42 % de asegurados atendidos en centros médicos o policlínicos",
+  "sum":"La atención se organiza alrededor del hospital y del daño ya producido; la prevención y el primer nivel son débiles. Las reformas anteriores ampliaron oferta sin mirar resultados. [[1:42]] [[2:53]]",
+  "quotes":[{"t":1,"p":42,"q":"Básicamente recuperativo, con un desarrollo insuficiente de acciones promocionales y preventivas."},
+   {"t":1,"p":42,"q":"Poder dominante por parte de los hospitales de mayor resolución frente a establecimientos de salud de menor complejidad."},
+   {"t":2,"p":53,"q":"hospitalocéntrica, basada en el daño; ineficiente, inequitativo, con débil regulación"},
+   {"t":2,"p":53,"q":"Frecuentemente, el centro de los esfuerzos ha estado en el incremento de la oferta más que en la mejora de los resultados en la salud de los asegurados."}]},
+ {"id":"R6","col":"R","title":"Información fragmentada","fig":"3 sistemas (SGH, Siscap, SGSS) sin catálogos comunes",
+  "sum":"Los datos de producción están en sistemas distintos, con códigos no homologados; los costos solo existen en forma agregada y el sistema de costos avanza lento. [[2:62]] [[2:250]]",
+  "quotes":[{"t":2,"p":62,"q":"La falta de información para la gestión y toma de decisiones es una problemática existente."},
+   {"t":2,"p":62,"q":"Otro factor que limita los procedimientos de integración de datos es la falta de homologación o estandarización de códigos de los catálogos que usan los actuales sistemas de información."},
+   {"t":2,"p":250,"q":"La implementación del sistema de costos ha avanzado muy lentamente, y en 2017 se reportaba solo la realización de un piloto en el Hospital Nacional Almenara."}]},
+ {"id":"R7","col":"R","title":"Personal sin incentivos ni movilidad","fig":"Recursos humanos: 50 % del presupuesto",
+  "sum":"El personal es la mitad del gasto, su productividad no mejora desde 2001 (4,7 atenciones por hora médica) y la ley laboral impide reasignarlo entre redes. [[2:21]] [[2:22]] [[2:82]]",
+  "quotes":[{"t":2,"p":21,"q":"el gasto en recursos humanos constituye el 50% del presupuesto"},
+   {"t":2,"p":53,"q":"personal asistencial insuficiente, mal distribuido y sin incentivos"},
+   {"t":2,"p":82,"q":"la reasignación de los recursos humanos a través de las redes del país, dada la legislación laboral vigente"},
+   {"t":2,"p":34,"q":"se debe superar la debilidad técnica para normar los procesos de gestión de recursos humanos"}]},
+ {"id":"R8","col":"R","title":"Sistema fragmentado y reglas cruzadas Minsa–MTPE","fig":"Adscrito al MTPE; rectoría sanitaria del Minsa",
+  "sum":"EsSalud responde al sector Trabajo, pero las reglas sanitarias son del Minsa, y no siempre coinciden. El sistema de salud está fragmentado en varios fondos. [[2:319]] [[2:340]]",
+  "quotes":[{"t":2,"p":319,"q":"en un contexto en que las inversiones eran insuficientes y el manejo del sistema se encontraba fragmentado"},
+   {"t":2,"p":340,"q":"Exista claridad entre el rol de EsSalud y el Minsa. EsSalud es parte del Ministerio de Trabajo y Promoción del Empleo (MTPE)."},
+   {"t":2,"p":340,"q":"existen discrepancias entre la categorización de los centros de salud que aplican EsSalud y el Minsa en cuanto al grado de complejidad de las atenciones"},
+   {"t":2,"p":349,"q":"la necesidad de que se actualice la norma de categorización del Minsa"}]},
+ {"id":"R9","col":"R","title":"El asegurado no tiene voz en la gestión","fig":"Participación «parcial, subordinada» y «poco legítima»",
+  "sum":"Los asegurados no participan en decidir ni en vigilar los servicios; la comunicación con ellos es débil. [[2:55]]",
+  "quotes":[{"t":2,"p":55,"q":"hasta ahora, la participación de los asegurados en EsSalud es parcial, subordinada, colaborativa y poco legítima"},
+   {"t":2,"p":53,"q":"débil comunicación interna entre funcionarios y asegurados"},
+   {"t":2,"p":55,"q":"La carencia de gobernanza está llevando al conflicto entre prestadores y usuarios."}]},
+
+ {"id":"P1","col":"P","title":"Costos unitarios por encima de la inflación","fig":"Consulta externa +5,4 % al año frente a 3,1 % de inflación",
+  "sum":"El costo de cada atención creció cada año muy por encima de la inflación (2008-2017), mientras el ingreso por asegurado solo subió 0,8 % real al año. El libro lo llama el fenómeno más significativo. [[1:54]] [[2:360]] [[2:362]]",
+  "quotes":[{"t":1,"p":52,"q":"la inflación de los gastos unitarios en EsSalud de 2008 a 2017 ha sido muy superior a la inflación general promedio anual del Perú (3,1% en el periodo)"},
+   {"t":2,"p":360,"q":"entre 2008 y 2017 los ingresos operacionales por asegurado de EsSalud aumentaron en un 0,8% anual por sobre la inflación"},
+   {"t":2,"p":362,"q":"La inflación médica, es el aumento de costos por encima de la inflación y es el fenómeno más significativo que enfrentará EsSalud."}]},
+ {"id":"P2","col":"P","title":"Déficit operativo creciente","fig":"−S/ 576 M (2017) a −S/ 4 655 M (2028 proyectado)",
+  "sum":"Desde 2014 los gastos superan a los ingresos y la brecha se agranda. Además, EsSalud paga pensiones del DU 067-98 por casi S/ 700 M al año. [[2:44]] [[2:47]] [[2:51]]",
+  "quotes":[{"t":1,"p":51,"q":"el déficit operacional muestra una tendencia creciente, al representar el 31% de los ingresos en 2028"},
+   {"t":2,"p":44,"q":"en los últimos cuatro años se ha producido una brecha creciente entre ambos, debido a que los gastos son mayores y están aumentando más rápidamente que los ingresos"},
+   {"t":2,"p":49,"q":"EsSalud no puede seguir sosteniendo los regímenes especiales arriba mencionados sin un apoyo financiero del Gobierno, ni tampoco podrá absorber nuevos grupos en régimen especial."},
+   {"t":2,"p":51,"q":"sus gastos se reducirían en alrededor de 8% a 10% al año, lo que representa un promedio de casi S/ 700 millones anuales"}]},
+ {"id":"P3","col":"P","title":"Primer nivel débil y hospitales saturados","fig":"8 redes con hospital nacional: 70 % de adscritos, 73 % del gasto",
+  "sum":"Los hospitales nacionales cabeza de red concentran asegurados y presupuesto; la referencia y contrarreferencia funciona sola y aparecen colas ocultas y listas de espera. [[2:138]] [[1:46]]",
+  "quotes":[{"t":2,"p":138,"q":"ocho redes cuya cabecera es un hospital nacional concentran el 70% de la población asegurada adscrita a los establecimientos de nivel I y II de la red, y el 73% del gasto presupuestal de la entidad"},
+   {"t":1,"p":42,"q":"Debilidad del sistema de referencia y contrarreferencia que funciona de forma espontánea."},
+   {"t":2,"p":36,"q":"que sobrepasan la capacidad instalada de las áreas de emergencia y los establecimientos de alta complejidad"},
+   {"t":1,"p":46,"q":"reflejado hoy en cola oculta, diferimiento y listas de espera quirúrgica"}]},
+ {"id":"P4","col":"P","title":"Producción en caída y productividad estancada","fig":"Cirugías −23 %, hospitalización −21 %, emergencias −20 % por 1000 asegurados",
+  "sum":"Entre 2010 y 2017 cayó la producción por asegurado. El libro baraja tres explicaciones; una es que la oferta se deterioró y los asegurados buscaron atención fuera. [[1:40]] [[2:360]]",
+  "quotes":[{"t":1,"p":40,"q":"la producción de los principales grupos de prestaciones por cada 1000 asegurados muestra tendencias decrecientes, particularmente para cirugías (23% de reducción en 2017 respecto a 2010), hospitalización (21%) y emergencia (20%)"},
+   {"t":2,"p":35,"q":"el número de personal asistencial por cada 1000 asegurados se mantiene estable desde 1995 (alrededor de uno por cada 1000)"},
+   {"t":2,"p":360,"q":"La oferta de servicios de salud se habría deteriorado en calidad y/o cantidad, lo que llevaría a sus asegurados a demandar menos atención institucional y más con prestadores externos."}]},
+ {"id":"P5","col":"P","title":"Brecha de oferta e infraestructura envejecida","fig":"Brecha de S/ 31 226 M a 2035; lo proyectado cubre el 18 %",
+  "sum":"Se invierten S/ 350-400 M al año cuando harían falta S/ 1 850 M. El 70 % de los establecimientos no está en buen estado. [[2:108]] [[2:371]] [[2:493]] [[2:494]]",
+  "quotes":[{"t":2,"p":371,"q":"el 70% del total de establecimientos carece de un buen estado de conservación y 52% tiene una antigüedad mayor a 20 años"},
+   {"t":2,"p":493,"q":"De este modo, la necesidad total de inversión al horizonte 2035 es S/ 31 226 millones."},
+   {"t":2,"p":494,"q":"a 2035 se podría contribuir con el cierre del 18% del valor total de las brechas"},
+   {"t":2,"p":108,"q":"Se trata de un monto aproximado anual de S/ 1850 millones de soles, que supera el presupuesto promedio asignado a inversiones, de entre S/ 350 millones y S/ 400 millones."}]},
+ {"id":"P6","col":"P","title":"Variabilidad clínica y estancias extremas","fig":"Casos extremos: S/ 135 M en tres años (Rebagliati y Almenara)",
+  "sum":"Con 246 666 egresos de dos hospitales nacionales, el estudio de grupos relacionados por diagnóstico encontró manejos distintos para pacientes similares, cesáreas altas y partos simples ocupando camas de alta complejidad. [[2:262]] [[2:263]]",
+  "quotes":[{"t":2,"p":262,"q":"solo se puede afirmar que se presentan diferencias significativas entre ambos hospitales respecto del manejo de pacientes similares"},
+   {"t":2,"p":262,"q":"la tasa de cesárea respecto de los partos normales es de 70%"},
+   {"t":2,"p":262,"q":"El significativo peso de atención materna no compleja dentro de la casuística indicaría que se requiere reestructurar la oferta de servicios de estas dos redes."},
+   {"t":2,"p":262,"q":"el costo de casos extremos ascendió a S/ 135 millones en tres años"}]},
+ {"id":"P7","col":"P","title":"Medicamentos y abastecimiento con fallas","fig":"72 % de asegurados con probabilidad de gastar en medicamentos",
+  "sum":"Aunque el 85 % recibe sus medicamentos completos, la mayoría compra además por su cuenta; la logística está partida entre la central (Ceabe) y las redes. [[2:40]] [[2:143]]",
+  "quotes":[{"t":2,"p":40,"q":"la probabilidad señalada se encuentra en 72% para EsSalud y 66% para el SIS"},
+   {"t":2,"p":40,"q":"un 26,4% de los establecimientos visitados de EsSalud incumplen con las buenas prácticas de almacenamiento"},
+   {"t":2,"p":143,"q":"se realiza de manera centralizada a través de un órgano logístico especializado denominado Central de Abastecimiento de Bienes Estratégicos (Ceabe), pero también de forma delegada a través de las áreas de abastecimiento de las redes asistenciales"}]},
+ {"id":"P8","col":"P","title":"Esperas, maltrato y conflicto con el asegurado","fig":"Demoras y trámites: 62 % de los problemas reportados",
+  "sum":"Los problemas que reportan los usuarios son sobre todo de gestión: demoras, maltrato y falta de medicamentos. La relación asegurado-prestador se volvió conflictiva. [[1:34]] [[1:39]]",
+  "quotes":[{"t":1,"p":34,"q":"Las dificultades más frecuentes estaban asociadas a demoras en la atención y los trámites, que en conjunto sumaban el 62% de casos reportados."},
+   {"t":1,"p":34,"q":"la mayoría de las dificultades que enfrentaban los usuarios estarían relacionadas con problemas de gestión"},
+   {"t":1,"p":39,"q":"superar el serio daño reputacional existente que genera relaciones de conflicto asegurados-prestadores"},
+   {"t":2,"p":38,"q":"un 45,8% de los usuarios de EsSalud esperan hasta 50 minutos para la atención"}]},
+ {"id":"P9","col":"P","title":"Poca capacidad para comprar y administrar contratos","fig":"Terceros: S/ 282 M frente a S/ 11 399 M en la red propia",
+  "sum":"Los mecanismos de pago están por diseñar; la cápita vigente usa un valor promedio único y el pago por desempeño funciona como multa. Los contratos APP dejan vacíos (población, techo asistencial, supervisor). [[2:237]] [[2:250]] [[2:337]]",
+  "quotes":[{"t":2,"p":237,"q":"El diseño de los mecanismos de pagos en EsSalud es tarea pendiente y esencial"},
+   {"t":2,"p":250,"q":"las asignaciones totales de recursos no resultarían eficientes ni equitativas, generando incentivos a la selección de riesgos"},
+   {"t":2,"p":250,"q":"no estaría actuando como un pago adicional, y por lo tanto como un incentivo, sino como una sanción"},
+   {"t":2,"p":337,"q":"El contrato no ha determinado con claridad el techo asistencial de la APP Barton."},
+   {"t":2,"p":342,"q":"La administración del contrato es un reto para EsSalud."}]},
+
+ {"id":"E1","col":"E","lvl":"Intermedio","title":"Acceso efectivo limitado","fig":"Cobertura de servicios: 42 % de los asegurados (2017)",
+  "sum":"El libro define acceso como cerrar la brecha entre necesitar un servicio y usarlo. Faltan 50 establecimientos nuevos y 69 deben subir de categoría. [[1:18]] [[2:38]]",
+  "quotes":[{"t":2,"p":42,"q":"podría aumentar la cobertura de los servicios de salud, que al 2017 solo llegaba al 42% de los asegurados"},
+   {"t":1,"p":18,"q":"La ampliación del acceso a la salud se refiere a la reducción de la brecha entre la necesidad de servicios y el uso de esos servicios por parte de los asegurados"},
+   {"t":2,"p":38,"q":"se requiere crear 50 establecimientos de salud nuevos"}]},
+ {"id":"E2","col":"E","lvl":"Intermedio","title":"Calidad y seguridad comprometidas","fig":"28,1 % de establecimientos II y III incumple la norma de consulta externa",
+  "sum":"La Contraloría encontró más incumplimientos en EsSalud que en el Minsa, y el estudio financiero advierte que sin contener costos la calidad cae. [[2:36]] [[2:50]]",
+  "quotes":[{"t":2,"p":36,"q":"un 28,1% no cumplen con la normativa aplicable al funcionamiento de la UPSS de consulta externa"},
+   {"t":2,"p":50,"q":"De no ser así, el efecto se traducirá en menor calidad de los servicios a los asegurados si se opta por mantener el nivel de cobertura."}]},
+ {"id":"E3","col":"E","lvl":"Intermedio","title":"Poco valor por el dinero","fig":"Costos administrativos altos y baja productividad",
+  "sum":"Hay consenso en que el modelo actual no rinde lo que cuesta. [[2:110]] [[2:24]]",
+  "quotes":[{"t":2,"p":110,"q":"Existe un consenso referido a que el modelo actual de organización y gestión no garantiza valor por dinero."},
+   {"t":2,"p":24,"q":"los altos costos administrativos en relación con los gastos en la prestación de servicios de salud"}]},
+ {"id":"E4","col":"E","lvl":"Intermedio","title":"Desconfianza en la institución","fig":"49 % desconfía del seguro social (2015)",
+  "sum":"La desconfianza crece y se explica sobre todo por las esperas y el maltrato. [[1:66]] [[2:53]]",
+  "quotes":[{"t":1,"p":66,"q":"el 49% de los asegurados desconfiaba del seguro social. Las mayores causas de la desconfianza eran el tiempo de espera (82%), el maltrato (46%), la negligencia (27%) y la corrupción (14%)"},
+   {"t":2,"p":53,"q":"Esta situación describe una tendencia ascendente, y la respuesta institucional no ha sido suficiente para neutralizarla o detenerla."}]},
+ {"id":"E5","col":"E","lvl":"Final","title":"Gasto de bolsillo alto","fig":"52 % gasta de bolsillo en consulta; S/ 464-516 al año en medicamentos",
+  "sum":"Los asegurados pagan por servicios que el seguro debería cubrir; en cirugías gastan como quien tiene seguro privado. [[1:52]] [[2:42]]",
+  "quotes":[{"t":1,"p":52,"q":"La probabilidad de los asegurados de EsSalud de gastar de bolsillo por los principales servicios médicos se estima en 52% de los asegurados que realizan algún gasto por consulta externa en 2017"},
+   {"t":1,"p":52,"q":"se evidencia un importante gasto de bolsillo de los asegurados, lo que atenta contra los objetivos de la seguridad social de garantizar acceso a los servicios y a la protección financiera"},
+   {"t":2,"p":42,"q":"revertir la situación de desprotección financiera, en la que los gastos asociados a cirugías son similares a los de los asegurados del sector privado"}]},
+ {"id":"E6","col":"E","lvl":"Final","title":"Salud de los asegurados sin respuesta preventiva","fig":"Crónicas en una población que envejece: «uno de los retos más críticos»",
+  "sum":"La caída de la producción agrava las necesidades que impone la carga de enfermedad; el libro pide un cambio estructural del modelo de atención. [[1:40]] [[1:42]]",
+  "quotes":[{"t":1,"p":40,"q":"refleja uno de los retos más críticos que enfrenta el seguro social: la prevalencia de enfermedades crónico-degenerativas en el creciente número de adultos mayores asegurados"},
+   {"t":1,"p":42,"q":"Esto señala la urgente necesidad de introducir un cambio estructural en el modelo de atención"}]},
+ {"id":"E8","col":"E","lvl":"Final","title":"Expectativas no satisfechas","fig":"35 % no satisfecho; 64,9 % satisfecho frente a 72,0 % en el SIS",
+  "sum":"Los usuarios de EsSalud están menos satisfechos que los del SIS, reflejo de la saturación. [[1:33]] [[2:35]]",
+  "quotes":[{"t":1,"p":33,"q":"el 35% de los usuarios no se encuentra satisfecho con el servicio recibido"},
+   {"t":2,"p":35,"q":"el 64,9% de usuarios del primero se encuentra satisfecho con el servicio, mientras que la cifra aumenta a 72,0% en el caso del segundo"}]},
+ {"id":"E7","col":"E","lvl":"Condición","title":"Sostenibilidad de la seguridad social en riesgo","fig":"Sobrecostos simulados de S/ 4 482 M a S/ 34 973 M (2018-2028)",
+  "sum":"Que los ingresos cubran los gastos es, para el libro, una condición esencial de todo lo demás. [[1:18]] [[2:353]]",
+  "quotes":[{"t":1,"p":51,"q":"Esta situación de desequilibrio financiero presenta una clara amenaza para la seguridad social y las metas sanitarias y de protección financiera entre sus asegurados"},
+   {"t":2,"p":353,"q":"El incremento potencial de los costos se traducirá en un significativo deterioro de la calidad de los servicios de salud entregados"},
+   {"t":1,"p":18,"q":"lograr la sostenibilidad financiera de la institución (los ingresos cubren los gastos) es una condición esencial"}]}
+],
+"edges":[
+ {"from":"X1","to":"P2","why":"Más adultos mayores elevan el uso y el costo","c":{"t":1,"p":52}},
+ {"from":"X1","to":"E6","why":"Las crónicas concentran la carga de enfermedad","c":{"t":1,"p":40}},
+ {"from":"X2","to":"P3","why":"Los asegurados crecieron más que la capacidad","c":{"t":1,"p":33}},
+ {"from":"X2","to":"P5","why":"Más demanda con una oferta casi constante","c":{"t":2,"p":493}},
+ {"from":"R1","to":"P1","why":"Al producir sus propias prestaciones no contiene sus costos","c":{"t":2,"p":360}},
+ {"from":"R1","to":"P9","why":"Quien paga y presta a la vez no compra con exigencia","c":{"t":2,"p":25}},
+ {"from":"R2","to":"P1","why":"Transferencias históricas sin presión para bajar costos","c":{"t":2,"p":82}},
+ {"from":"R2","to":"P4","why":"Sin resultados en la asignación no hay incentivo a producir","c":{"t":2,"p":248}},
+ {"from":"R2","to":"P3","why":"El gasto se concentra en hospitales de nivel II y III","c":{"t":2,"p":24},"inf":true},
+ {"from":"R3","to":"P2","why":"Las medidas legales explican gran parte del deterioro","c":{"t":1,"p":52}},
+ {"from":"R4","to":"P9","why":"Cadena de mando larga: las reuniones con la APP no deciden","c":{"t":2,"p":339}},
+ {"from":"R4","to":"P7","why":"Abastecimiento repartido entre sede central y redes","c":{"t":2,"p":143}},
+ {"from":"R4","to":"P3","why":"Hospitales nacionales gestionados como cabeza de una red","c":{"t":2,"p":144}},
+ {"from":"R5","to":"P3","why":"Poca atención en primer nivel y referencia espontánea","c":{"t":1,"p":42}},
+ {"from":"R6","to":"P6","why":"Sin datos hospitalarios de calidad no se gestiona por grupos de diagnóstico","c":{"t":2,"p":261}},
+ {"from":"R6","to":"P9","why":"Pagar y supervisar exige información y códigos estándar","c":{"t":2,"p":255}},
+ {"from":"R7","to":"P4","why":"Baja productividad según estándares internacionales","c":{"t":2,"p":24}},
+ {"from":"R7","to":"P1","why":"Más profesionales y salarios elevaron los costos","c":{"t":2,"p":349}},
+ {"from":"R8","to":"P3","why":"Categorías distintas Minsa y EsSalud traban las referencias","c":{"t":2,"p":340}},
+ {"from":"R8","to":"P9","why":"Reglas del sector poco claras para los contratos APP","c":{"t":2,"p":340}},
+ {"from":"R9","to":"P8","why":"Sin gobernanza participativa crece el conflicto","c":{"t":2,"p":55}},
+ {"from":"R9","to":"E4","why":"La desconfianza es la razón política de la participación","c":{"t":2,"p":55}},
+ {"from":"P1","to":"P2","why":"La inflación médica es el factor de gasto más fuerte","c":{"t":2,"p":362}},
+ {"from":"P2","to":"P5","why":"El descalce impide financiar la inversión","c":{"t":2,"p":356}},
+ {"from":"P2","to":"E7","why":"Amenaza para la seguridad social","c":{"t":1,"p":51}},
+ {"from":"P2","to":"E2","why":"Sin contener costos, cae la calidad","c":{"t":2,"p":50}},
+ {"from":"P1","to":"E3","why":"Costos que crecen sin control","c":{"t":2,"p":360}},
+ {"from":"P3","to":"E1","why":"Saturación por encima de la capacidad instalada","c":{"t":2,"p":36}},
+ {"from":"P3","to":"E8","why":"La saturación se refleja en la insatisfacción","c":{"t":2,"p":35}},
+ {"from":"P4","to":"E1","why":"Menos atención institucional por asegurado","c":{"t":2,"p":360},"inf":true},
+ {"from":"P4","to":"E6","why":"La caída de la producción agrava la respuesta a la carga de enfermedad","c":{"t":1,"p":42}},
+ {"from":"P4","to":"E5","why":"Los asegurados buscarían atención fuera y pagarían","c":{"t":2,"p":360},"inf":true},
+ {"from":"P5","to":"E1","why":"Faltan 50 establecimientos y 69 deben subir de categoría","c":{"t":2,"p":38}},
+ {"from":"P5","to":"E2","why":"Establecimientos en mal estado de conservación","c":{"t":2,"p":371},"inf":true},
+ {"from":"P6","to":"E3","why":"Estancias extremas: S/ 135 M en tres años","c":{"t":2,"p":262}},
+ {"from":"P6","to":"E2","why":"Pacientes similares, manejos distintos","c":{"t":2,"p":262}},
+ {"from":"P7","to":"E5","why":"72 % con probabilidad de gastar en medicamentos","c":{"t":2,"p":40}},
+ {"from":"P7","to":"E8","why":"Falta de medicamentos: 23 % de los problemas reportados","c":{"t":1,"p":34}},
+ {"from":"P8","to":"E4","why":"Espera y maltrato, primeras causas de desconfianza","c":{"t":1,"p":66}},
+ {"from":"P8","to":"E8","why":"Demoras y trámites, 62 % de los problemas","c":{"t":1,"p":34}},
+ {"from":"P9","to":"E3","why":"Pagos mal diseñados asignan sin eficiencia","c":{"t":2,"p":250}}
+],
+"dims":[
+ {"n":1,"name":"Derechos de los asegurados","pols":["A1"]},
+ {"n":2,"name":"Gestión de la atención de salud","pols":["A2","A3"]},
+ {"n":3,"name":"Financiamiento y uso de recursos","pols":["A4","A5","A6"]},
+ {"n":4,"name":"Gobernanza y organización","pols":["A7","A8","A9"]}
+],
+"pols":[
+ {"id":"A1","n":1,"name":"Más derechos","long":"Garantizar los derechos de los asegurados","fig":"Decálogo, difusión de derechos, grupos prioritarios","pp":"37-39",
+  "obj":{"t":1,"p":18,"q":"EsSalud difundirá, promoverá y protegerá los derechos de los asegurados como corresponsables de su salud."},
+  "strat":[["1.1","Difundir, promover y proteger los derechos y obligaciones de los asegurados"],["1.2","Reforzar la protección de segmentos de asegurados prioritarios"],["1.3","Revisar los beneficios de forma transparente, con procesos y criterios definidos"]],
+  "hitos":[["Decálogo de derechos y obligaciones de asegurados y prestadores",80],["Modelo de fidelización de asegurados y empleadores",80],["Política de grupos y poblaciones vulnerables",80],["Criterios técnicos para incorporar tecnologías",80]],
+  "t2":["Sistema de participación del asegurado (Sipase), con la Gerencia de Atención al Asegurado como secretaría técnica [[2:56]]","Ranking semestral de satisfacción y derechos por Ipress [[2:55]]"],
+  "targets":[{"id":"R9","why":"Servicio de difusión de derechos desde la Iafas","c":{"t":1,"p":39}},{"id":"P8","why":"Decálogo de conducta para prestadores y pacientes","c":{"t":1,"p":39}},{"id":"E4","why":"Elevar la confianza de los asegurados","c":{"t":1,"p":37}},{"id":"X1","why":"Protección de grupos con riesgos prioritarios","c":{"t":1,"p":39}}]},
+ {"id":"A2","n":2,"name":"Cuidado de la salud centrado en el asegurado","long":"Adoptar un modelo de atención integral y centrado en las personas","fig":"Primer y segundo nivel como puerta de entrada","pp":"45-46",
+  "obj":{"t":1,"p":18,"q":"EsSalud desarrollará e implementará un modelo de cuidado de la salud centrado en el asegurado, a fin de colocarlo en el centro de las decisiones de la seguridad social en salud."},
+  "strat":[["2.1","Incorporar al asegurado como corresponsable de su salud"],["2.2","Fortalecer la atención en Ipress de primer y segundo nivel"],["2.3","Asegurar la continuidad y oportunidad de la atención"],["2.4","Cuidado estandarizado con protocolos y guías de práctica clínica"]],
+  "hitos":[["Modelo de atención familiar (médico de familia) como puerta de entrada",82],["Plan nacional de oferta flexible rediseñado con TIC",82],["Plan de desarrollo de capacidades del personal",82],["Modelo de gestión de la continuidad de la atención",82],["20 guías de práctica clínica al año",82],["90 % de Ipress propias categorizadas",82]],
+  "t2":["Sacar la atención materna no compleja de los hospitales nacionales [[2:262]]","Organizar cuidados de mediana complejidad para estancias largas [[2:262]]","OPS: no menos del 30 % del gasto al primer nivel [[1:45]]"],
+  "targets":[{"id":"R5","why":"Toda la población adscrita solo al primer y segundo nivel","c":{"t":1,"p":45}},{"id":"P3","why":"Continuidad y contrarreferencia efectivas","c":{"t":1,"p":46}},{"id":"P6","why":"Guías de práctica clínica con medición de adherencia","c":{"t":1,"p":46}},{"id":"R7","why":"Plan de desarrollo de capacidades del personal","c":{"t":1,"p":45}},{"id":"X1","why":"Atención domiciliaria de crónicas y cuidados de largo plazo","c":{"t":1,"p":46}}]},
+ {"id":"A3","n":3,"name":"Mejor gestión","long":"Optimizar las operaciones del aparato prestador y aprovechar economías de escala","fig":"Cartera por demanda y compra central de medicamentos","pp":"49-50",
+  "obj":{"t":1,"p":19,"q":"EsSalud establecerá una cartera de servicios ajustada por demanda según redes y nivel de complejidad"},
+  "strat":[["3.1","Establecer la cartera de servicios para el asegurado"],["3.2","Centralizar la compra de medicamentos y bienes estratégicos y modernizar el abastecimiento"],["3.3","Mejorar continuamente la calidad de la prestación"]],
+  "hitos":[["Estudio de demanda y cartera de servicios por redes",82],["Sistema electrónico de contratación para trazabilidad",84],["Operadores especializados de abastecimiento a nivel nacional",84],["Dispensación de medicamentos por canales extramurales",84],["Estándares esenciales de calidad e incentivos a su cumplimiento",84]],
+  "t2":["La APP Barton logra mejor provisión de medicamentos que redes propias de igual tamaño [[2:342]]","Hoy el abastecimiento se reparte entre Ceabe y las redes [[2:143]]"],
+  "targets":[{"id":"P7","why":"Las Ipress pasan a ser usuarias, no responsables, de la logística","c":{"t":1,"p":49}},{"id":"P3","why":"Cartera ajustada por demanda y capacidad resolutiva","c":{"t":1,"p":49}},{"id":"P6","why":"Estándares esenciales de calidad","c":{"t":1,"p":50}}]},
+ {"id":"A4","n":4,"name":"Más dinero para la salud","long":"Aumentar la protección financiera de los asegurados en forma sostenible","fig":"Homologar aportes y vigilar el gasto de bolsillo","pp":"57-58",
+  "obj":{"t":1,"p":19,"q":"El Estado dotará de predictibilidad y condiciones de sostenibilidad financiera al Seguro Social de Salud."},
+  "strat":[["4.1","Mejorar la gestión financiera (inversiones financieras)"],["4.2","Dotar de predictibilidad y sostenibilidad financiera: leyes, Sunat, cálculo actuarial"]],
+  "hitos":[["Licitación para tercerizar la cobranza de deuda no tributaria",86],["Decreto supremo de metas de recaudación de la Sunat",86],["Ley de homologación de aportes",86],["Ley para el pago de deuda tributaria",86],["Cálculo actuarial cada dos años",86],["Monitoreo del gasto de bolsillo",86]],
+  "t2":["Cotización de 9 % sobre todo el ingreso para todos: +8 % de ingresos al año (S/ 1 000 a 1 300 M) [[2:362]]","Recuperar las 14 aportaciones: +18 % al año (S/ 3 000 a 4 500 M) [[2:362]]","Dejar de pagar pensiones del DU 067-98: casi S/ 700 M al año [[2:51]]","Subsidio público para el déficit de los regímenes especiales [[2:50]]"],
+  "targets":[{"id":"R3","why":"Paquete de leyes de homologación progresiva de aportes","c":{"t":1,"p":57}},{"id":"P2","why":"Cerrar la brecha entre ingresos y gastos","c":{"t":1,"p":57}},{"id":"E5","why":"Monitoreo permanente del gasto de bolsillo","c":{"t":1,"p":58}}]},
+ {"id":"A5","n":5,"name":"Más salud por el dinero","long":"Asociar el financiamiento a las necesidades de los asegurados y a incentivos a la calidad y eficiencia","fig":"Compra estratégica, cápita y pago por diagnóstico","pp":"61-62",
+  "obj":{"t":1,"p":19,"q":"La Iafas-EsSalud tendrá a su cargo la gestión de la compra estratégica"},
+  "strat":[["5.1","Mecanismos de pago que promuevan calidad, continuidad y eficiencia"],["5.2","Reglas de juego claras con contratos-convenio de mayor plazo"],["5.3","Supervisión y rendición de cuentas de los prestadores"],["5.4","Ruta progresiva de autonomía de gestión para las Ipress"]],
+  "hitos":[["Selección y tarifas de los mecanismos de pago de la Iafas a la Ugipress",86],["Pilotos: una red de primer y segundo nivel y un hospital de alta complejidad",86],["Reglas de negocio y modelo de contratos y convenios",86],["Ley de procedimiento especial para contratar al sector privado",86],["Supervisión de convenios con tablero de control",86],["Modelo de evaluación y clasificación de Ipress para darles autonomía",88]],
+  "t2":["Cápitas ajustadas por edad y sexo en niveles I y II; pago por caso o por servicio en nivel III [[2:254]]","En tres años, del presupuesto por partidas a cápitas y pago por diagnóstico [[2:254]]","Los grupos por diagnóstico son factibles con datos rutinarios; extenderlos toma al menos cinco años [[2:261]] [[2:311]]","Corregir la cápita única promedio y el pago por desempeño que opera como sanción [[2:250]]"],
+  "targets":[{"id":"R2","why":"Nueva fórmula de capitación y pilotos de pago","c":{"t":1,"p":61}},{"id":"P1","why":"Pago asociado al uso eficiente de recursos en hospitales III","c":{"t":1,"p":61}},{"id":"P9","why":"Contratos-convenio de tres años con indicadores","c":{"t":1,"p":62}},{"id":"P6","why":"Ajuste de riesgo con grupos relacionados de diagnóstico","c":{"t":1,"p":61}}]},
+ {"id":"A6","n":6,"name":"Diversificar para expandir la oferta","long":"Diversificar las modalidades para la expansión de la provisión de servicios","fig":"Optimizar, comprar, APP y, al final, invertir","pp":"65-66",
+  "obj":{"t":1,"p":19,"q":"EsSalud determinará y ejecutará un portafolio que combine alternativas de expansión de oferta en aquellos lugares donde existan brechas"},
+  "strat":[["6.1","Portafolio que combine opciones según sus beneficios donde haya brechas, con orden de prelación"]],
+  "hitos":[["Contratación de 24 Ipress privadas para atender en Lima",88],["Dos contratos APP: Chimbote y Piura",88],["Plan de expansión diversificada de la oferta",88]],
+  "t2":["Brecha de S/ 31 226 M; el presupuesto proyectado cubre el 18 % [[2:493]] [[2:494]]","Comparador público-privado para APP; valor presente para decidir entre alquiler y obra [[2:494]]","Contratos APP con población adscrita, techo asistencial y supervisor imparcial [[2:340]] [[2:341]]"],
+  "targets":[{"id":"P5","why":"Orden: optimizar lo propio, comprar a públicos, a privados, APP, obra","c":{"t":1,"p":65}},{"id":"X2","why":"Ipress privadas para asegurados con dificultad de acceso en Lima","c":{"t":1,"p":66}}]},
+ {"id":"A7","n":7,"name":"Aumentar la confianza","long":"Fortalecer la transparencia y la participación del asegurado en la gobernanza","fig":"Juntas de usuarios, antisoborno, rendición de cuentas","pp":"69-70",
+  "obj":{"t":1,"p":19,"q":"EsSalud establecerá procesos transparentes y participativos de formulación y monitoreo de políticas e institucionalizará mecanismos de vigilancia ciudadana de los servicios de salud."},
+  "strat":[["7.1","Procesos transparentes y participativos de formulación y monitoreo de políticas"],["7.2","Vigilancia ciudadana de los servicios de salud"],["7.3","Transparencia y medidas anticorrupción"],["7.4","Rendición de cuentas sobre producción, calidad, costos y satisfacción"]],
+  "hitos":[["Directiva de participación de los asegurados",88],["Juntas de usuarios en Lima y en cada red",88],["ISO 37001 en hospitales nacionales, INCOR, Salud Renal, 10 hospitales II, Iafas y Ugipress",90],["Directiva y rendición anual de cuentas a los asegurados",90]],
+  "t2":["La participación da legitimidad y viabilidad a la reforma, además de satisfacción [[2:54]] [[2:55]]","Las metas no se alcanzan solo con presupuesto [[2:59]]"],
+  "targets":[{"id":"R9","why":"Juntas de usuarios como vigilancia regular","c":{"t":1,"p":69}},{"id":"E4","why":"Incrementar la confianza y el respaldo de los asegurados","c":{"t":1,"p":69}},{"id":"R4","why":"Acreditación antisoborno y rendición anual de cuentas","c":{"t":1,"p":70}}]},
+ {"id":"A8","n":8,"name":"Especializar la organización","long":"Separar las funciones de aseguramiento y de prestación","fig":"Holding, luego Iafas y Ugipress autónomas por ley","pp":"73-74",
+  "obj":{"t":1,"p":20,"q":"EsSalud especializará y establecerá clara distinción de las funciones de la Iafas y la Ugipress con crecientes grados de autonomía en su funcionamiento y mandato."},
+  "strat":[["8.1","Especializar y distinguir las funciones de Iafas y Ugipress con creciente autonomía"],["8.2","Dotarlas de capacidades de gestión, incluidas TIC"],["8.3","Supervisar y rendir cuentas de su desempeño"]],
+  "hitos":[["ROF del holding EsSalud y separación de cuentas",90],["ROF de dos Ugipress",90],["Ley de creación de la Iafas y la Ugipress",90],["Normas de buen gobierno y de riesgo corporativo",90],["Manual de puestos y perfiles; política de incorporación de personal",90],["Tablero de desempeño y auditorías externas",90]],
+  "t2":["Dos empresas de derecho público bajo un mismo directorio y luego independientes [[2:14]]","Transición de 18 a 24 meses [[2:19]], con el riesgo de prolongarla [[2:107]]","Gerentes por tres años renovables, elegidos con apoyo de una empresa especializada [[2:108]]","Factores críticos: respaldo político, comunicación, gerentes profesionales, sistema de información único [[2:165]] [[2:166]]"],
+  "targets":[{"id":"R1","why":"Holding con cuentas separadas y luego dos entidades autónomas","c":{"t":1,"p":73}},{"id":"R4","why":"Acabar con la dispersión de funciones","c":{"t":1,"p":73}},{"id":"R7","why":"Perfiles y política de incorporación de profesionales","c":{"t":1,"p":74}},{"id":"R8","why":"Norma técnica nacional para las Ugipress","c":{"t":1,"p":74}}]},
+ {"id":"A9","n":9,"name":"Impulsar la transformación digital","long":"Orientar la institución hacia la transformación digital","fig":"Unidad de Transformación Digital y uso de datos","pp":"77-78",
+  "obj":{"t":1,"p":20,"q":"construirá una hoja de ruta digital, en el cual desde los datos permitirá brindar más y mejores servicios, repensar y simplificar sus procesos y ganar eficiencia operacional"},
+  "strat":[["9.1","Fortalecer las capacidades del personal en cultura digital"],["9.2","Crear nuevas experiencias al ciudadano y mayor valor público"]],
+  "hitos":[["Política de cultura digital y plan anual de capacidades",92],["Unidad de Transformación Digital dependiente de la Alta Dirección",92],["Plan anual de transformación digital",92]],
+  "t2":["Homologar catálogos e integrar SGH, Siscap y SGSS en un repositorio central de datos [[2:62]] [[2:64]]","Inversión a 10 años con apoyo financiero y técnico externo [[2:61]]"],
+  "targets":[{"id":"R6","why":"Unidad de Transformación Digital y uso de los datos","c":{"t":1,"p":77}}]}
+],
+"tours":[
+ {"id":"dinero","label":"Siga el dinero","ids":["R3","R1","R7","P1","P2","P5","E7","E1","E2","A4","A6","A5"],
+  "cap":"Leyes que recortan aportes (R3) y costos que crecen sobre la inflación (P1) abren el déficit (P2). El déficit frena la inversión (P5) y amenaza la sostenibilidad (E7). Respuestas: políticas 4, 5 y 6."},
+ {"id":"paciente","label":"Siga al paciente","ids":["X2","R5","R8","R4","P3","P8","E1","E8","E4","A2","A3","A1"],
+  "cap":"Más asegurados (X2) y un modelo centrado en el hospital (R5) saturan los hospitales (P3); la espera y el maltrato (P8) terminan en insatisfacción y desconfianza (E8, E4). Respuestas: políticas 1, 2 y 3."},
+ {"id":"compra","label":"Siga la compra","ids":["R1","R2","R6","P9","P1","P6","E3","A5","A8","A9"],
+  "cap":"Pagar y prestar en la misma casa (R1), repartir por presupuesto histórico (R2) y no tener datos (R6) dejan sin capacidad de compra (P9) y con poco valor por el dinero (E3). Respuestas: políticas 5, 8 y 9."},
+ {"id":"confianza","label":"Siga la confianza","ids":["R9","R4","P8","P7","E4","E8","E5","A7","A1"],
+  "cap":"Sin voz del asegurado (R9) y con gobernanza débil (R4), los problemas de trato y medicamentos (P8, P7) se vuelven desconfianza (E4). Respuestas: políticas 1 y 7."}
+],
+"loops":[
+ {"id":"L1","k":"R","name":"El hospital se lleva el presupuesto","steps":[["Primer nivel|débil",{"t":1,"p":42}],["Asegurados van|al hospital",{"t":2,"p":36}],["Hospitales concentran|el gasto",{"t":2,"p":138}],["Presupuesto histórico|lo consolida",{"t":2,"p":167}]],
+  "txt":"Como el primer nivel resuelve poco, los asegurados llegan al hospital; ocho redes con hospital nacional concentran el 73 % del gasto, y el presupuesto histórico repite ese reparto al año siguiente, sin dinero nuevo para el primer nivel.",
+  "lev":"Punto de palanca: adscribir a toda la población al primer y segundo nivel [[1:45]] y pagar por cápita a las redes [[1:61]]. La OPS sugiere al menos 30 % del gasto en primer nivel [[1:45]]."},
+ {"id":"L2","k":"R","name":"El déficit desgasta la oferta","steps":[["Déficit|operativo",{"t":1,"p":51}],["Inversión por debajo|de lo necesario",{"t":2,"p":108}],["Establecimientos|envejecidos",{"t":2,"p":371}],["Compra a terceros|a mayor costo",{"t":2,"p":366}]],
+  "txt":"El déficit deja la inversión en S/ 350-400 M al año cuando harían falta S/ 1 850 M; los establecimientos envejecen y la brecha se cubre comprando fuera, a un costo unitario que el propio estudio considera mayor, lo que vuelve a presionar el gasto.",
+  "lev":"Punto de palanca: decidir caso por caso entre invertir y comprar con criterios no discrecionales [[2:494]] y una política financiera de mediano plazo [[2:494]]."},
+ {"id":"L3","k":"B","name":"La demanda contenida y su rebote","steps":[["Oferta|deteriorada",{"t":2,"p":360}],["Uso institucional|cae",{"t":2,"p":358}],["Se paga|de bolsillo",{"t":1,"p":52}],["Mejorar la oferta|reactiva demanda",{"t":2,"p":365}]],
+  "txt":"Hoy el gasto se contiene en parte porque los asegurados usan menos a EsSalud y pagan fuera ◇. Cuando la oferta mejore, el consumo subirá: el estudio financiero lo anticipa y la política 1 también.",
+  "lev":"Punto de palanca: planificar la demanda inducida con un acuerdo Iafas-Ugipress para prevención y detección precoz [[1:39]] y recalcular la prima cada dos años [[1:58]]."},
+ {"id":"L4","k":"R","name":"Desconfianza que se alimenta","steps":[["Esperas y|maltrato",{"t":1,"p":34}],["49 %|desconfía",{"t":1,"p":66}],["Conflicto y daño|reputacional",{"t":1,"p":39}],["Presión política|y mediática",{"t":1,"p":39}],["Decisiones lejos|de lo técnico",{"t":2,"p":29}]],
+  "txt":"Las esperas y el maltrato generan desconfianza; la desconfianza vuelve conflictiva la relación y expone a los gestores a presión política y mediática, que aleja las decisiones de los criterios técnicos ◇ y deja intactas las causas de la espera.",
+  "lev":"Punto de palanca: juntas de usuarios y rendición anual de cuentas [[1:69]] [[1:70]]; reglas técnicas y estables para revisar beneficios [[1:39]]."},
+ {"id":"L5","k":"R","name":"Mandatos sin financiamiento","steps":[["Leyes recortan|aportes",{"t":1,"p":52}],["Déficit|crece",{"t":1,"p":51}],["El servicio|se resiente",{"t":2,"p":50}],["Sin indicadores|creíbles",{"t":1,"p":57}],["Poca fuerza para|defender ingresos",{"t":1,"p":57}]],
+  "txt":"Las leyes que reducen aportes agrandan el déficit y deterioran el servicio. Sin indicadores de desempeño creíbles, EsSalud tiene poca fuerza para negociar ingresos ◇, y nuevas leyes vuelven a recortarlos.",
+  "lev":"Punto de palanca: sustentar la negociación de ingresos en indicadores de eficiencia y desempeño [[1:57]], con tablero y auditorías independientes [[1:74]]."},
+ {"id":"L6","k":"B","name":"El statu quo se defiende","steps":[["Propuesta de|separación",{"t":1,"p":73}],["Temor a privatización|y despidos",{"t":2,"p":165}],["Resistencia interna|y sindical",{"t":2,"p":169}],["La transición|se alarga",{"t":2,"p":107}]],
+  "txt":"La reforma despierta temores, el temor produce resistencia y la resistencia alarga la transición. Una transición larga bajo un mismo directorio puede diluir la compra estratégica y devolver el sistema a su punto de partida.",
+  "lev":"Punto de palanca: respaldo político al más alto nivel, comunicación interna y externa, gerentes profesionales y gradualidad con hitos [[2:165]] [[2:169]]."}
+],
+"decs":[
+ {"h":"¿Cuánto dura la transición bajo un mismo directorio?","q":{"t":2,"p":107,"q":"el riesgo de extender la fase de transición con Ugipress y la Iafas dentro de la misma entidad puede afectar en el largo plazo el propósito de la separación de funciones"},"b":"El estudio sugiere 18 a 24 meses [[2:19]]; el tomo 1 fija como llegada una ley con dos entidades autónomas [[1:74]]."},
+ {"h":"¿Una Ugipress con siete redes o dos especializadas?","q":{"t":2,"p":107,"q":"se deberá tomar la decisión de pasar a una Ugipress y siete redes de Ipress u optar por dos Ugipress Especializadas"},"b":"El tomo 1 ya optó por una Ugipress con dos órganos: primer y segundo nivel en siete redes, y alta complejidad [[1:25]]."},
+ {"h":"¿Invertir o tercerizar para cerrar brechas?","q":{"t":2,"p":349,"q":"Deberá decidirse si se invierte o no en nuevos EESS, siendo la alternativa tercerizar los servicios necesarios a través de convenios o contratos con otras Ipress, públicas o privadas."},"b":"El tomo 1 fija un orden de prelación: optimizar lo propio, comprar a públicos, a privados, APP y al final obra tradicional [[1:65]]."},
+ {"h":"¿Medidas estructurales sobre la cobertura?","q":{"t":2,"p":50,"q":"podría ser recomendable adoptar medidas destinadas a limitar algunas coberturas, o poner periodos de espera o copagos"},"b":"El tomo 1 no las recoge. La Ley 29344 impide reducir los servicios que EsSalud ya daba [[2:247]]."},
+ {"h":"¿Quién paga los regímenes especiales?","q":{"t":2,"p":50,"q":"aparece como necesario que EsSalud reciba un subsidio público equivalente en magnitud a una parte o a la totalidad del déficit operacional que los regímenes especiales le generan"},"b":"El tomo 1 opta por homologar aportes por ley [[1:57]] y recuerda que EsSalud no recibe recursos del presupuesto público [[1:10]]."},
+ {"h":"¿Qué cubre exactamente el seguro?","q":{"t":2,"p":108,"q":"Una tarea clave del mapa de ruta es la definición de lo que debería ser el plan de beneficios explícito cubierto por EsSalud"},"b":"El tomo 1 lo aborda como revisión transparente de beneficios y criterios para incorporar tecnologías (estrategia 1.3) [[1:39]], sin un plan explícito."}
+],
+"gaps":[
+ {"r":"Subsidio público para el déficit de los regímenes especiales","s":"no","d":"Recomendado en el tomo 2 [[2:50]] [[2:365]]. El tomo 1 no menciona subsidios; propone homologar aportes por ley [[1:57]]."},
+ {"r":"Limitar coberturas, periodos de espera o copagos","s":"no","d":"Planteado como posible medida estructural [[2:50]] [[2:366]]. No aparece en el tomo 1."},
+ {"r":"Cambios legales para mover personal entre redes","s":"no","d":"El tomo 2 los ve posibles y necesarios [[2:34]]. La hoja de ruta trae perfiles, política de incorporación y capacitación [[1:90]], no movilidad."},
+ {"r":"Plan de beneficios explícito","s":"part","d":"Tarea clave según el tomo 2 [[2:108]]. El tomo 1 lo reduce a revisar beneficios e incorporar tecnologías [[1:80]]."},
+ {"r":"Sistema de costos y contención del costo unitario","s":"part","d":"El tomo 2 señala la inflación médica como el factor más significativo [[2:362]] y un sistema de costos lento [[2:250]]. La hoja de ruta lo enfrenta por la vía de pilotos de pago [[1:86]], sin un hito de costos."}
+],
+"studies":[
+ ["Modelo de negocios y estructura organizacional de la Iafas-EsSalud (mar. 2019)",15],
+ ["Modelo de negocio y escenarios de la Unidad de Gestión de Ipress (mar. 2019)",133],
+ ["Manual de operaciones: organización y procesos de la Iafas-EsSalud",171],
+ ["Mecanismos de pago de servicios de salud. Nota técnica (mar. 2019)",235],
+ ["Grupos relacionados por diagnóstico (HRG) en hospitales seleccionados (feb. 2019)",259],
+ ["Gobernanza y desempeño de la APP: el caso de la red Barton. Nota técnica",315],
+ ["Sostenibilidad financiera de EsSalud. Nota técnica",351],
+ ["Plan estratégico de inversiones de EsSalud 2019-2035",369]
+]
+}
+</script>
+
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s);
+const D=JSON.parse($("#lb-data").textContent);
+const COLOR={R:"--root",P:"--prob",E:"--eff",A:"--resp",X:"--ext"};
+const PDF_BASE="https://www.essalud.gob.pe/transparencia/libro_blanco/";
+const pdfHref=c=>PDF_BASE+"libro_blanco_"+c.t+".pdf#page="+(c.p+2);
+const cite=c=>'<a class="cite" href="'+pdfHref(c)+'" target="_blank" rel="noopener" title="Abrir el tomo '+c.t+' en la página '+c.p+'">T'+c.t+'·p.'+c.p+'</a>'+(c.inf?' <b class="inf" title="Inferencia nuestra">◇</b>':'');
+const rich=s=>String(s).replace(/\[\[(\d):(\d+)\]\]/g,(m,t,p)=>cite({t:+t,p:+p}));
+const quote=q=>'<blockquote>«'+q.q+'» '+cite(q)+'</blockquote>';
+
+/* nodos: unir causas/problemas/efectos con las políticas */
+const NODES=D.nodes.slice();
+D.pols.forEach(p=>NODES.push({id:p.id,col:"A",title:p.name,fig:p.fig,pol:p}));
+const N=Object.fromEntries(NODES.map(n=>[n.id,n]));
+const typeOf=n=>n.grp==="ext"?"X":n.col;
+const out={},inn={},resp={};
+NODES.forEach(n=>{out[n.id]=[];inn[n.id]=[];resp[n.id]=[];});
+D.edges.forEach(e=>{out[e.from].push(e);inn[e.to].push(e);});
+D.pols.forEach(p=>p.targets.forEach(t=>resp[t.id].push({pol:p.id,why:t.why,c:t.c})));
+
+/* cifras y tesis */
+$("#stats").innerHTML=D.stats.map(s=>'<div class="stat"><b>'+s.v+'</b><span>'+s.l+' '+cite(s.c)+'</span></div>').join("");
+$("#thesis").innerHTML=D.thesis.map(t=>'<div class="th"><h3>'+t.h+'</h3><p>'+t.b+'</p>'+quote(t.q)+'</div>').join("");
+$("#syslist").innerHTML=D.sys.map(s=>'<li><span class="n">'+s.n+'</span><span>'+s.txt+' '+s.c.map(cite).join(" ")+'</span></li>').join("");
+
+/* columnas del mapa */
+const COLS=[
+ {k:"R",h:"Causas raíz",p:"Rasgos de fondo que originan los problemas",groups:[["Presiones del entorno",["X1","X2"]],["Causas estructurales",["R1","R2","R3","R4","R5","R6","R7","R8","R9"]]]},
+ {k:"P",h:"Problemas",p:"Fallas que se ven en la operación",groups:[[null,["P1","P2","P3","P4","P5","P6","P7","P8","P9"]]]},
+ {k:"E",h:"Efectos e impactos",p:"Sobre los objetivos que el libro se fija",groups:[["Objetivos intermedios",["E1","E2","E3","E4"]],["Objetivos finales",["E5","E6","E8"]],["Condición",["E7"]]]},
+ {k:"A",h:"Respuestas del libro",p:"Las 9 políticas del tomo 1",groups:D.dims.map(d=>["Dimensión "+d.n+" · "+d.name,d.pols])}
+];
+const colIdx={R:0,P:1,E:2,A:3};
+function card(id){
+  const n=N[id],t=typeOf(n);
+  const code=n.col==="A"?"P"+n.pol.n:id;
+  return '<button type="button" class="node t-'+t+(t==="X"?" ext":"")+'" data-id="'+id+'" aria-label="'+code+': '+n.title+'">'+
+    '<span class="row"><span class="code">'+code+'</span>'+(n.lvl?'<span class="lvl">'+n.lvl+'</span>':'')+'</span>'+
+    '<span class="ttl">'+n.title+'</span><span class="fig">'+n.fig+'</span></button>';
+}
+$("#cols").innerHTML=COLS.map(c=>'<div class="col"><div class="col-h"><h3><i class="sw '+c.k+'"></i>'+c.h+'</h3><p>'+c.p+'</p></div>'+
+  c.groups.map(g=>(g[0]?'<div class="sub">'+g[0]+'</div>':'')+g[1].map(card).join("")).join("")+'</div>').join("");
+const mapEl=$("#map"),svg=$("#edges");
+const el=id=>mapEl.querySelector('.node[data-id="'+id+'"]');
+
+/* cálculo de cadenas */
+function walk(start,dir){
+  const seen=new Set(),st=[start];
+  while(st.length){const x=st.pop();(dir==="up"?inn[x].map(e=>e.from):out[x].map(e=>e.to)).forEach(y=>{if(!seen.has(y)){seen.add(y);st.push(y);}});}
+  return seen;
+}
+let state={sel:null,tour:null};
+function lit(){
+  if(state.tour){const t=D.tours.find(x=>x.id===state.tour);return {set:new Set(t.ids),pols:new Set(t.ids.filter(i=>N[i].col==="A"))};}
+  if(!state.sel) return null;
+  const id=state.sel,n=N[id];
+  if(n.col==="A"){
+    const set=new Set([id]);n.pol.targets.forEach(t=>{set.add(t.id);walk(t.id,"down").forEach(x=>set.add(x));});
+    return {set,pols:new Set([id])};
+  }
+  const up=walk(id,"up"),down=walk(id,"down"),set=new Set([id,...up,...down]),pols=new Set();
+  [id,...up].forEach(x=>resp[x].forEach(r=>{pols.add(r.pol);set.add(r.pol);}));
+  return {set,pols};
+}
+
+/* dibujo de flechas */
+function anchor(id,side){
+  const r=el(id).getBoundingClientRect(),m=mapEl.getBoundingClientRect();
+  return {x:(side==="r"?r.right:r.left)-m.left,y:r.top+r.height/2-m.top};
+}
+function draw(){
+  if(getComputedStyle(svg).display==="none"){svg.innerHTML="";return;}
+  const m=mapEl.getBoundingClientRect();
+  svg.setAttribute("width",m.width);svg.setAttribute("height",m.height);svg.setAttribute("viewBox","0 0 "+m.width+" "+m.height);
+  const L=lit();let h='<defs>';
+  ["R","P","E","A","X"].forEach(k=>{h+='<marker id="mk'+k+'" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var('+COLOR[k]+')"/></marker>';});
+  h+='</defs>';
+  const paths=[];
+  D.edges.forEach(e=>{
+    const a=N[e.from],b=N[e.to],ta=typeOf(a);
+    const on=L&&L.set.has(e.from)&&L.set.has(e.to);
+    let d;
+    if(a.col===b.col){const p=anchor(e.from,"l"),q=anchor(e.to,"l");d="M"+p.x+","+p.y+" C"+(p.x-34)+","+p.y+" "+(q.x-34)+","+q.y+" "+(q.x-2)+","+q.y;}
+    else{const p=anchor(e.from,"r"),q=anchor(e.to,"l"),dx=Math.max(30,(q.x-p.x)*.5);d="M"+p.x+","+p.y+" C"+(p.x+dx)+","+p.y+" "+(q.x-dx)+","+q.y+" "+(q.x-2)+","+q.y;}
+    const op=L?(on?.95:.07):.42,w=on?2.2:1.3;
+    paths.push([on?1:0,'<path d="'+d+'" fill="none" style="stroke:var('+COLOR[ta]+')" stroke-width="'+w+'" opacity="'+op+'" marker-end="url(#mk'+ta+')"/>']);
+  });
+  if(L){
+    D.pols.forEach(p=>{if(!L.pols.has(p.id))return;
+      p.targets.forEach(t=>{if(!L.set.has(t.id))return;
+        const a=anchor(p.id,"l"),b=anchor(t.id,"r"),dx=Math.max(60,(a.x-b.x)*.35);
+        const d="M"+a.x+","+a.y+" C"+(a.x-dx)+","+a.y+" "+(b.x+dx)+","+b.y+" "+(b.x+2)+","+b.y;
+        paths.push([1,'<path d="'+d+'" fill="none" style="stroke:var(--resp)" stroke-width="1.8" stroke-dasharray="5 4" opacity=".9" marker-end="url(#mkA)"/>']);
+      });});
+  }
+  paths.sort((x,y)=>x[0]-y[0]);
+  svg.innerHTML=h+paths.map(p=>p[1]).join("");
+}
+function paint(){
+  const L=lit();
+  mapEl.classList.toggle("focus",!!L);
+  mapEl.querySelectorAll(".node").forEach(b=>{const id=b.dataset.id;b.classList.toggle("on",!!L&&L.set.has(id));b.classList.toggle("sel",id===state.sel);
+    b.setAttribute("aria-pressed",id===state.sel?"true":"false");});
+  draw();
+}
+
+/* panel de detalle */
+const drawer=$("#drawer");let lastFocus=null;
+function chip(id){const n=N[id],t=typeOf(n),code=n.col==="A"?"P"+n.pol.n:id;return '<button type="button" class="chip t-'+t+'" data-go="'+id+'"><span class="code">'+code+'</span><span class="t">'+n.title+'</span></button>';}
+const TYPE={X:"Presión del entorno",R:"Causa raíz",P:"Problema",E:"Efecto o impacto",A:"Respuesta del libro"};
+function linkList(arr,key){return '<ul class="links">'+arr.map(e=>'<li>'+chip(e[key])+'<span class="muted">'+e.why+' '+cite(Object.assign({},e.c,{inf:e.inf}))+'</span></li>').join("")+'</ul>';}
+function openDrawer(id){
+  const n=N[id],t=typeOf(n);let h='<div class="dh t-'+t+'"><div><span class="tag">'+TYPE[t]+' · '+(n.col==="A"?"Política "+n.pol.n:id)+(n.lvl?' · '+n.lvl:'')+'</span><h2>'+(n.col==="A"?n.pol.name:n.title)+'</h2></div><button type="button" class="x" id="dx" aria-label="Cerrar el detalle">×</button></div>';
+  if(n.col==="A"){
+    const p=n.pol;
+    h+='<div class="t-A"><p class="dfig">'+p.long+'</p></div>'+quote(p.obj);
+    h+='<div class="dsec"><h4>Actúa sobre</h4><ul class="links">'+p.targets.map(x=>'<li>'+chip(x.id)+'<span class="muted">'+x.why+' '+cite(x.c)+'</span></li>').join("")+'</ul></div>';
+    h+='<div class="dsec"><h4>Estrategias</h4><ul class="links">'+p.strat.map(s=>'<li><b>'+s[0]+'</b> '+s[1]+'</li>').join("")+'</ul></div>';
+    h+='<div class="dsec"><h4>Lo que agrega el tomo 2</h4><ul class="links">'+p.t2.map(s=>'<li>'+rich(s)+'</li>').join("")+'</ul></div>';
+    h+='<p><a href="#pol-'+p.id+'" id="gopol">Ver la ficha completa con hitos</a></p>';
+  }else{
+    h+='<div class="t-'+t+'"><p class="dfig">'+n.fig+'</p></div><p>'+rich(n.sum)+'</p>';
+    h+='<div class="dsec"><h4>Lo que dice el libro</h4>'+n.quotes.map(quote).join("")+'</div>';
+    if(inn[id].length) h+='<div class="dsec"><h4>Viene de</h4>'+linkList(inn[id],"from")+'</div>';
+    if(out[id].length) h+='<div class="dsec"><h4>Lleva a</h4>'+linkList(out[id],"to")+'</div>';
+    const direct=resp[id];const via=new Map();
+    walk(id,"up").forEach(u=>resp[u].forEach(r=>{if(!direct.some(d=>d.pol===r.pol)&&!via.has(r.pol))via.set(r.pol,u);}));
+    h+='<div class="dsec"><h4>Respuesta del libro</h4>';
+    if(direct.length) h+='<ul class="links">'+direct.map(r=>'<li>'+chip(r.pol)+'<span class="muted">'+r.why+' '+cite(r.c)+'</span></li>').join("")+'</ul>';
+    if(via.size) h+='<p class="muted" style="font-size:.86rem">Por la vía de sus causas: </p><div class="chips">'+[...via.keys()].map(chip).join("")+'</div>';
+    if(!direct.length&&!via.size) h+='<p class="muted">Ninguna política lo atiende de forma directa ◇.</p>';
+    h+='</div>';
+  }
+  drawer.innerHTML=h;drawer.hidden=false;drawer.scrollTop=0;
+  $("#dx").addEventListener("click",closeDrawer);
+  const gp=$("#gopol");if(gp)gp.addEventListener("click",()=>closeDrawer(true));
+  $("#dx").focus();
+}
+function closeDrawer(keepFocus){drawer.hidden=true;state.sel=null;paint();if(lastFocus&&keepFocus!==true){try{lastFocus.focus();}catch(e){}}}
+function select(id,fromChip){
+  state.tour=null;setTourButtons();$("#tourcap").textContent="";
+  if(state.sel===id&&!fromChip){closeDrawer();return;}
+  state.sel=id;paint();openDrawer(id);
+  const b=el(id);if(fromChip&&b){const r=b.getBoundingClientRect();if(r.top<70||r.bottom>innerHeight)b.scrollIntoView({block:"center",behavior:"smooth"});}
+}
+mapEl.addEventListener("click",e=>{const b=e.target.closest(".node");if(b){lastFocus=b;select(b.dataset.id);}});
+document.addEventListener("click",e=>{const c=e.target.closest("[data-go]");if(c){e.preventDefault();
+  if(!c.closest("#drawer")){lastFocus=c;document.getElementById("mapa").scrollIntoView({behavior:"smooth"});}
+  select(c.dataset.go,true);}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!drawer.hidden)closeDrawer();});
+
+/* recorridos */
+function setTourButtons(){document.querySelectorAll("#tours .btn[data-tour]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.tour===state.tour?"true":"false"));}
+$("#tours").innerHTML=D.tours.map(t=>'<button type="button" class="btn" data-tour="'+t.id+'" aria-pressed="false">'+t.label+'</button>').join("")+'<button type="button" class="btn" id="tclear">Ver todo</button>';
+$("#tours").addEventListener("click",e=>{const b=e.target.closest(".btn");if(!b)return;
+  drawer.hidden=true;state.sel=null;
+  if(b.id==="tclear"||state.tour===b.dataset.tour){state.tour=null;$("#tourcap").textContent="";}
+  else{state.tour=b.dataset.tour;$("#tourcap").textContent=D.tours.find(t=>t.id===state.tour).cap;}
+  setTourButtons();paint();});
+
+/* bucles */
+function ring(L){
+  const W=340,H=300,cx=170,cy=150,R=108,n=L.steps.length,col=L.k==="R"?"--root":"--eff",soft=L.k==="R"?"--root-soft":"--eff-soft";
+  let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Bucle '+L.k+': '+L.steps.map(x=>x[0].replace("|"," ")).join(" → ")+'"><circle class="l-ring" cx="'+cx+'" cy="'+cy+'" r="'+R+'"/>';
+  for(let i=0;i<n;i++){const a=(-90+360*(i+.5)/n)*Math.PI/180,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a),rot=(-90+360*(i+.5)/n)+90;
+    s+='<polygon points="-6,-5 6,0 -6,5" transform="translate('+x.toFixed(1)+','+y.toFixed(1)+') rotate('+rot.toFixed(1)+')" style="fill:var('+col+')"/>';}
+  for(let i=0;i<n;i++){const a=(-90+360*i/n)*Math.PI/180,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a),ln=L.steps[i][0].split("|");
+    s+='<rect class="l-box" x="'+(x-60).toFixed(1)+'" y="'+(y-21).toFixed(1)+'" width="120" height="42" rx="7" style="fill:var(--surface);stroke:var('+col+')"/>';
+    ln.forEach((t,j)=>{s+='<text class="l-txt" x="'+x.toFixed(1)+'" y="'+(y+(ln.length===1?4:(j===0?-3:11))).toFixed(1)+'" text-anchor="middle">'+t+'</text>';});}
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="30" style="fill:var('+soft+')"/><text class="l-mid" x="'+cx+'" y="'+(cy+12)+'" text-anchor="middle" style="fill:var('+col+')">'+L.k+'</text>';
+  s+='<text class="l-sub" x="'+cx+'" y="'+(cy+46)+'" text-anchor="middle">'+(L.k==="R"?"se refuerza":"frena el cambio")+'</text></svg>';
+  return s;
+}
+$("#loops").innerHTML=D.loops.map(L=>'<article class="loop"><div style="display:flex;gap:8px;align-items:center"><span class="kind '+L.k+'">'+L.k+(L.id.slice(1))+'</span><h3>'+L.name+'</h3></div>'+ring(L)+
+  '<p>'+L.txt+'</p><p class="muted" style="font-size:.82rem">Eslabones: '+L.steps.map(x=>x[0].replace("|"," ")+' '+cite(x[1])).join(" → ")+'</p><p class="lev">'+rich(L.lev)+'</p></article>').join("");
+
+/* políticas */
+$("#dims").innerHTML=D.dims.map(d=>'<div class="dim"><h3 class="dn"><span>Dimensión '+d.n+'</span>'+d.name+'</h3><div class="pols">'+
+  d.pols.map(id=>{const p=D.pols.find(x=>x.id===id);
+   return '<article class="pol" id="pol-'+p.id+'"><div><p class="pn">POLÍTICA '+p.n+' · T1 pp. '+p.pp+'</p><h4>'+p.name+'</h4><p class="muted" style="font-size:.86rem;margin-top:3px">'+p.long+'</p></div>'+
+   quote(p.obj)+
+   '<div><p class="lbl">Atiende</p><div class="chips" style="margin-top:6px">'+p.targets.map(t=>chip(t.id)).join("")+'</div></div>'+
+   '<div><p class="lbl">Estrategias</p><ul style="margin-top:6px">'+p.strat.map(s=>'<li><b>'+s[0]+'</b> '+s[1]+'</li>').join("")+'</ul></div>'+
+   '<details><summary>Hitos de la hoja de ruta ('+p.hitos.length+')</summary><ul>'+p.hitos.map(h=>'<li>'+h[0]+' '+cite({t:1,p:h[1]})+'</li>').join("")+'</ul></details>'+
+   '<details><summary>Lo que agrega el tomo 2 ('+p.t2.length+')</summary><ul>'+p.t2.map(s=>'<li>'+rich(s)+'</li>').join("")+'</ul></details></article>';}).join("")+'</div></div>').join("");
+
+/* decisiones, brechas, estudios */
+$("#decs").innerHTML=D.decs.map(d=>'<article class="dec"><h3>'+d.h+'</h3>'+quote(d.q)+'<p>'+rich(d.b)+'</p></article>').join("");
+const ST={no:'<span class="no">No</span>',part:'<span class="part">Solo en parte</span>'};
+$("#gaps").innerHTML=D.gaps.map(g=>'<tr><td><b>'+g.r+'</b></td><td>'+ST[g.s]+'</td><td>'+rich(g.d)+'</td></tr>').join("");
+$("#studies").innerHTML=D.studies.map(s=>'<li>'+s[0]+' '+cite({t:2,p:s[1]})+'</li>').join("")+'<li>Integrados en el primero: análisis de actores clave, participación de los asegurados e inteligencia de negocios '+cite({t:2,p:22})+'</li>';
+
+/* redibujo */
+let raf=0;const redraw=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(draw);};
+addEventListener("resize",redraw);
+if("ResizeObserver" in window) new ResizeObserver(redraw).observe(mapEl);
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(redraw);
+paint();
+})();
+</script>
+</body>
+</html>
