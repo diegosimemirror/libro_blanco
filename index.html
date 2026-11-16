@@ -374,7 +374,7 @@ footer{padding-block:34px 40px;color:var(--muted);font-size:.84rem}
   <div class="sec-head">
     <p class="eyebrow">Trazabilidad</p>
     <h2>Mapa de causas, problemas, efectos y respuestas</h2>
-    <p>Pulse cualquier tarjeta: se ilumina la cadena completa (de qué viene, a qué lleva y qué política del libro la atiende) y se abre el detalle con las citas. Los recorridos de abajo siguen cuatro hilos que sirven para explicar el libro en una reunión.</p>
+    <p>Pulse cualquier tarjeta: se ilumina la cadena completa (de qué viene, a qué lleva y qué política del libro la atiende) y se abre el detalle con las citas. Los recorridos de abajo siguen cuatro hilos que sirven para explicar el libro en una reunión; cada uno tiene su propio enlace para compartir (por ejemplo, <code>#recorrido-dinero</code>).</p>
   </div>
   <div class="tours" id="tours" role="group" aria-label="Recorridos guiados"></div>
   <p class="tour-cap" id="tourcap" aria-live="polite"></p>
@@ -958,7 +958,16 @@ $("#tours").addEventListener("click",e=>{const b=e.target.closest(".btn");if(!b)
   drawer.hidden=true;state.sel=null;
   if(b.id==="tclear"||state.tour===b.dataset.tour){state.tour=null;$("#tourcap").textContent="";}
   else{state.tour=b.dataset.tour;$("#tourcap").textContent=D.tours.find(t=>t.id===state.tour).cap;}
+  try{history.replaceState(null,"",state.tour?"#recorrido-"+state.tour:"#mapa");}catch(err){}
   setTourButtons();paint();});
+/* enlace directo a un recorrido: #recorrido-dinero, #recorrido-paciente, #recorrido-compra, #recorrido-confianza */
+function fromHash(){
+  const m=location.hash.match(/^#recorrido-([a-z]+)$/),t=m&&D.tours.find(x=>x.id===m[1]);
+  if(!t)return;
+  drawer.hidden=true;state.sel=null;state.tour=t.id;$("#tourcap").textContent=t.cap;setTourButtons();paint();
+  document.getElementById("mapa").scrollIntoView();
+}
+addEventListener("hashchange",fromHash);
 
 /* bucles */
 function ring(L){
@@ -998,6 +1007,7 @@ addEventListener("resize",redraw);
 if("ResizeObserver" in window) new ResizeObserver(redraw).observe(mapEl);
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(redraw);
 paint();
+fromHash();
 })();
 </script>
 </body>
