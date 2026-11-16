@@ -1,0 +1,826 @@
+{
+ "docs": {
+  "1": {
+   "sig": "LB1",
+   "src": "LB",
+   "name": "Libro Blanco, tomo 1 (EsSalud, 2019)",
+   "url": "https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf",
+   "off": 2
+  },
+  "2": {
+   "sig": "LB2",
+   "src": "LB",
+   "name": "Libro Blanco, tomo 2: estudios del Banco Mundial (EsSalud, 2019)",
+   "url": "https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_2.pdf",
+   "off": 2
+  },
+  "3": {
+   "sig": "OIT",
+   "src": "OIT",
+   "name": "Valuación actuarial EsSalud. Estudio financiero actuarial al 2022 (OIT, 2023)",
+   "url": "https://www.social-protection.org/gimi/Media.action?id=20597",
+   "off": 0
+  },
+  "4": {
+   "sig": "OCDE",
+   "src": "MARCO",
+   "name": "Rethinking Health System Performance Assessment (OCDE, 2024)",
+   "url": "https://doi.org/10.1787/107182c8-en",
+   "off": null
+  }
+ },
+ "stats": [
+  {
+   "v": "11,6 M",
+   "l": "asegurados en 2018",
+   "c": {
+    "t": 1,
+    "p": 33
+   }
+  },
+  {
+   "v": "36,7 %",
+   "l": "de la población cubierta en 2022",
+   "c": {
+    "t": 3,
+    "p": 102
+   }
+  },
+  {
+   "v": "389",
+   "l": "Ipress propias en 29 redes",
+   "c": {
+    "t": 2,
+    "p": 137
+   }
+  },
+  {
+   "v": "2026",
+   "l": "año en que se agotaría la reserva legal",
+   "c": {
+    "t": 3,
+    "p": 104
+   }
+  }
+ ],
+ "essentials": [
+  {
+   "lane": "IAFAS",
+   "h": "Las leyes le quitan ingresos",
+   "b": "Topes de aporte para CAS, Minsa y Minedu, gratificaciones exoneradas y pensionistas que cotizan casi nada. Ninguna de esas normas tuvo cálculo actuarial.",
+   "num": "+20,5 %",
+   "numl": "de ingresos si se corrigen topes y gratificaciones, según la OIT",
+   "cites": [
+    {
+     "t": 1,
+     "p": 51
+    },
+    {
+     "t": 3,
+     "p": 104
+    }
+   ],
+   "ids": [
+    "R3",
+    "R10",
+    "R12",
+    "P2"
+   ]
+  },
+  {
+   "lane": "IAFAS",
+   "h": "La reserva se acaba",
+   "b": "El Libro Blanco proyectó un déficit de 31 % de los ingresos a 2028. La OIT, con datos más recientes, prevé déficits desde 2023 y la reserva legal agotada en 2026.",
+   "num": "2026",
+   "numl": "fin de la reserva legal en el escenario base de la OIT",
+   "cites": [
+    {
+     "t": 1,
+     "p": 51
+    },
+    {
+     "t": 3,
+     "p": 104
+    }
+   ],
+   "ids": [
+    "P2",
+    "E7",
+    "R11"
+   ]
+  },
+  {
+   "lane": "IAFAS",
+   "h": "Paga, pero no compra",
+   "b": "El fondo se reparte entre redes propias por presupuesto histórico, sin contratos ni pago por resultados. Solo el Libro Blanco trata este tema.",
+   "num": "50 / 50",
+   "numl": "reparto histórico entre el nivel I-II y el nivel III",
+   "cites": [
+    {
+     "t": 2,
+     "p": 167
+    },
+    {
+     "t": 2,
+     "p": 248
+    }
+   ],
+   "ids": [
+    "R1",
+    "R2",
+    "P9"
+   ]
+  },
+  {
+   "lane": "IPRESS",
+   "h": "Todo pasa por el hospital",
+   "b": "Solo 42 % de los asegurados se atiende en primer nivel. La OIT lee el aumento de las emergencias como una alarma sobre la red.",
+   "num": "73 %",
+   "numl": "del gasto se concentra en 8 de las 29 redes",
+   "cites": [
+    {
+     "t": 2,
+     "p": 138
+    },
+    {
+     "t": 3,
+     "p": 103
+    }
+   ],
+   "ids": [
+    "R5",
+    "P3",
+    "E1"
+   ]
+  },
+  {
+   "lane": "IPRESS",
+   "h": "Cada atención cuesta más",
+   "b": "El costo de cada atención creció muy por encima de la inflación, mientras el ingreso por asegurado subió 0,8 % real al año.",
+   "num": "+5,4 %",
+   "numl": "al año en consulta externa, frente a 3,1 % de inflación",
+   "cites": [
+    {
+     "t": 1,
+     "p": 54
+    },
+    {
+     "t": 2,
+     "p": 360
+    }
+   ],
+   "ids": [
+    "R7",
+    "P1",
+    "E3"
+   ]
+  },
+  {
+   "lane": "IPRESS",
+   "h": "Cerrar brechas agranda el déficit",
+   "b": "La brecha de oferta llega a S/ 31 226 M. Para la OIT, el gasto en nuevos hospitales es la principal causa del déficit desde 2023.",
+   "num": "S/ 2 077 M",
+   "numl": "de gasto en infraestructura previsto para 2032",
+   "cites": [
+    {
+     "t": 2,
+     "p": 493
+    },
+    {
+     "t": 3,
+     "p": 104
+    }
+   ],
+   "ids": [
+    "P5",
+    "P2"
+   ]
+  },
+  {
+   "lane": "GOB",
+   "h": "Se decide sin cálculo actuarial",
+   "b": "Los dos estudios piden que ninguna ley cambie aportes o prestaciones sin un estudio actuarial previo. La OIT anota que sus recomendaciones de mayor impacto no se adoptaron.",
+   "num": "2015 y 2018",
+   "numl": "valuaciones cuyas recomendaciones de mayor impacto no se adoptaron",
+   "cites": [
+    {
+     "t": 1,
+     "p": 57
+    },
+    {
+     "t": 3,
+     "p": 104
+    }
+   ],
+   "ids": [
+    "R12",
+    "R3",
+    "O1"
+   ]
+  },
+  {
+   "lane": "GOB",
+   "h": "Una sola casa para pagar y prestar",
+   "b": "Separar al asegurador del prestador es, para el Libro Blanco, la reforma que habilita las demás. La OIT no la trata.",
+   "num": "2",
+   "numl": "entidades autónomas al final de la reforma",
+   "cites": [
+    {
+     "t": 1,
+     "p": 73
+    }
+   ],
+   "ids": [
+    "R1",
+    "R4",
+    "A8"
+   ]
+  },
+  {
+   "lane": "GOB",
+   "h": "El asegurado desconfía",
+   "b": "La mitad de los asegurados desconfía del seguro social; la espera y el maltrato son las primeras causas.",
+   "num": "49 %",
+   "numl": "desconfía del seguro social (2015)",
+   "cites": [
+    {
+     "t": 1,
+     "p": 66
+    }
+   ],
+   "ids": [
+    "R9",
+    "P8",
+    "E4"
+   ]
+  }
+ ],
+ "lanes": {
+  "IAFAS": {
+   "name": "Asegurador",
+   "abbr": "IAFAS",
+   "q": "¿Recauda, protege el fondo y compra bien?"
+  },
+  "IPRESS": {
+   "name": "Prestador",
+   "abbr": "IPRESS",
+   "q": "¿Atiende a tiempo, con calidad y a un costo razonable?"
+  },
+  "GOB": {
+   "name": "Gobierno y entorno",
+   "abbr": "GOB",
+   "q": "¿Quién decide y bajo qué reglas?"
+  }
+ },
+ "blocks": {
+  "afi": {
+   "lane": "IAFAS",
+   "name": "Afiliación y cobertura",
+   "who": "OMS: recaudación",
+   "quote": {
+    "t": 1,
+    "p": 23,
+    "q": "Gestión de suscripción y afiliación: incorporar afiliados en los planes que mantienen las Iafas"
+   }
+  },
+  "rau": {
+   "lane": "IAFAS",
+   "name": "Recaudación",
+   "who": "OMS: recaudación",
+   "quote": {
+    "t": 1,
+    "p": 23,
+    "q": "la recaudación de aportes o contribuciones para las Iafas bajo régimen contributivo o semicontributivo"
+   }
+  },
+  "fon": {
+   "lane": "IAFAS",
+   "name": "Fondo y reservas",
+   "who": "OMS: mancomunación",
+   "quote": {
+    "t": 3,
+    "p": 79,
+    "q": "para que esta se mantenga al 30 por ciento de los gastos en prestaciones del ejercicio anterior"
+   }
+  },
+  "ben": {
+   "lane": "IAFAS",
+   "name": "Plan de beneficios",
+   "who": "OMS: diseño de beneficios",
+   "quote": {
+    "t": 1,
+    "p": 23,
+    "q": "Gestión del diseño de planes de salud: elaborar los planes de salud que se ofrecen a la ciudadanía"
+   }
+  },
+  "com": {
+   "lane": "IAFAS",
+   "name": "Compra y pago a prestadores",
+   "who": "OMS: compra estratégica",
+   "quote": {
+    "t": 1,
+    "p": 23,
+    "q": "Gestión de compra de prestaciones de salud: pactar, a través de contratos o convenios, con las Ugipress/Ipress las condiciones generales y específicas de servicio para los asegurados"
+   }
+  },
+  "ase": {
+   "lane": "IAFAS",
+   "name": "Atención al asegurado",
+   "who": "DS 010-2016-SA",
+   "quote": {
+    "t": 1,
+    "p": 23,
+    "q": "Gestión de asegurados: atender a las personas aseguradas o potencialmente asegurables"
+   }
+  },
+  "pro": {
+   "lane": "IAFAS",
+   "name": "Protección financiera y sostenibilidad",
+   "who": "Resultado del asegurador",
+   "quote": {
+    "t": 1,
+    "p": 18,
+    "q": "lograr la sostenibilidad financiera de la institución (los ingresos cubren los gastos) es una condición esencial"
+   }
+  },
+  "rec": {
+   "lane": "IPRESS",
+   "name": "Recursos",
+   "who": "OCDE: personal, datos, infraestructura, medicamentos",
+   "quote": {
+    "t": 4,
+    "p": 16,
+    "q": "It includes the following six pillars"
+   }
+  },
+  "acc": {
+   "lane": "IPRESS",
+   "name": "Acceso y cobertura",
+   "who": "OCDE: servicios",
+   "quote": {
+    "t": 4,
+    "p": 14,
+    "q": "resources and policy are fed into health services and interventions, that, in turn, produce outcomes"
+   }
+  },
+  "cal": {
+   "lane": "IPRESS",
+   "name": "Calidad y trato",
+   "who": "OCDE: servicios centrados en las personas",
+   "quote": {
+    "t": 4,
+    "p": 16,
+    "q": "places people’s health needs and preferences at the core of health system"
+   }
+  },
+  "res": {
+   "lane": "IPRESS",
+   "name": "Resultados en salud",
+   "who": "OCDE: resultados",
+   "quote": null
+  },
+  "efi": {
+   "lane": "IPRESS",
+   "name": "Eficiencia",
+   "who": "OCDE: dimensión transversal",
+   "quote": {
+    "t": 4,
+    "p": 17,
+    "q": "namely efficiency and equity on one side, and sustainability and resilience on the other"
+   }
+  },
+  "gob": {
+   "lane": "GOB",
+   "name": "Reglas y decisiones",
+   "who": "Gobierno corporativo y sectorial",
+   "quote": null
+  }
+ },
+ "chart": {
+  "lb": {
+   "years": [
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026,
+    2027,
+    2028
+   ],
+   "ing": [
+    6960,
+    6842,
+    7606,
+    8470,
+    9232,
+    9513,
+    9620,
+    10036,
+    10156,
+    10401,
+    10774,
+    11160,
+    11561,
+    11976,
+    12407,
+    12853,
+    13316,
+    13795,
+    14292,
+    14808
+   ],
+   "gas": [
+    6609,
+    6873,
+    6980,
+    7858,
+    8888,
+    9846,
+    10120,
+    10790,
+    10732,
+    11315,
+    11931,
+    12583,
+    13275,
+    14008,
+    14787,
+    15613,
+    16491,
+    17422,
+    18411,
+    19462
+   ],
+   "firstProj": 2018,
+   "c": {
+    "t": 2,
+    "p": 47
+   }
+  },
+  "growth": [
+   {
+    "who": "Libro Blanco (Banco Mundial)",
+    "src": "LB",
+    "per": "2017-2028, soles de 2017",
+    "ing": 45.8,
+    "gas": 81.3,
+    "c": {
+     "t": 2,
+     "p": 47
+    },
+    "calc": true
+   },
+   {
+    "who": "Estudio actuarial (OIT)",
+    "src": "OIT",
+    "per": "2022-2032, soles corrientes",
+    "ing": 50.2,
+    "gas": 85.4,
+    "c": {
+     "t": 3,
+     "p": 78
+    },
+    "calc": false
+   }
+  ]
+ },
+ "loops": [
+  {
+   "id": "L1",
+   "k": "R",
+   "lane": "IPRESS",
+   "name": "El hospital se lleva el presupuesto",
+   "steps": [
+    [
+     "Primer nivel|débil",
+     {
+      "t": 1,
+      "p": 42
+     }
+    ],
+    [
+     "Asegurados van|al hospital",
+     {
+      "t": 2,
+      "p": 36
+     }
+    ],
+    [
+     "Hospitales concentran|el gasto",
+     {
+      "t": 2,
+      "p": 138
+     }
+    ],
+    [
+     "Presupuesto histórico|lo consolida",
+     {
+      "t": 2,
+      "p": 167
+     }
+    ]
+   ],
+   "txt": "Como el primer nivel resuelve poco, los asegurados llegan al hospital o a emergencias; el gasto se concentra allí y el presupuesto histórico repite ese reparto al año siguiente.",
+   "lev": "Dónde cortarlo: adscribir a toda la población al primer y segundo nivel [[1:45]] y pagar por cápita a las redes [[1:61]]. La OIT pide lo mismo para bajar costos [[3:109]]."
+  },
+  {
+   "id": "L2",
+   "k": "R",
+   "lane": "IAFAS",
+   "name": "Cerrar brechas agranda el déficit",
+   "steps": [
+    [
+     "Déficit|operativo",
+     {
+      "t": 1,
+      "p": 51
+     }
+    ],
+    [
+     "Inversión por debajo|de lo necesario",
+     {
+      "t": 2,
+      "p": 108
+     }
+    ],
+    [
+     "Establecimientos|envejecidos",
+     {
+      "t": 2,
+      "p": 371
+     }
+    ],
+    [
+     "Nuevos hospitales|elevan el gasto",
+     {
+      "t": 3,
+      "p": 104
+     }
+    ]
+   ],
+   "txt": "El déficit deja la inversión muy por debajo de lo que pide la brecha; cuando por fin se invierte en hospitales, ese gasto se vuelve la principal causa del déficit. Los dos estudios ven las dos caras del mismo dilema.",
+   "lev": "Dónde cortarlo: elegir entre invertir y comprar con criterios no discrecionales [[2:494]] y financiar la inversión con una estrategia integral de ingresos [[3:110]]."
+  },
+  {
+   "id": "L3",
+   "k": "R",
+   "lane": "GOB",
+   "name": "Leyes sin cálculo actuarial",
+   "steps": [
+    [
+     "Leyes recortan|aportes",
+     {
+      "t": 1,
+      "p": 52
+     }
+    ],
+    [
+     "Déficit|crece",
+     {
+      "t": 1,
+      "p": 51
+     }
+    ],
+    [
+     "Recomendaciones|no adoptadas",
+     {
+      "t": 3,
+      "p": 104
+     }
+    ],
+    [
+     "Nuevas leyes sin|contraparte",
+     {
+      "t": 3,
+      "p": 110
+     }
+    ]
+   ],
+   "txt": "Cada ley que reduce aportes o amplía prestaciones sin financiamiento agranda el déficit; las recomendaciones para revertirlo no se adoptan, y la práctica se repite.",
+   "lev": "Dónde cortarlo: ninguna norma sin revisión del área actuarial [[3:15]] y una estrategia ante mandatos no financiados [[1:57]]."
+  },
+  {
+   "id": "L4",
+   "k": "B",
+   "lane": "GOB",
+   "name": "El statu quo se defiende",
+   "steps": [
+    [
+     "Propuesta de|reforma",
+     {
+      "t": 1,
+      "p": 73
+     }
+    ],
+    [
+     "Temor a privatización|y despidos",
+     {
+      "t": 2,
+      "p": 165
+     }
+    ],
+    [
+     "Resistencia interna|y sindical",
+     {
+      "t": 2,
+      "p": 169
+     }
+    ],
+    [
+     "La transición|se alarga",
+     {
+      "t": 2,
+      "p": 107
+     }
+    ]
+   ],
+   "txt": "La reforma despierta temores, el temor produce resistencia y la resistencia alarga la transición, que tiende a volver al punto de partida.",
+   "lev": "Dónde cortarlo: respaldo político al más alto nivel, comunicación interna y externa y gradualidad con hitos [[2:165]] [[2:169]]; diálogo social informado, según la OIT [[3:110]]."
+  }
+ ],
+ "compare": [
+  {
+   "lane": "IAFAS",
+   "tema": "Equiparar aportes de CAS, Minsa y Minedu",
+   "lb": "Ley de homologación progresiva de aportes [[1:57]]",
+   "oit": "Equiparar con el sector privado: +7 % de ingresos [[3:104]] [[3:105]]",
+   "st": "both"
+  },
+  {
+   "lane": "IAFAS",
+   "tema": "Volver a cotizar sobre gratificaciones",
+   "lb": "Recuperar 14 aportes: +18 % de ingresos al año [[2:362]]",
+   "oit": "Restablecer los 14 meses: +14,3 % de ingresos [[3:104]]",
+   "st": "both",
+   "nota": "Las estimaciones difieren ◇"
+  },
+  {
+   "lane": "IAFAS",
+   "tema": "Pensionistas y Ley 30478",
+   "lb": "Simula que los pensionistas aporten 9 % [[2:50]]",
+   "oit": "Base mínima para todos los pensionistas y revisar la Ley 30478 [[3:105]] [[3:106]]",
+   "st": "both"
+  },
+  {
+   "lane": "IAFAS",
+   "tema": "Dejar de pagar pensiones de la ONP",
+   "lb": "Casi S/ 700 M al año [[2:51]]",
+   "oit": "Libera 2,7 % de los ingresos [[3:106]]",
+   "st": "both"
+  },
+  {
+   "lane": "IAFAS",
+   "tema": "Afiliar a independientes",
+   "lb": "Los seguros voluntarios no funcionan [[2:68]]",
+   "oit": "Afiliación obligatoria de no asalariados con capacidad contributiva [[3:103]]",
+   "st": "both"
+  },
+  {
+   "lane": "IAFAS",
+   "tema": "Subsidio del Tesoro a regímenes especiales",
+   "lb": "Lo recomienda el tomo 2 [[2:50]]; el tomo 1 no lo recoge",
+   "oit": "No lo propone; recuerda que EsSalud no recibe recursos del Tesoro [[3:106]]",
+   "st": "lb"
+  },
+  {
+   "lane": "IAFAS",
+   "tema": "Copagos, periodos de espera o límites de cobertura",
+   "lb": "Lo plantea el tomo 2 [[2:50]]; el tomo 1 no lo recoge",
+   "oit": "No lo trata; pide financiar toda mejora de prestaciones [[3:110]]",
+   "st": "lb"
+  },
+  {
+   "lane": "IAFAS",
+   "tema": "Plan de beneficios explícito",
+   "lb": "Tarea clave en el tomo 2 [[2:108]]",
+   "oit": "Proyectar la demanda de adultos mayores para el paquete de beneficios [[3:102]]",
+   "st": "both"
+  },
+  {
+   "lane": "IAFAS",
+   "tema": "Comprar con contratos y pagar por resultados",
+   "lb": "Cápita en redes, GRD en hospitales, contratos de 3 años [[1:61]] [[1:62]]",
+   "oit": null,
+   "st": "lb"
+  },
+  {
+   "lane": "IPRESS",
+   "tema": "Fortalecer el primer nivel",
+   "lb": "Toda la población adscrita al primer y segundo nivel [[1:45]]",
+   "oit": "Más capacidad resolutiva para bajar costos de hospitales [[3:109]]",
+   "st": "both"
+  },
+  {
+   "lane": "IPRESS",
+   "tema": "Cerrar brechas de oferta",
+   "lb": "Optimizar, comprar, APP y, al final, obra pública [[1:65]]",
+   "oit": "La inversión en hospitales es la principal causa del déficit [[3:104]]",
+   "st": "both",
+   "nota": "En tensión ◇"
+  },
+  {
+   "lane": "IPRESS",
+   "tema": "Mover personal entre redes",
+   "lb": "El tomo 2 pide cambios legales [[2:34]]; el tomo 1 no",
+   "oit": null,
+   "st": "lb"
+  },
+  {
+   "lane": "GOB",
+   "tema": "Separar asegurador y prestador",
+   "lb": "Holding y luego dos entidades por ley [[1:73]]",
+   "oit": null,
+   "st": "lb"
+  },
+  {
+   "lane": "GOB",
+   "tema": "Ninguna ley sin estudio actuarial",
+   "lb": "Estrategia ante mandatos no financiados [[1:57]]",
+   "oit": "Toda norma revisada por el área actuarial; Convenio 102 [[3:15]] [[3:110]]",
+   "st": "both"
+  },
+  {
+   "lane": "GOB",
+   "tema": "Capacidad actuarial propia",
+   "lb": "Cálculo actuarial cada dos años [[1:58]]",
+   "oit": "Fortalecer el área de estudios actuariales [[3:109]]",
+   "st": "both"
+  }
+ ],
+ "frames": {
+  "iafas": "Para el asegurador no hay un marco global único. Esta página combina tres piezas: los procesos que el DS 010-2016-SA exige a toda Iafas pública [[1:23]], las funciones del financiamiento de la salud de la OMS (Kutzin y otros, 2017), que el propio Libro Blanco adopta [[1:17]], y los principios del Convenio 102 de la OIT, que guían el estudio actuarial [[3:13]]. Para la gestión institucional, la AISS publica directrices de buena gobernanza; la OISS aporta principios (Código Iberoamericano de Seguridad Social, 1995), pero no un mapa operativo del seguro de salud.",
+  "ipress": "Para el prestador se usa el marco de evaluación del desempeño de los sistemas de salud de la OCDE (2024): recursos que alimentan servicios, que producen resultados, con las necesidades de las personas al centro [[4:14]] [[4:16]] y cuatro dimensiones transversales [[4:17]]. Es el mismo marco que ordena el mapa del sistema de salud del Perú."
+ },
+ "credits": [
+  {
+   "grp": "Estudios analizados",
+   "cita": "EsSalud (2019). <i>Hacia la modernización de la seguridad social en el Perú. Libro blanco para el diálogo</i>. Tomo 1: Políticas y hoja de ruta para el fortalecimiento del Seguro Social de Salud, EsSalud 2019-2022. Lima: Seguro Social de Salud.",
+   "url": "https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf",
+   "acceso": "Portal de transparencia de EsSalud",
+   "lic": "Derechos reservados de EsSalud. Se citan fragmentos breves, con fines de análisis y con su fuente."
+  },
+  {
+   "grp": "Estudios analizados",
+   "cita": "EsSalud (2019). <i>Hacia la modernización de la seguridad social en el Perú. Libro blanco para el diálogo</i>. Tomo 2: Compendio de estudios. Estudios elaborados por personal del Banco Mundial, con contribuciones externas, por encargo de EsSalud.",
+   "url": "https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_2.pdf",
+   "acceso": "Portal de transparencia de EsSalud",
+   "lic": "Derechos reservados de EsSalud. Se citan fragmentos breves, con fines de análisis y con su fuente.",
+   "extra": "; también en el <a href=\"https://repositorio.essalud.gob.pe/handle/20.500.12959/830\" target=\"_blank\" rel=\"noopener\">repositorio institucional de EsSalud</a>"
+  },
+  {
+   "grp": "Estudios analizados",
+   "cita": "OIT (2023). <i>Valuación actuarial EsSalud. Estudio financiero actuarial al 2022</i>. Lima: Oficina Internacional del Trabajo. Elaborado por los Servicios de Finanzas Públicas, Actuariales y Estadísticos de la OIT (Helmut Schwarzer, Cristina Lloret, Andrés Acuña y Sergio Velasco); redacción de Víctor Hugo Molinas; coordinación de Pablo Casalí.",
+   "url": "https://www.social-protection.org/gimi/Media.action?id=20597",
+   "acceso": "Plataforma de Protección Social de la OIT",
+   "lic": "Licencia CC BY 4.0. Esta página es una adaptación que no ha sido realizada, revisada ni aprobada por la OIT y no debe considerarse una adaptación oficial de la OIT."
+  },
+  {
+   "grp": "Marcos conceptuales",
+   "cita": "OCDE (2024). <i>Rethinking Health System Performance Assessment: A Renewed Framework</i>. OECD Health Policy Studies. París: OECD Publishing.",
+   "url": "https://doi.org/10.1787/107182c8-en",
+   "acceso": "Sitio de la OCDE (DOI)",
+   "lic": "Esta es una adaptación de un trabajo original de la OCDE. Las opiniones expresadas no deben considerarse representativas de los puntos de vista oficiales de la OCDE o de sus países miembros."
+  },
+  {
+   "grp": "Marcos conceptuales",
+   "cita": "Kutzin, J., Witter, S., Jowett, M. y Bayarsaikhan, D. (2017). <i>Developing a national health financing strategy: a reference guide</i>. Health Financing Guidance n.º 3. Ginebra: Organización Mundial de la Salud.",
+   "url": "https://www.who.int/publications/i/item/9789241512107",
+   "acceso": "Sitio de la OMS",
+   "lic": "Licencia CC BY-NC-SA 3.0 IGO. Se usa su enfoque de funciones del financiamiento, que el propio Libro Blanco adopta."
+  },
+  {
+   "grp": "Marcos conceptuales",
+   "cita": "OIT (1952). <i>Convenio sobre la seguridad social (norma mínima)</i>, núm. 102.",
+   "url": "https://normlex.ilo.org/dyn/nrmlx_es/f?p=NORMLEXPUB:12100:0::NO::P12100_ILO_CODE:C102",
+   "acceso": "NORMLEX, base de normas de la OIT",
+   "lic": "Norma internacional del trabajo, citada a través del estudio actuarial de la OIT."
+  },
+  {
+   "grp": "Marcos conceptuales",
+   "cita": "Asociación Internacional de la Seguridad Social (AISS). <i>Directrices de la AISS sobre buena gobernanza</i>.",
+   "url": "https://iskm.issa.int/node/5022",
+   "acceso": "Centro de conocimiento de la AISS",
+   "lic": "Referencia general; no se citan textos."
+  },
+  {
+   "grp": "Marcos conceptuales",
+   "cita": "Organización Iberoamericana de Seguridad Social (OISS) (1995). <i>Código Iberoamericano de Seguridad Social</i>. Madrid.",
+   "url": "https://normativa.colpensiones.gov.co/colpensiones/docs/ley_0516_1999.htm",
+   "acceso": "Texto oficial anexo a la Ley 516 de 1999 de Colombia, publicado por Colpensiones",
+   "lic": "Referencia general; no se citan textos."
+  }
+ ]
+}

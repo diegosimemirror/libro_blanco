@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mapa de la reforma de EsSalud</title>
+<meta name="description" content="EsSalud como asegurador y como prestador: lo que dicen el Libro Blanco (EsSalud y Banco Mundial, 2019) y la valuación actuarial de la OIT (2022), con cada afirmación enlazada a su página.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='5' width='14' height='6' fill='%23E3120B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Roboto+Condensed:wght@500;700&display=swap">
+<style>
+/* Concepto: un informe de semanario. Filetes finos, etiqueta roja que marca cada pieza, titulares en serif.
+   La posición dice el rol (asegurador, prestador, gobierno) y el tipo (causa, problema, efecto, respuesta);
+   el color dice solo la fuente (Libro Blanco u OIT) y responde a los dos interruptores. */
+:root{
+  --bg:#ffffff; --panel:#eef1f4; --ink:#121212; --ink2:#3b3b3b; --muted:#5f6368; --rule:#d5d8dc; --rule2:#9aa0a6;
+  --red:#e3120b; --lb:#008a68; --lb-soft:#dcf0e9; --oit:#b8760f; --oit-soft:#f7ead2;
+  --ing:#1f6fa8; --gas:#d7261e; --focus:#1f6fa8; --shadow:0 12px 32px rgba(0,0,0,.18);
+  --f-head:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+  --f-cond:"Roboto Condensed","Arial Narrow",Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111316; --panel:#1b1f24; --ink:#eceef0; --ink2:#c9cdd2; --muted:#a3a9b0; --rule:#2e343b; --rule2:#5d646c;
+  --red:#ff4b3e; --lb:#2fa98c; --lb-soft:#123329; --oit:#bf7f12; --oit-soft:#3a2a0e; --ing:#3d8fd1; --gas:#f0483e; --focus:#7fb6e6;
+  --shadow:0 12px 32px rgba(0,0,0,.55); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111316; --panel:#1b1f24; --ink:#eceef0; --ink2:#c9cdd2; --muted:#a3a9b0; --rule:#2e343b; --rule2:#5d646c;
+  --red:#ff4b3e; --lb:#2fa98c; --lb-soft:#123329; --oit:#bf7f12; --oit-soft:#3a2a0e; --ing:#3d8fd1; --gas:#f0483e; --focus:#7fb6e6;
+  --shadow:0 12px 32px rgba(0,0,0,.55); color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body)}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--ink);text-decoration-color:var(--rule2);text-underline-offset:2px}
+a:hover{text-decoration-color:var(--red)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.kicker{font:700 .78rem/1.2 var(--f-cond);text-transform:uppercase;letter-spacing:.06em;color:var(--red)}
+.tagbar{display:block;width:40px;height:8px;background:var(--red)}
+.muted{color:var(--muted)}
+.inf{color:var(--muted);font-weight:700}
+.tab{font-variant-numeric:tabular-nums}
+
+/* cabecera */
+header.mast{border-top:8px solid var(--red)}
+header.mast .wrap{padding-block:30px 26px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px;align-items:end}
+header.mast h1{font:700 clamp(2rem,4.4vw,3.3rem)/1.06 var(--f-head);letter-spacing:-.01em;margin-top:8px}
+header.mast .dek{margin-top:14px;font-size:1.12rem;line-height:1.5;color:var(--ink2);max-width:62ch}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink)}
+.stat{padding:10px 12px 12px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:2px;min-width:0}
+.stat:nth-child(odd){padding-right:14px}
+.stat b{font:700 1.7rem/1.1 var(--f-head);font-variant-numeric:tabular-nums}
+.stat span{font-size:.85rem;color:var(--muted)}
+
+/* barra fija con secciones e interruptores */
+.bar{position:sticky;top:env(safe-area-inset-top, 0px);z-index:30;background:var(--bg);border-bottom:1px solid var(--rule);border-top:1px solid var(--rule)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:31;background:var(--bg)}
+.bar-in{display:flex;gap:14px;align-items:center;justify-content:space-between;padding-block:6px;flex-wrap:nowrap}
+.bar nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1 1 auto}
+.bar .switches{flex:none}
+.bar nav a{white-space:nowrap;text-decoration:none;font:500 .82rem/1 var(--f-cond);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:8px 8px;border-bottom:3px solid transparent}
+.bar nav a b{color:var(--red);margin-right:4px}
+.bar nav a:hover{color:var(--ink)}
+.bar nav a[aria-current="true"]{color:var(--ink);border-bottom-color:var(--red)}
+.switches{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.switches .lbl{font:500 .74rem var(--f-cond);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.sw{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font:600 .84rem/1 var(--f-body);color:var(--ink);padding:6px 10px 6px 6px;border:1px solid var(--rule);border-radius:999px;background:var(--bg)}
+.sw .knob{width:30px;height:18px;border-radius:999px;background:var(--rule);position:relative;flex:none;transition:background .15s}
+.sw .knob::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--bg);transition:transform .15s}
+.sw[aria-checked="true"] .knob::after{transform:translateX(12px)}
+.sw.lb[aria-checked="true"] .knob{background:var(--lb)}
+.sw.oit[aria-checked="true"] .knob{background:var(--oit)}
+.sw.neutral[aria-checked="true"] .knob{background:var(--ink2)}
+.sw:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* secciones */
+section.sec{padding-block:46px 10px;display:flex;flex-direction:column;gap:20px}
+.sec-head{display:flex;flex-direction:column;gap:8px;max-width:76ch}
+.sec-head h2{font:700 clamp(1.5rem,2.6vw,2.05rem)/1.15 var(--f-head)}
+.sec-head .kicker b{margin-right:6px}
+.sec-head p{color:var(--ink2);font-size:1.02rem}
+
+/* citas y marcas de fuente */
+a.cite{font:500 .72rem/1 var(--f-cond);letter-spacing:.02em;text-decoration:none;color:var(--muted);border:1px solid var(--rule);padding:2px 5px 3px;border-radius:3px;white-space:nowrap;vertical-align:1px;background:var(--bg)}
+a.cite:hover{border-color:var(--ink)}
+body.on-LB a.cite.s-LB{color:var(--lb);border-color:var(--lb)}
+body.on-OIT a.cite.s-OIT{color:var(--oit);border-color:var(--oit)}
+.badges{display:inline-flex;gap:4px}
+.badge{font:700 .64rem/1 var(--f-cond);letter-spacing:.04em;padding:3px 5px;border-radius:2px;color:var(--muted);border:1px solid var(--rule)}
+body.on-LB .badge.b-LB{background:var(--lb);border-color:var(--lb);color:#fff}
+body.on-OIT .badge.b-OIT{background:var(--oit);border-color:var(--oit);color:#fff}
+.mk{transition:opacity .18s, background-color .18s}
+.mk.miss{opacity:.32}
+blockquote{margin:0;padding:6px 0 6px 12px;border-left:2px solid var(--rule);color:var(--ink2);font-style:italic}
+blockquote .cite{font-style:normal;margin-left:4px}
+
+/* 1. los dos roles */
+.roles{display:grid;grid-template-columns:minmax(0,1fr) 92px minmax(0,1fr);gap:0;align-items:stretch}
+.band{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;padding:10px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);font-size:.88rem}
+.band b{font:700 .74rem var(--f-cond);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-right:4px}
+.band.bottom{border-top:1px solid var(--rule);border-bottom:1px solid var(--ink)}
+.role{padding:16px 0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.role h3{font:700 1.25rem/1.2 var(--f-head)}
+.role h3 span{font:700 .8rem var(--f-cond);color:var(--muted);letter-spacing:.05em;margin-left:6px}
+.role .q{color:var(--muted);font-size:.92rem}
+.blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.block{all:unset;box-sizing:border-box;cursor:pointer;background:var(--panel);padding:10px 12px;display:flex;flex-direction:column;gap:4px;border-top:3px solid transparent;min-width:0}
+.block:hover{border-top-color:var(--ink)}
+.block[aria-pressed="true"]{border-top-color:var(--red)}
+.block:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.block .bn{font:700 .95rem/1.2 var(--f-body)}
+.block .bw{font:500 .72rem var(--f-cond);color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.block .cnt{display:flex;gap:6px;margin-top:4px;align-items:center;font-size:.78rem;color:var(--muted)}
+.block.wide{grid-column:1/-1}
+.bridge{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:0 6px}
+.bridge .ar{font:700 1.6rem/1 var(--f-body);color:var(--red)}
+.bridge small{font:500 .72rem/1.25 var(--f-cond);text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+.frames{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.frames p{font-size:.92rem;color:var(--ink2)}
+.frames h4{margin:0 0 6px;font:700 .78rem var(--f-cond);text-transform:uppercase;letter-spacing:.06em}
+
+/* 2. lo esencial */
+.ess{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 28px}
+.ess-col{display:flex;flex-direction:column;min-width:0}
+.ess-col h3{font:700 .8rem var(--f-cond);text-transform:uppercase;letter-spacing:.06em;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+.ess-col h3 span{color:var(--muted);font-weight:500;margin-left:6px;text-transform:none;letter-spacing:0}
+.it{padding:14px 0 16px;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:6px}
+.it .num{font:700 2rem/1 var(--f-head);color:var(--red);font-variant-numeric:tabular-nums}
+.it .numl{font-size:.8rem;color:var(--muted);line-height:1.3}
+.it h4{margin:4px 0 0;font:700 1.08rem/1.25 var(--f-head)}
+.it p{font-size:.93rem;color:var(--ink2)}
+.it .foot{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between}
+.lnk{all:unset;cursor:pointer;font:600 .82rem var(--f-body);color:var(--ink);border-bottom:1px solid var(--red)}
+.lnk:focus-visible{outline:3px solid var(--focus)}
+.it.mk.hit{background:linear-gradient(90deg,var(--panel),transparent 60%)}
+
+/* 3. gráficos */
+.charts{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:32px}
+figure.econ{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+figure.econ::before{content:"";display:block;width:40px;height:8px;background:var(--red);margin-bottom:6px}
+figure.econ h3{font:700 1.02rem/1.25 var(--f-body)}
+figure.econ .sub{font-size:.88rem;color:var(--ink2)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.84rem;color:var(--ink2);margin-top:2px}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px}
+.chartbox{position:relative}
+.chartbox svg{display:block;width:100%;height:auto;overflow:visible}
+figure.econ figcaption{font-size:.78rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:6px}
+.ax{fill:var(--muted);font:400 11px var(--f-body)}
+.gl{stroke:var(--rule);stroke-width:1}
+.gl0{stroke:var(--ink);stroke-width:1}
+.tip{position:absolute;pointer-events:none;background:var(--bg);border:1px solid var(--ink);padding:6px 8px;font-size:.8rem;line-height:1.35;box-shadow:var(--shadow);white-space:nowrap;z-index:5}
+details.data{font-size:.84rem}
+details.data summary{cursor:pointer;color:var(--muted)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--rule)}
+th{font:700 .74rem var(--f-cond);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid var(--ink)}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+
+/* 4. mapa por carriles */
+.mapctl{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.btn{all:unset;cursor:pointer;font:600 .84rem/1 var(--f-body);padding:8px 12px;border:1px solid var(--rule);color:var(--ink)}
+.btn:hover{border-color:var(--ink)}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:focus-visible{outline:3px solid var(--focus)}
+.cap{font-size:.95rem;color:var(--ink2);min-height:1.5em;max-width:92ch}
+.mapscroll{overflow-x:auto}
+.map{position:relative;min-width:980px}
+.map svg.edges{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:visible}
+.grid{position:relative;z-index:1;display:grid;grid-template-columns:118px repeat(4,minmax(0,1fr));column-gap:40px}
+.gh{font:700 .78rem var(--f-cond);text-transform:uppercase;letter-spacing:.06em;padding:0 0 8px;border-bottom:1px solid var(--ink)}
+.gh small{display:block;font:400 .78rem var(--f-body);text-transform:none;letter-spacing:0;color:var(--muted);margin-top:2px}
+.lane{padding:14px 0;border-bottom:1px solid var(--rule);font:700 1rem/1.2 var(--f-head)}
+.lane small{display:block;font:500 .72rem/1.3 var(--f-cond);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:4px}
+.cell{padding:14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:7px;min-width:0}
+.node{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:7px 9px 8px;background:var(--bg);border:1px solid var(--rule);border-left:3px solid var(--rule2);min-width:0}
+.node:hover{border-color:var(--ink2)}
+.node:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.node .row{display:flex;gap:6px;align-items:center;justify-content:space-between}
+.node .code{font:700 .7rem/1 var(--f-cond);color:var(--muted);letter-spacing:.03em}
+.node .ttl{font:600 .88rem/1.25 var(--f-body);color:var(--ink)}
+.node .fig{font-size:.76rem;line-height:1.35;color:var(--muted)}
+.node.ext{border-style:dashed;border-left-style:solid}
+.node.key .ttl::before{content:"";display:inline-block;width:7px;height:7px;background:var(--red);margin-right:6px;vertical-align:1px}
+body.on-LB .node.hit[data-hit~="LB"]{border-left-color:var(--lb);background:var(--lb-soft)}
+body.on-OIT .node.hit[data-hit~="OIT"]{border-left-color:var(--oit);background:var(--oit-soft)}
+body.on-LB.on-OIT .node.hit[data-hit="LB OIT"]{border-left-color:var(--lb);background:linear-gradient(90deg,var(--lb-soft) 0 50%,var(--oit-soft) 50% 100%);box-shadow:inset -3px 0 0 var(--oit)}
+.map.focus .node{opacity:.22}
+.map.focus .node.on{opacity:1}
+.map.focus .node.sel{opacity:1;outline:2px solid var(--ink);outline-offset:1px}
+.mapnote{font-size:.82rem;color:var(--muted);max-width:92ch}
+
+/* panel */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(470px,100%);z-index:60;background:var(--bg);border-left:1px solid var(--ink);box-shadow:var(--shadow);overflow-y:auto;
+  padding:calc(16px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) 22px;display:flex;flex-direction:column;gap:14px}
+.drawer::before{content:"";display:block;width:40px;height:8px;background:var(--red)}
+.dh{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.dh h2{font:700 1.4rem/1.2 var(--f-head);margin-top:4px}
+.x{all:unset;cursor:pointer;font:700 1.4rem/1 var(--f-body);padding:2px 8px;color:var(--muted)}
+.x:hover{color:var(--ink)}
+.x:focus-visible{outline:3px solid var(--focus)}
+.dfig{background:var(--panel);padding:10px 12px;font-weight:600}
+.dsec{display:flex;flex-direction:column;gap:8px}
+.dsec h4{margin:0;font:700 .76rem var(--f-cond);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--rule);padding-bottom:4px}
+.links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.links li{font-size:.88rem;display:flex;flex-direction:column;gap:2px}
+.chip{all:unset;cursor:pointer;font:600 .86rem/1.3 var(--f-body);color:var(--ink);border-bottom:1px solid var(--rule2)}
+.chip .code{font:700 .7rem var(--f-cond);color:var(--muted);margin-right:5px}
+.chip:hover{border-bottom-color:var(--red)}
+.chip:focus-visible{outline:3px solid var(--focus)}
+.chips{display:flex;flex-wrap:wrap;gap:6px 14px}
+.dl ul{margin:0;padding-left:18px;font-size:.88rem;display:flex;flex-direction:column;gap:4px}
+
+/* 5. bucles */
+.loops{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.loop{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--ink);padding-top:12px;min-width:0}
+.loop .lh{display:flex;gap:10px;align-items:baseline}
+.loop .lh span{font:700 .74rem var(--f-cond);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.loop h3{font:700 1.12rem/1.2 var(--f-head)}
+.loop svg{width:100%;max-width:330px;height:auto;align-self:center;display:block}
+.loop p{font-size:.92rem;color:var(--ink2)}
+.loop .lev{border-top:1px solid var(--rule);padding-top:8px;font-size:.88rem}
+.l-ring{fill:none;stroke:var(--rule2);stroke-width:1.5}
+.l-box{fill:var(--bg);stroke:var(--ink);stroke-width:1}
+.l-txt{fill:var(--ink);font:600 11.5px var(--f-body)}
+.l-mid{fill:var(--red);font:700 34px var(--f-head)}
+.l-sub{fill:var(--muted);font:500 10.5px var(--f-cond);text-transform:uppercase;letter-spacing:.04em}
+
+/* 6. quién propone qué */
+td.c-LB,td.c-OIT{min-width:220px}
+td.none{color:var(--muted);font-style:italic}
+tr.grp td{font:700 .78rem var(--f-cond);text-transform:uppercase;letter-spacing:.06em;color:var(--ink);border-bottom:1px solid var(--ink);padding-top:18px;background:transparent}
+.st{font:700 .66rem/1 var(--f-cond);text-transform:uppercase;letter-spacing:.04em;padding:3px 5px;border:1px solid var(--rule);color:var(--muted);white-space:nowrap}
+.st.both{border-color:var(--ink);color:var(--ink)}
+body.on-LB td.c-LB.hit{background:var(--lb-soft)}
+body.on-OIT td.c-OIT.hit{background:var(--oit-soft)}
+
+/* fuentes */
+.src{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.src ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:.92rem}
+.src h3{font:700 1.05rem/1.2 var(--f-head);margin-bottom:8px}
+footer{border-top:1px solid var(--ink);margin-top:36px;padding-block:18px 34px;font-size:.85rem;color:var(--muted)}
+
+@media (max-width:980px){
+  header.mast .wrap{grid-template-columns:minmax(0,1fr)}
+  .roles{grid-template-columns:minmax(0,1fr)}
+  .bridge{flex-direction:row;padding:8px 0}
+  .bridge .ar{transform:rotate(90deg)}
+  .ess,.charts,.frames,.src,.loops{grid-template-columns:minmax(0,1fr)}
+  .ess{gap:24px}
+}
+@media (max-width:640px){
+  .blocks{grid-template-columns:minmax(0,1fr)}
+  .drawer{top:auto;height:84vh;width:100%;border-left:0;border-top:1px solid var(--ink)}
+  .switches .lbl{display:none}
+}
+</style>
+</head>
+<body class="on-LB on-OIT">
+
+<header class="mast"><div class="wrap">
+  <div>
+    <p class="kicker">Seguridad social en salud · Perú</p>
+    <h1>Un seguro que también es hospital</h1>
+    <p class="dek">EsSalud cumple dos oficios: asegura a 11,6 millones de personas y las atiende en sus propios establecimientos. Dos estudios encuentran problemas en ambos: el Libro Blanco (EsSalud y Banco Mundial, 2019) y la valuación actuarial de la OIT (2022). Esta página los ordena por rol y lleva cada afirmación a su página.</p>
+  </div>
+  <div class="stats" id="stats"></div>
+</div></header>
+
+<div class="bar"><div class="wrap bar-in">
+  <nav aria-label="Secciones" id="secnav">
+    <a href="#roles"><b>1</b>Dos roles</a><a href="#esencial"><b>2</b>Lo esencial</a><a href="#cuentas"><b>3</b>Las cuentas</a>
+    <a href="#mapa"><b>4</b>El mapa</a><a href="#bucles"><b>5</b>Por qué no cambia</a><a href="#propuestas"><b>6</b>Quién propone qué</a><a href="#fuentes"><b>7</b>Fuentes</a>
+  </nav>
+  <div class="switches" role="group" aria-label="Marcar por fuente">
+    <span class="lbl">Marcar</span>
+    <button type="button" class="sw lb" role="switch" aria-checked="true" id="swLB" title="Marca lo que respalda el Libro Blanco (EsSalud y Banco Mundial, 2019)"><span class="knob"></span>Libro Blanco 2019</button>
+    <button type="button" class="sw oit" role="switch" aria-checked="true" id="swOIT" title="Marca lo que respalda el estudio actuarial de la OIT (datos a 2022)"><span class="knob"></span>OIT 2022</button>
+  </div>
+</div></div>
+
+<main class="wrap">
+
+<section class="sec" id="roles">
+  <div class="sec-head">
+    <p class="kicker"><b>1</b>Dos roles</p>
+    <h2>Asegurador y prestador en una misma casa</h2>
+    <p>Como asegurador (IAFAS), EsSalud afilia, recauda, guarda el fondo y paga la atención. Como prestador (IPRESS), atiende en 389 establecimientos propios. Cada bloque cuenta cuántos hallazgos de cada estudio caen allí; púlselo para verlos en el mapa.</p>
+  </div>
+  <div class="roles" id="rolesfig"></div>
+  <div class="frames" id="frames"></div>
+</section>
+
+<section class="sec" id="esencial">
+  <div class="sec-head">
+    <p class="kicker"><b>2</b>Lo esencial</p>
+    <h2>Nueve hallazgos, tres por rol</h2>
+    <p>Si solo hay tiempo para una página, es esta. Los interruptores de arriba muestran qué estudio respalda cada punto.</p>
+  </div>
+  <div class="ess" id="ess"></div>
+</section>
+
+<section class="sec" id="cuentas">
+  <div class="sec-head">
+    <p class="kicker"><b>3</b>Las cuentas</p>
+    <h2>Dos estudios, la misma brecha</h2>
+    <p>Con datos y años distintos, el Banco Mundial y la OIT llegan a lo mismo: en una década el gasto crece unos 35 puntos porcentuales más que el ingreso.</p>
+  </div>
+  <div class="charts">
+    <figure class="econ mk" data-src="LB" id="fig-lines">
+      <h3>Ingresos y gastos operativos de EsSalud</h3>
+      <p class="sub">S/ millones de 2017; desde 2018, proyección</p>
+      <div class="legend"><span><i style="background:var(--ing)"></i>Ingresos</span><span><i style="background:var(--gas)"></i>Gastos</span></div>
+      <div class="chartbox" id="chartLines"></div>
+      <figcaption id="capLines"></figcaption>
+      <details class="data"><summary>Ver los datos</summary><div class="tbl"><table id="tblLines"></table></div></details>
+    </figure>
+    <figure class="econ" id="fig-growth">
+      <h3>Crecimiento proyectado en una década</h3>
+      <p class="sub">% de aumento entre el primer y el último año de cada proyección</p>
+      <div class="legend"><span><i style="background:var(--ing)"></i>Ingresos</span><span><i style="background:var(--gas)"></i>Gastos</span></div>
+      <div class="chartbox" id="chartGrowth"></div>
+      <figcaption id="capGrowth"></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="mapa">
+  <div class="sec-head">
+    <p class="kicker"><b>4</b>El mapa</p>
+    <h2>De la causa a la respuesta, rol por rol</h2>
+    <p>Filas: los dos roles y el gobierno. Columnas: causa, problema, efecto y respuesta. Pulse una tarjeta para ver de qué viene, a qué lleva, qué la atiende y las citas. El cuadrado rojo marca lo esencial.</p>
+  </div>
+  <div class="mapctl" id="mapctl">
+    <button type="button" class="sw neutral" role="switch" aria-checked="true" id="swKey"><span class="knob"></span>Solo lo esencial</button>
+  </div>
+  <p class="cap" id="cap" aria-live="polite"></p>
+  <div class="mapscroll"><div class="map" id="map">
+    <svg class="edges" id="edges" aria-hidden="true"></svg>
+    <div class="grid" id="grid"></div>
+  </div></div>
+  <p class="mapnote">Las flechas aparecen al elegir una tarjeta, un recorrido o un bloque. Las relaciones marcadas con ◇ en el detalle son inferencias nuestras. Los recorridos tienen enlace propio para compartir, por ejemplo <code>#recorrido-dinero</code>.</p>
+</section>
+
+<section class="sec" id="bucles">
+  <div class="sec-head">
+    <p class="kicker"><b>5</b>Por qué no cambia</p>
+    <h2>Cuatro círculos viciosos</h2>
+    <p>Lectura nuestra <span class="inf">◇</span>: los estudios no dibujan estos bucles, pero cada eslabón tiene su cita. R se refuerza a sí mismo; B devuelve el sistema a donde estaba.</p>
+  </div>
+  <div class="loops" id="loops"></div>
+</section>
+
+<section class="sec" id="propuestas">
+  <div class="sec-head">
+    <p class="kicker"><b>6</b>Quién propone qué</p>
+    <h2>En qué coinciden el Libro Blanco y la OIT</h2>
+    <p>La OIT se concentra en el financiamiento del asegurador; el Libro Blanco, en la organización y la compra. Donde los dos miran lo mismo, casi siempre coinciden.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th style="width:24%">Tema</th><th>Libro Blanco 2019</th><th>Estudio actuarial OIT 2022</th><th style="width:96px"></th></tr></thead>
+    <tbody id="cmp"></tbody>
+  </table></div>
+</section>
+
+<section class="sec" id="fuentes">
+  <div class="sec-head">
+    <p class="kicker"><b>7</b>Fuentes</p>
+    <h2>Créditos: de dónde sale cada afirmación</h2>
+    <p>Todas las publicaciones usadas son de acceso público y gratuito. Los enlaces llevan a las versiones que publican sus propios autores; el crédito por los datos, análisis y conclusiones citados es de ellos.</p>
+  </div>
+  <div class="src">
+    <div id="credits"></div>
+    <div>
+      <h3>Método</h3>
+      <ul>
+        <li>Cada cita literal se comprobó por programa contra el texto de la página indicada, con <a href="https://github.com/diegosimemirror/libro_blanco/blob/main/scripts/verificar_citas.py" target="_blank" rel="noopener">verificar_citas.py</a>. La etiqueta muestra la página impresa; el enlace abre la del PDF.</li>
+        <li>Los roles, los bloques y la clasificación en causa, problema, efecto y respuesta son nuestros. Las relaciones que inferimos van marcadas con ◇.</li>
+        <li>La OIT no trata la separación de funciones, la compra estratégica, los mecanismos de pago, los copagos ni el gasto de bolsillo; se buscó cada término en su texto.</li>
+        <li>Cifras que no se concilian: ingresos que dejan los regímenes especiales (S/ 2 280 M según EsSalud, S/ 1 000 M según el Banco Mundial) <span id="c-recon1"></span>; efecto de volver a cotizar sobre gratificaciones (+18 % en el Libro Blanco, +14,3 % en la OIT) <span id="c-recon2"></span>.</li>
+        <li>Las cifras de encuestas (Ensusalud, Enssa, Enaho) y de registros de EsSalud provienen de los documentos citados; no se recalcularon.</li>
+        <li>Esta página no ha sido revisada ni aprobada por EsSalud, el Banco Mundial, la OIT ni la OCDE, y no representa la posición de ninguna institución.</li>
+        <li>Para ver el sistema de salud completo: <a href="https://diegosimemirror.github.io/proyectos/mapa-salud-peru.html" target="_blank" rel="noopener">Mapa del Sistema de Salud del Perú</a>.</li>
+      </ul>
+      <h3 style="margin-top:18px">Estudios del tomo 2 del Libro Blanco</h3>
+      <ul id="studies"></ul>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">Versión 2 · noviembre de 2026 · Análisis de Diego Sime, elaborado con Claude Code, a partir de publicaciones de acceso público de EsSalud, el Banco Mundial, la OIT, la OCDE, la OMS, la AISS y la OISS (ver <a href="#fuentes">créditos</a>). Código y verificación: <a href="https://github.com/diegosimemirror/libro_blanco" target="_blank" rel="noopener">github.com/diegosimemirror/libro_blanco</a>.</div></footer>
+
+<aside class="drawer" id="drawer" hidden aria-label="Detalle del elemento seleccionado"></aside>
+
+<script type="application/json" id="lb-data">__DATOS__</script>
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const D=JSON.parse($("#lb-data").textContent);
+const DOC=D.docs, srcOf=c=>DOC[c.t].src;
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+function cite(c){const d=DOC[c.t],href=d.url+(d.off===null?"":"#page="+(c.p+d.off));
+  return '<a class="cite s-'+d.src+'" href="'+href+'" target="_blank" rel="noopener" title="'+esc(d.name)+', página '+c.p+'">'+d.sig+'·p.'+c.p+'</a>'+(c.inf?' <span class="inf" title="Inferencia nuestra">◇</span>':'');}
+const rich=s=>String(s).replace(/\[\[(\d):(\d+)\]\]/g,(m,t,p)=>cite({t:+t,p:+p}));
+const citesIn=s=>[...String(s).matchAll(/\[\[(\d):(\d+)\]\]/g)].map(m=>({t:+m[1],p:+m[2]}));
+const srcsOf=cs=>[...new Set(cs.map(srcOf).filter(x=>x==="LB"||x==="OIT"))].sort();
+const quote=q=>'<blockquote>«'+q.q+'» '+cite(q)+'</blockquote>';
+const badges=ss=>'<span class="badges">'+ss.map(s=>'<span class="badge b-'+s+'">'+(s==="LB"?"LB":"OIT")+'</span>').join("")+'</span>';
+
+/* --- nodos, flechas y fuentes --- */
+const N=Object.fromEntries(D.nodes.map(n=>[n.id,n]));
+const out={},inn={},resp={};
+D.nodes.forEach(n=>{out[n.id]=[];inn[n.id]=[];resp[n.id]=[];
+  n.src=srcsOf((n.quotes||[]).concat(n.obj?[n.obj]:[]).concat(citesIn(n.sum||"")));});
+D.edges.forEach(e=>{out[e.from].push(e);inn[e.to].push(e);});
+D.nodes.filter(n=>n.col==="A").forEach(r=>r.targets.forEach(t=>resp[t.id].push({id:r.id,why:t.why,c:t.c})));
+const code=n=>n.col!=="A"?n.id:n.pn?"Pol "+n.pn:"Rec "+n.id.slice(1);
+const TYPE={R:"Causa",P:"Problema",E:"Efecto",A:"Respuesta"};
+const LANES=["IAFAS","IPRESS","GOB"];
+
+/* --- interruptores de fuente --- */
+const on={LB:true,OIT:true};
+function applySources(){
+  document.body.classList.toggle("on-LB",on.LB);document.body.classList.toggle("on-OIT",on.OIT);
+  const any=on.LB||on.OIT;
+  $$("[data-src]").forEach(el=>{const s=el.dataset.src.split(" ").filter(Boolean),act=s.filter(x=>on[x]);
+    el.classList.toggle("hit",act.length>0);el.classList.toggle("miss",any&&act.length===0);el.dataset.hit=act.join(" ");});
+}
+[["swLB","LB"],["swOIT","OIT"]].forEach(([id,k])=>$("#"+id).addEventListener("click",e=>{on[k]=!on[k];e.currentTarget.setAttribute("aria-checked",on[k]);applySources();}));
+
+/* --- cabecera --- */
+$("#stats").innerHTML=D.stats.map(s=>'<div class="stat"><b>'+s.v+'</b><span>'+s.l+' '+cite(s.c)+'</span></div>').join("");
+
+/* --- 1. dos roles --- */
+function blockBtn(k,wide){const b=D.blocks[k],ns=D.nodes.filter(n=>n.blk===k&&n.col!=="A");
+  const lb=ns.filter(n=>n.src.includes("LB")).length,oi=ns.filter(n=>n.src.includes("OIT")).length;
+  const ss=[lb?"LB":"",oi?"OIT":""].filter(Boolean),bd=(s,v)=>'<span class="badge'+(v?' b-'+s:'')+'">'+s+' '+v+'</span>';
+  return '<button type="button" class="block'+(ns.length?' mk':'')+(wide?' wide':'')+'" data-blk="'+k+'"'+(ns.length?' data-src="'+ss.join(" ")+'"':'')+' aria-pressed="false"><span class="bw">'+b.who+'</span><span class="bn">'+b.name+'</span>'+
+    '<span class="cnt">'+(ns.length?bd("LB",lb)+bd("OIT",oi):'<span>Sin hallazgos propios: el plan explícito sigue pendiente</span>')+'</span></button>';}
+$("#rolesfig").innerHTML=
+ '<div class="band"><b>Gobierno y entorno</b>Congreso y Ejecutivo (leyes de aportes) · MTPE y Fonafe · Minsa (rector) y Susalud · Sunat · EPS y otros seguros</div>'+
+ '<div class="role"><h3>Asegurador<span>IAFAS</span></h3><p class="q">'+D.lanes.IAFAS.q+'</p><div class="blocks">'+["afi","rau","fon","ben","com","ase"].map(k=>blockBtn(k)).join("")+blockBtn("pro",true)+'</div></div>'+
+ '<div class="bridge"><span class="ar" aria-hidden="true">→</span><small>paga la atención</small><small>hoy: presupuesto histórico</small></div>'+
+ '<div class="role"><h3>Prestador<span>IPRESS</span></h3><p class="q">'+D.lanes.IPRESS.q+'</p><div class="blocks">'+["rec","acc","cal","res"].map(k=>blockBtn(k)).join("")+blockBtn("efi",true)+'</div></div>'+
+ '<div class="band bottom"><b>En el centro</b>11,6 millones de asegurados: trabajadores, pensionistas y sus familias</div>';
+$("#frames").innerHTML='<div><h4>Marco del asegurador</h4><p>'+rich(D.frames.iafas)+'</p></div><div><h4>Marco del prestador</h4><p>'+rich(D.frames.ipress)+'</p></div>';
+$("#rolesfig").addEventListener("click",e=>{const b=e.target.closest(".block");if(!b)return;
+  setFocus({kind:"blk",id:b.dataset.blk});document.getElementById("mapa").scrollIntoView({behavior:"smooth"});});
+
+/* --- 2. lo esencial --- */
+$("#ess").innerHTML=LANES.map(l=>'<div class="ess-col"><h3>'+D.lanes[l].name+'<span>'+(l==="GOB"?"":D.lanes[l].abbr)+'</span></h3>'+
+  D.essentials.filter(x=>x.lane===l).map((x,i)=>{const ss=srcsOf(x.cites);
+   return '<article class="it mk" data-src="'+ss.join(" ")+'"><p class="num">'+x.num+'</p><p class="numl">'+x.numl+'</p><h4>'+x.h+'</h4><p>'+x.b+'</p>'+
+   '<div class="foot"><span>'+x.cites.map(cite).join(" ")+'</span><button type="button" class="lnk" data-ess="'+D.essentials.indexOf(x)+'">Ver en el mapa</button></div></article>';}).join("")+'</div>').join("");
+$("#ess").addEventListener("click",e=>{const b=e.target.closest("[data-ess]");if(!b)return;const x=D.essentials[+b.dataset.ess];
+  setFocus({kind:"set",ids:x.ids,cap:x.h+". "+x.b});document.getElementById("mapa").scrollIntoView({behavior:"smooth"});});
+
+/* --- 3. gráficos --- */
+const fmt=n=>n.toLocaleString("es-PE").replace(/,/g," ");
+function lineChart(){
+  const L=D.chart.lb,W=640,H=300,m={l:8,r:52,t:14,b:26},iw=W-m.l-m.r,ih=H-m.t-m.b;
+  const x=i=>m.l+iw*i/(L.years.length-1),y=v=>m.t+ih*(1-v/20000);
+  const pi=L.years.indexOf(L.firstProj);
+  let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Ingresos y gastos de EsSalud 2009-2028: desde 2014 los gastos superan a los ingresos y la brecha llega a 4 655 millones en 2028.">';
+  s+='<rect x="'+x(pi)+'" y="'+m.t+'" width="'+(x(L.years.length-1)-x(pi))+'" height="'+ih+'" style="fill:var(--panel)"/>';
+  s+='<text class="ax" x="'+(x(pi)+6)+'" y="'+(m.t+14)+'">Proyección</text>';
+  [0,5000,10000,15000,20000].forEach(v=>{s+='<line class="'+(v===0?"gl0":"gl")+'" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y(v)+'" y2="'+y(v)+'"/><text class="ax" x="'+(W-m.r+6)+'" y="'+(y(v)+4)+'">'+fmt(v)+'</text>';});
+  L.years.forEach((yr,i)=>{if(yr%3===0||i===L.years.length-1&&false)s+='<text class="ax" x="'+x(i)+'" y="'+(H-6)+'" text-anchor="middle">'+yr+'</text>';});
+  const path=a=>a.map((v,i)=>(i?"L":"M")+x(i).toFixed(1)+","+y(v).toFixed(1)).join(" ");
+  s+='<path d="'+path(L.ing)+'" fill="none" style="stroke:var(--ing)" stroke-width="2.4"/><path d="'+path(L.gas)+'" fill="none" style="stroke:var(--gas)" stroke-width="2.4"/>';
+  const li=L.years.length-1;
+  s+='<text class="ax" x="'+(x(li)-4)+'" y="'+(y(L.gas[li])-8)+'" text-anchor="end" style="fill:var(--ink);font-weight:600">Gastos '+fmt(L.gas[li])+'</text>';
+  s+='<text class="ax" x="'+(x(li)-4)+'" y="'+(y(L.ing[li])+16)+'" text-anchor="end" style="fill:var(--ink);font-weight:600">Ingresos '+fmt(L.ing[li])+'</text>';
+  s+='<line id="xh" class="gl0" y1="'+m.t+'" y2="'+(m.t+ih)+'" x1="-10" x2="-10" style="stroke-dasharray:2 3"/><rect id="hit" x="'+m.l+'" y="'+m.t+'" width="'+iw+'" height="'+ih+'" fill="transparent"/></svg>';
+  const box=$("#chartLines");box.innerHTML=s+'<div class="tip" hidden></div>';
+  const svg=box.querySelector("svg"),tip=box.querySelector(".tip"),xh=box.querySelector("#xh");
+  const move=ev=>{const r=svg.getBoundingClientRect(),px=(ev.clientX-r.left)*W/r.width,i=Math.max(0,Math.min(li,Math.round((px-m.l)/iw*li)));
+    xh.setAttribute("x1",x(i));xh.setAttribute("x2",x(i));
+    tip.hidden=false;tip.innerHTML='<b>'+L.years[i]+(i>=pi?' (proyección)':'')+'</b><br>Ingresos: S/ '+fmt(L.ing[i])+' M<br>Gastos: S/ '+fmt(L.gas[i])+' M<br>Margen: S/ '+fmt(L.ing[i]-L.gas[i])+' M';
+    const bx=(ev.clientX-box.getBoundingClientRect().left);tip.style.left=Math.min(bx+12,box.clientWidth-170)+"px";tip.style.top="8px";};
+  svg.querySelector("#hit").addEventListener("pointermove",move);svg.querySelector("#hit").addEventListener("pointerleave",()=>{tip.hidden=true;xh.setAttribute("x1",-10);xh.setAttribute("x2",-10);});
+  $("#capLines").innerHTML='Fuente: Libro Blanco, tomo 2, estudio de sostenibilidad financiera del Banco Mundial '+cite(L.c)+'. Excluye inversión.';
+  $("#tblLines").innerHTML='<thead><tr><th>Año</th><th class="n">Ingresos</th><th class="n">Gastos</th><th class="n">Margen</th></tr></thead><tbody>'+
+    L.years.map((yr,i)=>'<tr><td>'+yr+(i>=pi?' *':'')+'</td><td class="n">'+fmt(L.ing[i])+'</td><td class="n">'+fmt(L.gas[i])+'</td><td class="n">'+fmt(L.ing[i]-L.gas[i])+'</td></tr>').join("")+'</tbody>';
+}
+function growthChart(){
+  const G=D.chart.growth,W=460,rowH=86,H=G.length*rowH+20,m={l:8,r:56},iw=W-m.l-m.r,x=v=>m.l+iw*v/100;
+  let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Crecimiento proyectado: Libro Blanco, ingresos 46 % y gastos 81 %; OIT, ingresos 50 % y gastos 85 %.">';
+  [0,25,50,75,100].forEach(v=>{s+='<line class="'+(v===0?"gl0":"gl")+'" x1="'+x(v)+'" x2="'+x(v)+'" y1="4" y2="'+(H-18)+'"/><text class="ax" x="'+x(v)+'" y="'+(H-4)+'" text-anchor="middle">'+v+'%</text>';});
+  G.forEach((g,i)=>{const y0=10+i*rowH;
+    s+='<g class="mk" data-src="'+g.src+'"><text x="'+m.l+'" y="'+(y0+10)+'" style="fill:var(--ink);font:700 12.5px var(--f-body)">'+g.who+'</text><text class="ax" x="'+m.l+'" y="'+(y0+25)+'">'+g.per+'</text>';
+    [["ing",g.ing,"Ingresos"],["gas",g.gas,"Gastos"]].forEach(([k,v,lab],j)=>{const yy=y0+33+j*22;
+      s+='<rect class="bar" data-tip="'+g.who+'<br>'+lab+': +'+String(v).replace(".",",")+' %" x="'+x(0)+'" y="'+yy+'" width="'+(x(v)-x(0))+'" height="16" rx="2" style="fill:var(--'+k+')"/>'+
+        '<text x="'+(x(v)+6)+'" y="'+(yy+12.5)+'" style="fill:var(--ink);font:600 12px var(--f-body)">+'+String(v).replace(".",",")+'%</text>';});
+    s+='</g>';});
+  s+='</svg>';
+  const box=$("#chartGrowth");box.innerHTML=s+'<div class="tip" hidden></div>';const tip=box.querySelector(".tip");
+  $$("rect.bar",box).forEach(r=>{r.addEventListener("pointermove",ev=>{const b=box.getBoundingClientRect();tip.hidden=false;tip.innerHTML=r.dataset.tip;tip.style.left=Math.min(ev.clientX-b.left+12,box.clientWidth-170)+"px";tip.style.top=(ev.clientY-b.top-48)+"px";});
+    r.addEventListener("pointerleave",()=>tip.hidden=true);});
+  $("#capGrowth").innerHTML='Fuentes: Libro Blanco '+cite(G[0].c)+' (cálculo nuestro <span class="inf">◇</span> con los valores del gráfico, sin inversión) y OIT '+cite(G[1].c)+' (soles corrientes, incluye inversión en infraestructura). Las bases no son comparables en nivel, sí en dirección.';
+}
+lineChart();growthChart();
+
+/* --- 4. mapa por carriles --- */
+const COLS=["R","P","E","A"];
+function card(n){const ext=n.grp==="ext";
+  return '<button type="button" class="node mk'+(ext?' ext':'')+(n.key?' key':'')+'" data-id="'+n.id+'" data-src="'+n.src.join(" ")+'" aria-label="'+code(n)+': '+esc(n.title)+'">'+
+   '<span class="row"><span class="code">'+code(n)+(ext?' · entorno':'')+'</span>'+badges(n.src)+'</span><span class="ttl">'+n.title+'</span><span class="fig">'+n.fig+'</span></button>';}
+$("#grid").innerHTML='<div class="gh"></div>'+[["Causas","de fondo"],["Problemas","en la operación"],["Efectos","sobre asegurados y fondo"],["Respuestas","Libro Blanco y OIT"]].map(h=>'<div class="gh">'+h[0]+'<small>'+h[1]+'</small></div>').join("")+
+ LANES.map(l=>'<div class="lane">'+D.lanes[l].name+'<small>'+(l==="GOB"?"":D.lanes[l].abbr+" · ")+D.lanes[l].q+'</small></div>'+
+   COLS.map(c=>'<div class="cell">'+D.nodes.filter(n=>n.lane===l&&n.col===c).map(card).join("")+'</div>').join("")).join("");
+const mapEl=$("#map"),svg=$("#edges"),el=id=>mapEl.querySelector('.node[data-id="'+id+'"]');
+function walk(start,dir){const seen=new Set(),st=[start];while(st.length){const x=st.pop();(dir==="up"?inn[x].map(e=>e.from):out[x].map(e=>e.to)).forEach(y=>{if(!seen.has(y)){seen.add(y);st.push(y);}});}return seen;}
+let focus=null,keyOnly=true;
+function lit(){if(!focus)return null;
+  if(focus.kind==="node"){const n=N[focus.id];
+    if(n.col==="A"){const set=new Set([n.id]);n.targets.forEach(t=>{set.add(t.id);walk(t.id,"down").forEach(x=>set.add(x));});return {set,resp:new Set([n.id])};}
+    const up=walk(n.id,"up"),dn=walk(n.id,"down"),set=new Set([n.id,...up,...dn]),rs=new Set();
+    [n.id,...up].forEach(x=>resp[x].forEach(r=>{rs.add(r.id);set.add(r.id);}));return {set,resp:rs};}
+  if(focus.kind==="blk"){const ids=D.nodes.filter(n=>n.blk===focus.id&&n.col!=="A").map(n=>n.id),set=new Set(ids),rs=new Set();
+    ids.forEach(x=>resp[x].forEach(r=>{rs.add(r.id);set.add(r.id);}));return {set,resp:rs};}
+  const set=new Set(focus.ids);return {set,resp:new Set(focus.ids.filter(i=>N[i].col==="A"))};}
+function anchor(id,side){const r=el(id).getBoundingClientRect(),m=mapEl.getBoundingClientRect();return {x:(side==="r"?r.right:r.left)-m.left,y:r.top+r.height/2-m.top};}
+function visible(id){const b=el(id);return b&&b.offsetParent!==null;}
+function draw(){const m=mapEl.getBoundingClientRect();svg.setAttribute("width",m.width);svg.setAttribute("height",m.height);svg.setAttribute("viewBox","0 0 "+m.width+" "+m.height);
+  const L=lit();if(!L){svg.innerHTML="";return;}
+  let h='<defs><marker id="mk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink2)"/></marker><marker id="mkr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--red)"/></marker></defs>';
+  D.edges.forEach(e=>{if(!L.set.has(e.from)||!L.set.has(e.to)||!visible(e.from)||!visible(e.to))return;const a=N[e.from],b=N[e.to];let d;
+    if(COLS.indexOf(a.col)===COLS.indexOf(b.col)){const p=anchor(e.from,"l"),q=anchor(e.to,"l");d="M"+p.x+","+p.y+" C"+(p.x-30)+","+p.y+" "+(q.x-30)+","+q.y+" "+(q.x-2)+","+q.y;}
+    else{const p=anchor(e.from,"r"),q=anchor(e.to,"l"),dx=Math.max(24,(q.x-p.x)*.5);d="M"+p.x+","+p.y+" C"+(p.x+dx)+","+p.y+" "+(q.x-dx)+","+q.y+" "+(q.x-2)+","+q.y;}
+    h+='<path d="'+d+'" fill="none" style="stroke:var(--ink2)" stroke-width="1.5" opacity=".8" marker-end="url(#mk)"/>';});
+  D.nodes.filter(r=>r.col==="A"&&L.resp.has(r.id)&&visible(r.id)).forEach(r=>r.targets.forEach(t=>{if(!L.set.has(t.id)||!visible(t.id))return;
+    const a=anchor(r.id,"l"),b=anchor(t.id,"r"),dx=Math.max(50,(a.x-b.x)*.35);
+    h+='<path d="M'+a.x+","+a.y+" C"+(a.x-dx)+","+a.y+" "+(b.x+dx)+","+b.y+" "+(b.x+2)+","+b.y+'" fill="none" style="stroke:var(--red)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#mkr)"/>';}));
+  svg.innerHTML=h;}
+function paint(){const L=lit();mapEl.classList.toggle("focus",!!L);
+  $$(".node",mapEl).forEach(b=>{const id=b.dataset.id,n=N[id],inL=!!L&&L.set.has(id);
+    b.classList.toggle("on",inL);b.classList.toggle("sel",!!focus&&focus.kind==="node"&&focus.id===id);
+    b.hidden=keyOnly&&!n.key&&!inL;});
+  $$(".block").forEach(b=>b.setAttribute("aria-pressed",!!focus&&focus.kind==="blk"&&focus.id===b.dataset.blk?"true":"false"));
+  $$("#mapctl .btn[data-tour]").forEach(b=>b.setAttribute("aria-pressed",!!focus&&focus.kind==="set"&&focus.tour===b.dataset.tour?"true":"false"));
+  requestAnimationFrame(draw);}
+function setFocus(f){focus=f;drawer.hidden=true;
+  $("#cap").innerHTML=!f?"":f.kind==="blk"?"Bloque: "+D.blocks[f.id].name+" ("+D.blocks[f.id].who+")"+(D.blocks[f.id].quote?" "+quote(D.blocks[f.id].quote).replace(/<\/?blockquote>/g,""):""):(f.cap||"");
+  try{history.replaceState(null,"",f&&f.tour?"#recorrido-"+f.tour:location.pathname+location.search);}catch(e){}
+  paint();}
+$("#mapctl").insertAdjacentHTML("beforeend",D.tours.map(t=>'<button type="button" class="btn" data-tour="'+t.id+'" aria-pressed="false">'+t.label+'</button>').join("")+'<button type="button" class="btn" id="clr">Limpiar</button>');
+$("#mapctl").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+  if(b.id==="swKey"){keyOnly=!keyOnly;b.setAttribute("aria-checked",keyOnly);paint();return;}
+  if(b.id==="clr"){setFocus(null);return;}
+  const t=D.tours.find(x=>x.id===b.dataset.tour);if(!t)return;
+  setFocus(focus&&focus.tour===t.id?null:{kind:"set",ids:t.ids,cap:t.cap,tour:t.id});});
+
+/* --- panel de detalle --- */
+const drawer=$("#drawer");let lastFocus=null;
+function chip(id){const n=N[id];return '<button type="button" class="chip" data-go="'+id+'"><span class="code">'+code(n)+'</span>'+n.title+'</button>';}
+function linkList(arr,key){return '<ul class="links">'+arr.map(e=>'<li>'+chip(e[key])+'<span class="muted">'+e.why+' '+e.c.map(c=>cite(Object.assign({},c,{inf:e.inf}))).join(" ")+'</span></li>').join("")+'</ul>';}
+function openDrawer(id){const n=N[id];
+  let h='<div class="dh"><div><p class="kicker">'+D.lanes[n.lane].name+' · '+TYPE[n.col]+' · '+code(n)+'</p><h2>'+n.title+'</h2></div><button type="button" class="x" id="dx" aria-label="Cerrar el detalle">×</button></div>';
+  h+='<p class="dfig">'+n.fig+'</p>'+(n.src.length?'<p>'+badges(n.src)+'</p>':'');
+  if(n.col==="A"){
+    if(n.long)h+='<p class="muted">'+n.long+'</p>';
+    h+='<div class="dsec"><h4>Lo que dice la fuente</h4>'+n.quotes.map(quote).join("")+'</div>';
+    h+='<div class="dsec"><h4>Actúa sobre</h4><ul class="links">'+n.targets.map(t=>'<li>'+chip(t.id)+'<span class="muted">'+t.why+' '+t.c.map(cite).join(" ")+'</span></li>').join("")+'</ul></div>';
+    if(n.strat)h+='<div class="dsec dl"><h4>Estrategias del tomo 1</h4><ul>'+n.strat.map(s=>'<li><b>'+s[0]+'</b> '+s[1]+'</li>').join("")+'</ul></div>';
+    if(n.hitos)h+='<div class="dsec dl"><h4>Hitos de la hoja de ruta 2019-2022</h4><ul>'+n.hitos.map(x=>'<li>'+x[0]+' '+cite({t:1,p:x[1]})+'</li>').join("")+'</ul></div>';
+    if(n.t2)h+='<div class="dsec dl"><h4>Lo que agregan el tomo 2 y la OIT</h4><ul>'+n.t2.map(s=>'<li>'+rich(s)+'</li>').join("")+'</ul></div>';
+  }else{
+    h+='<p>'+rich(n.sum)+'</p><div class="dsec"><h4>Lo que dicen las fuentes</h4>'+n.quotes.map(quote).join("")+'</div>';
+    if(inn[id].length)h+='<div class="dsec"><h4>Viene de</h4>'+linkList(inn[id],"from")+'</div>';
+    if(out[id].length)h+='<div class="dsec"><h4>Lleva a</h4>'+linkList(out[id],"to")+'</div>';
+    const direct=resp[id],via=new Map();walk(id,"up").forEach(u=>resp[u].forEach(r=>{if(!direct.some(d=>d.id===r.id)&&!via.has(r.id))via.set(r.id,u);}));
+    h+='<div class="dsec"><h4>Respuesta</h4>';
+    if(direct.length)h+='<ul class="links">'+direct.map(r=>'<li>'+chip(r.id)+'<span class="muted">'+r.why+' '+r.c.map(cite).join(" ")+'</span></li>').join("")+'</ul>';
+    if(via.size)h+='<p class="muted" style="font-size:.86rem">Por la vía de sus causas:</p><div class="chips">'+[...via.keys()].map(chip).join("")+'</div>';
+    if(!direct.length&&!via.size)h+='<p class="muted">Ninguna respuesta lo atiende de forma directa ◇.</p>';
+    h+='</div>';}
+  drawer.innerHTML=h;drawer.hidden=false;drawer.scrollTop=0;$("#dx").addEventListener("click",()=>closeDrawer());$("#dx").focus();}
+function closeDrawer(){drawer.hidden=true;if(focus&&focus.kind==="node"){focus=null;paint();}if(lastFocus){try{lastFocus.focus();}catch(e){}}}
+function selectNode(id,scroll){if(focus&&focus.kind==="node"&&focus.id===id&&!scroll){closeDrawer();return;}
+  focus={kind:"node",id};$("#cap").textContent="";paint();openDrawer(id);
+  if(scroll){const b=el(id);if(b&&!b.hidden)b.scrollIntoView({block:"center",behavior:"smooth"});}}
+mapEl.addEventListener("click",e=>{const b=e.target.closest(".node");if(b){lastFocus=b;selectNode(b.dataset.id);}});
+document.addEventListener("click",e=>{const c=e.target.closest("[data-go]");if(c){e.preventDefault();selectNode(c.dataset.go,true);}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!drawer.hidden)closeDrawer();});
+
+/* --- 5. bucles --- */
+function ring(L){const W=330,H=290,cx=165,cy=145,R=104,n=L.steps.length;
+  let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Bucle '+L.k+': '+L.steps.map(x=>x[0].replace("|"," ")).join(" → ")+'"><circle class="l-ring" cx="'+cx+'" cy="'+cy+'" r="'+R+'"/>';
+  for(let i=0;i<n;i++){const a=(-90+360*(i+.5)/n)*Math.PI/180,rot=(-90+360*(i+.5)/n)+90;
+    s+='<polygon points="-6,-5 6,0 -6,5" transform="translate('+(cx+R*Math.cos(a)).toFixed(1)+','+(cy+R*Math.sin(a)).toFixed(1)+') rotate('+rot.toFixed(1)+')" style="fill:var(--red)"/>';}
+  for(let i=0;i<n;i++){const a=(-90+360*i/n)*Math.PI/180,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a),ln=L.steps[i][0].split("|");
+    s+='<rect class="l-box" x="'+(x-60).toFixed(1)+'" y="'+(y-21).toFixed(1)+'" width="120" height="42"/>';
+    ln.forEach((t,j)=>{s+='<text class="l-txt" x="'+x.toFixed(1)+'" y="'+(y+(ln.length===1?4:(j===0?-3:11))).toFixed(1)+'" text-anchor="middle">'+t+'</text>';});}
+  s+='<text class="l-mid" x="'+cx+'" y="'+(cy+12)+'" text-anchor="middle">'+L.k+'</text><text class="l-sub" x="'+cx+'" y="'+(cy+32)+'" text-anchor="middle">'+(L.k==="R"?"se refuerza":"frena el cambio")+'</text></svg>';return s;}
+$("#loops").innerHTML=D.loops.map(L=>{const ss=srcsOf(L.steps.map(x=>x[1]).concat(citesIn(L.lev)));
+  return '<article class="loop mk" data-src="'+ss.join(" ")+'"><div class="lh"><span>'+D.lanes[L.lane].name+'</span>'+badges(ss)+'</div><h3>'+L.name+'</h3>'+ring(L)+
+  '<p>'+L.txt+'</p><p class="muted" style="font-size:.8rem">Eslabones: '+L.steps.map(x=>x[0].replace("|"," ")+' '+cite(x[1])).join(" → ")+'</p><p class="lev">'+rich(L.lev)+'</p></article>';}).join("");
+
+/* --- 6. quién propone qué --- */
+const ST={both:'<span class="st both">Coinciden</span>',lb:'<span class="st">Solo Libro Blanco</span>'};
+$("#cmp").innerHTML=LANES.map(l=>'<tr class="grp"><td colspan="4">'+D.lanes[l].name+(l==="GOB"?"":" ("+D.lanes[l].abbr+")")+'</td></tr>'+
+  D.compare.filter(r=>r.lane===l).map(r=>'<tr><td><b>'+r.tema+'</b>'+(r.nota?'<br><span class="muted" style="font-size:.8rem">'+r.nota+'</span>':'')+'</td>'+
+   '<td class="c-LB mk" data-src="LB">'+rich(r.lb)+'</td>'+(r.oit?'<td class="c-OIT mk" data-src="OIT">'+rich(r.oit)+'</td>':'<td class="none">No lo trata</td>')+'<td>'+ST[r.st]+'</td></tr>').join("")).join("");
+
+/* --- 7. fuentes --- */
+$("#credits").innerHTML=[...new Set(D.credits.map(c=>c.grp))].map(g=>'<h3'+(g===D.credits[0].grp?'':' style="margin-top:18px"')+'>'+g+'</h3><ul class="cred">'+
+  D.credits.filter(c=>c.grp===g).map(c=>'<li>'+c.cita+'<br><span class="muted">Acceso público: <a href="'+c.url+'" target="_blank" rel="noopener">'+c.acceso+'</a>'+(c.extra||'')+'. '+c.lic+'</span></li>').join("")+'</ul>').join("");
+$("#studies").innerHTML=D.studies.map(s=>'<li>'+s[0]+' '+cite({t:2,p:s[1]})+'</li>').join("");
+$("#c-recon1").innerHTML=cite({t:2,p:48});$("#c-recon2").innerHTML=cite({t:2,p:362})+" "+cite({t:3,p:104});
+
+/* --- barra: sección actual --- */
+const links=$$("#secnav a");
+if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.setAttribute("aria-current",a.getAttribute("href")==="#"+en.target.id?"true":"false"));}});},{rootMargin:"-40% 0px -55% 0px"});
+  $$("section.sec").forEach(s=>io.observe(s));}
+
+/* --- enlaces a recorridos y redibujo --- */
+function fromHash(){const m=location.hash.match(/^#recorrido-([a-z]+)$/),t=m&&D.tours.find(x=>x.id===m[1]);if(!t)return;
+  setFocus({kind:"set",ids:t.ids,cap:t.cap,tour:t.id});document.getElementById("mapa").scrollIntoView();}
+addEventListener("hashchange",fromHash);
+let raf=0;const redraw=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(draw);};
+addEventListener("resize",redraw);if("ResizeObserver" in window)new ResizeObserver(redraw).observe(mapEl);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(redraw);
+applySources();paint();fromHash();
+})();
+</script>
+</body>
+</html>

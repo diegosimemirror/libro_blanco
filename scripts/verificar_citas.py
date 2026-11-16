@@ -1,17 +1,20 @@
 """Verifica que cada cita literal del mapa esté en la página que se indica.
 
 Proceso:
-  1. Extrae el texto de los dos tomos del Libro Blanco con pdftotext (Poppler), página por página.
-  2. Lee las citas guardadas en index.html (bloque JSON con id "lb-data").
-  3. Busca cada cita en la página citada (o en la página siguiente, si la cita cruza de una a otra).
-  4. Revisa que las flechas, las políticas y los recorridos apunten a elementos que existen.
+  1. Extrae el texto de los cuatro documentos con pdftotext (Poppler), página por página.
+  2. Recorre todo el JSON de index.html (bloque con id "lb-data") y reúne cada cita: todo objeto con
+     tomo o documento ("t"), página impresa ("p") y texto literal ("q").
+  3. Busca cada cita en su página (o en la siguiente, si cruza de una a otra).
+  4. Revisa que flechas, respuestas, recorridos, hallazgos esenciales y bloques apunten a elementos que existen.
 
 Uso:
-  python scripts/verificar_citas.py RUTA/libro_blanco_1.pdf RUTA/libro_blanco_2.pdf
+  python scripts/verificar_citas.py libro_blanco_1.pdf libro_blanco_2.pdf estudio_oit.pdf marco_ocde.pdf
 
-Los PDF no están en el repositorio (tienen derechos reservados de EsSalud). Se descargan de:
-  https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf
-  https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_2.pdf
+Documentos (no están en el repositorio):
+  1 y 2  Libro Blanco, tomos 1 y 2 (EsSalud, 2019):
+         https://www.essalud.gob.pe/transparencia/libro_blanco/libro_blanco_1.pdf (y _2.pdf)
+  3      Valuación actuarial EsSalud al 2022 (OIT, 2023): https://www.social-protection.org/gimi/Media.action?id=20597
+  4      Rethinking Health System Performance Assessment (OCDE, 2024): https://doi.org/10.1787/107182c8-en
 
 Paquetes: solo la biblioteca estándar de Python (json, re, subprocess, pathlib, sys, tempfile).
 Requiere el programa pdftotext en el PATH (viene con Poppler o con Git para Windows).
@@ -24,7 +27,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-DESPLAZAMIENTO = 2  # página del PDF = página impresa + 2, en ambos tomos
+DESPLAZAMIENTO = {1: 2, 2: 2, 3: 0, 4: 2}  # página del PDF = página impresa + desplazamiento
 INDEX = Path(__file__).resolve().parent.parent / "index.html"
 
 
@@ -39,7 +42,7 @@ def paginas(pdf: Path) -> dict[int, str]:
 
 
 def normalizar(texto: str) -> str:
-    """Une palabras cortadas con guion al final de línea, colapsa espacios y pasa a minúsculas."""
+    """Une palabras cortadas con guion al final de línea, colapsa espacios y unifica comillas."""
     texto = texto.replace("­", "")
     texto = re.sub(r"-\s*\n\s*", "", texto)
     texto = re.sub(r"\s+", " ", texto)
@@ -47,47 +50,46 @@ def normalizar(texto: str) -> str:
     return texto.strip().lower()
 
 
-# --- Proceso 2: citas del mapa ---------------------------------------------------
-def citas(datos: dict):
-    """Recorre todas las citas literales con su tomo, página impresa y lugar del mapa."""
-    for s in datos["stats"]:
-        yield s["c"]["t"], s["c"]["p"], s["q"], "cifra de cabecera"
-    for s in datos["thesis"]:
-        yield s["q"]["t"], s["q"]["p"], s["q"]["q"], "tesis"
-    for nodo in datos["nodes"]:
-        for q in nodo["quotes"]:
-            yield q["t"], q["p"], q["q"], nodo["id"]
-    for p in datos["pols"]:
-        yield p["obj"]["t"], p["obj"]["p"], p["obj"]["q"], p["id"]
-    for d in datos["decs"]:
-        yield d["q"]["t"], d["q"]["p"], d["q"]["q"], "decisión abierta"
+# --- Proceso 2: citas en cualquier lugar del JSON -------------------------------
+def citas(obj, ruta="datos"):
+    if isinstance(obj, dict):
+        if {"t", "p", "q"} <= obj.keys():
+            yield obj["t"], obj["p"], obj["q"], ruta
+        for k, v in obj.items():
+            yield from citas(v, f"{ruta}.{obj.get('id', k)}" if k == "quotes" else f"{ruta}.{k}")
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj):
+            yield from citas(v, f"{ruta}[{i}]")
 
 
 # --- Proceso 3 y 4: verificación ------------------------------------------------
 def main() -> int:
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 5:
         print(__doc__)
         return 2
-    texto = {1: paginas(Path(sys.argv[1])), 2: paginas(Path(sys.argv[2]))}
+    texto = {i + 1: paginas(Path(a)) for i, a in enumerate(sys.argv[1:5])}
     html = INDEX.read_text(encoding="utf-8")
-    datos = json.loads(re.search(r'<script type="application/json" id="lb-data">(.*?)</script>', html, re.S).group(1))
+    bloque = re.search(r'<script type="application/json" id="lb-data">(.*?)</script>', html, re.S).group(1)
+    datos = json.loads(bloque.replace("<\\/", "</"))
 
     fallas = total = 0
-    for tomo, pag, cita, lugar in citas(datos):
+    for doc, pag, cita, lugar in citas(datos):
         total += 1
         q = normalizar(cita)
-        p = pag + DESPLAZAMIENTO
-        t = texto[tomo]
+        p = pag + DESPLAZAMIENTO[doc]
+        t = texto[doc]
         if q in t.get(p, "") or q in t.get(p, "") + " " + t.get(p + 1, ""):
             continue
         fallas += 1
-        donde = [k - DESPLAZAMIENTO for k, v in t.items() if q in v]
-        print(f"FALLA [{lugar}] T{tomo} p.{pag}: encontrada en {donde or 'ninguna página'} :: {cita[:80]}")
+        donde = [k - DESPLAZAMIENTO[doc] for k, v in t.items() if q in v]
+        print(f"FALLA [{lugar}] doc {doc} p.{pag}: encontrada en {donde or 'ninguna página'} :: {cita[:80]}")
 
-    ids = {n["id"] for n in datos["nodes"]} | {p["id"] for p in datos["pols"]}
+    ids = {n["id"] for n in datos["nodes"]}
     rotos = [(e["from"], e["to"]) for e in datos["edges"] if e["from"] not in ids or e["to"] not in ids]
-    rotos += [(p["id"], t["id"]) for p in datos["pols"] for t in p["targets"] if t["id"] not in ids]
+    rotos += [(n["id"], t["id"]) for n in datos["nodes"] if n["col"] == "A" for t in n["targets"] if t["id"] not in ids]
     rotos += [(r["id"], i) for r in datos["tours"] for i in r["ids"] if i not in ids]
+    rotos += [("esencial", i) for e in datos["essentials"] for i in e["ids"] if i not in ids]
+    rotos += [(n["id"], n["blk"]) for n in datos["nodes"] if n["col"] != "A" and n["blk"] not in datos["blocks"]]
 
     print(f"Citas literales en su página: {total - fallas} de {total}")
     print(f"Referencias rotas: {rotos or 'ninguna'}")
